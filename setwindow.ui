@@ -1,0 +1,860 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetWindow</class>
+ <widget class="QWidget" name="SetWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qt200.qrc">
+    <normaloff>:/resource/image/Title.png</normaloff>:/resource/image/Title.png</iconset>
+  </property>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>0</y>
+     <width>161</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="sizeIncrement">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <kerning>true</kerning>
+    </font>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>-1</y>
+     <width>640</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>4</number>
+   </property>
+   <widget class="QWidget" name="PrintSetPage">
+    <widget class="QGroupBox" name="groupBox_Pinrt">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="lbPrintTitle">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>3</y>
+        <width>120</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>General Setting</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_PrintModel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>601</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Print Mode</string>
+     </property>
+     <widget class="QRadioButton" name="rbAuto">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>30</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Auto Printing</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbManual">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>30</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Manual Printing</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="btnPrintSave">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>310</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnPrintCancel">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>310</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Encode">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>160</y>
+       <width>601</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Encode Mode</string>
+     </property>
+     <widget class="QRadioButton" name="rbAutoEncode">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>30</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Auto Encode</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbScanEncode">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>30</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Scanning Encode</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="RefValueSetPage">
+    <widget class="QLabel" name="lbRefvTitle">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>0</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Renf Setting</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Refv">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnAdd">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>40</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnModify">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>40</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Modify</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnDelete">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>40</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="twRefvInfo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>621</width>
+       <height>311</height>
+      </rect>
+     </property>
+    </widget>
+    <zorder>groupBox_Refv</zorder>
+    <zorder>lbRefvTitle</zorder>
+    <zorder>btnAdd</zorder>
+    <zorder>btnModify</zorder>
+    <zorder>btnDelete</zorder>
+    <zorder>twRefvInfo</zorder>
+   </widget>
+   <widget class="QWidget" name="DateSetPage">
+    <widget class="QLabel" name="lbDateTitle">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>2</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Date/Time Setting</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Date">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbDatetag">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>50</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Time Setting</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSetDateSave">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>110</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OK</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dteDateSet">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>50</y>
+       <width>110</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>yyyy/MM/dd</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="dteTimeSet">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>50</y>
+       <width>118</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>HH:mm:ss</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <zorder>groupBox_Date</zorder>
+    <zorder>lbDateTitle</zorder>
+    <zorder>lbDatetag</zorder>
+    <zorder>btnSetDateSave</zorder>
+    <zorder>dteDateSet</zorder>
+    <zorder>dteTimeSet</zorder>
+   </widget>
+   <widget class="QWidget" name="SystemSetPage">
+    <widget class="QLabel" name="lbSysSetTitle">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>3</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>System Setting</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_SysSet">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Lis">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>601</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>LIS Connection</string>
+     </property>
+     <widget class="QRadioButton" name="rbNull">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>30</y>
+        <width>89</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Null</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbHL7">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>30</y>
+        <width>89</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>HL7</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbASTM">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>30</y>
+        <width>89</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ASTM</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Net">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>601</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Network Setting</string>
+     </property>
+     <widget class="QLabel" name="lbLocalIP">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>40</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Local IP Add</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbServerIP">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>80</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Server IP Add</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbServerPort">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>80</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Server Port</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leLocalIP">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>40</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leServerIP">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>80</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leServerPort">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>80</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Language">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>301</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Language Options</string>
+     </property>
+     <widget class="QComboBox" name="cBoxLanguage">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>31</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Chinese</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>English</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Channel">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>240</y>
+       <width>291</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>QC Channel</string>
+     </property>
+     <widget class="QComboBox" name="cBoxChannel">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>31</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Channel1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Channel2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Channel3</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="btnSysSave">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>350</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSysCancel">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>350</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+    <zorder>groupBox_SysSet</zorder>
+    <zorder>groupBox_Language</zorder>
+    <zorder>groupBox_Lis</zorder>
+    <zorder>lbSysSetTitle</zorder>
+    <zorder>groupBox_Net</zorder>
+    <zorder>groupBox_Channel</zorder>
+    <zorder>btnSysSave</zorder>
+    <zorder>btnSysCancel</zorder>
+   </widget>
+   <widget class="QWidget" name="SysInfoSetPage">
+    <widget class="QLabel" name="lbSysInfoTitle">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>3</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>System Info</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_SysInfo">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbSoftTag">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>140</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Software Version：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbHardTag">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>190</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Firmware version：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbSoftNum">
+     <property name="geometry">
+      <rect>
+       <x>397</x>
+       <y>140</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>V0.26.0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbHardNum">
+     <property name="geometry">
+      <rect>
+       <x>397</x>
+       <y>190</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>V0.5.1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSoftUpdate">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>260</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Soft Update</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnHardUpdate">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>320</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hard Update</string>
+     </property>
+    </widget>
+    <zorder>groupBox_SysInfo</zorder>
+    <zorder>lbSysInfoTitle</zorder>
+    <zorder>lbSoftTag</zorder>
+    <zorder>lbHardTag</zorder>
+    <zorder>lbSoftNum</zorder>
+    <zorder>lbHardNum</zorder>
+    <zorder>btnSoftUpdate</zorder>
+    <zorder>btnHardUpdate</zorder>
+   </widget>
+   <widget class="QWidget" name="DebugSetPage">
+    <widget class="QLabel" name="lbDebugTitle">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>3</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Debug Mode</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_Debug">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>0</y>
+       <width>643</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnDebugLogout">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>40</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Logout</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnDebugInterface">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>75</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Interface</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="leDebugLoginPwd">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>60</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnDebugOk">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>110</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OK</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbDebugLoginPwd">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>64</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Login Password</string>
+     </property>
+    </widget>
+    <zorder>groupBox_Debug</zorder>
+    <zorder>lbDebugTitle</zorder>
+    <zorder>btnDebugLogout</zorder>
+    <zorder>btnDebugInterface</zorder>
+    <zorder>leDebugLoginPwd</zorder>
+    <zorder>btnDebugOk</zorder>
+    <zorder>lbDebugLoginPwd</zorder>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="qt200.qrc"/>
+ </resources>
+ <connections/>
+</ui>

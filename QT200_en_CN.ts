@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="en_US">
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="mainwindow.ui" line="14"/>
+        <source>MainWindow</source>
+        <translation>MainWindow</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="38"/>
+        <source>Test</source>
+        <translation>Test</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="67"/>
+        <source>Query</source>
+        <translation>Query</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="159"/>
+        <source>V1</source>
+        <translatorcomment>V1</translatorcomment>
+        <translation>V1</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="obsolete">Control</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="96"/>
+        <source>QC</source>
+        <translation>QC</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="125"/>
+        <source>Settings</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <source>V1.0.0</source>
+        <translation type="obsolete">V1.0.0</translation>
+    </message>
+    <message>
+        <source>100%</source>
+        <translation type="obsolete">100%</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="249"/>
+        <source>Timer1</source>
+        <translation>Timer1</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="295"/>
+        <source>Timer2</source>
+        <translation>Timer2</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="313"/>
+        <source>Timer3</source>
+        <translation>Timer3</translation>
+    </message>
+</context>
+<context>
+    <name>QCValue</name>
+    <message>
+        <location filename="qcvalue.ui" line="14"/>
+        <source>QC Setting</source>
+        <translation>QC Setting</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.ui" line="30"/>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.ui" line="43"/>
+        <source>Item</source>
+        <translation>Item</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.ui" line="102"/>
+        <source>QC Batch Number</source>
+        <oldsource>QC Batch Number:</oldsource>
+        <translation>QC Batch Number</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.ui" line="76"/>
+        <source>Upper Limit</source>
+        <translation>Upper Limit</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.ui" line="89"/>
+        <source>Lower Limit</source>
+        <translation>Lower Limit</translation>
+    </message>
+</context>
+<context>
+    <name>QCWindow</name>
+    <message>
+        <location filename="qcwindow.ui" line="14"/>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="obsolete">Project</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.ui" line="30"/>
+        <source>Item</source>
+        <translation>Item</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.ui" line="43"/>
+        <source>QC Batch Number</source>
+        <oldsource>Batch Num</oldsource>
+        <translation>QC Batch Number</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.ui" line="56"/>
+        <source>Qc Setting</source>
+        <translation>Qc Setting</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.ui" line="69"/>
+        <source>Test</source>
+        <translation>Test</translation>
+    </message>
+    <message>
+        <source>QC1</source>
+        <translation type="obsolete">QC1</translation>
+    </message>
+    <message>
+        <source>QC2</source>
+        <translation type="obsolete">QC2</translation>
+    </message>
+    <message>
+        <source>QC3</source>
+        <translation type="obsolete">QC3</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.ui" line="112"/>
+        <source>Tips:QC tests only supports real-time test, please again in external reaction after the 
+completion of the test</source>
+        <oldsource>Tips:QC tests only supports real-time test, please again in external reaction after the completion of the test</oldsource>
+        <translation>Tips:QC tests only supports real-time test, please again in external reaction after the 
+completion of the test</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="37"/>
+        <source>Numble</source>
+        <translation>Numble</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="37"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="37"/>
+        <location filename="setwindow.cpp" line="242"/>
+        <source>Age</source>
+        <translation>Age</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="38"/>
+        <location filename="setwindow.cpp" line="242"/>
+        <source>Sex</source>
+        <translation>Sex</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="38"/>
+        <source>Test Item</source>
+        <translation>Test Item</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="39"/>
+        <source>Check Result</source>
+        <translation>Check Result</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="39"/>
+        <source>Check Time</source>
+        <translation>Check Time</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="43"/>
+        <source>V1.0.0</source>
+        <translation>V1.0.0</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="601"/>
+        <source>Timer1</source>
+        <translation>Timer1</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="633"/>
+        <source>Timer2</source>
+        <translation>Timer2</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="665"/>
+        <source>Timer3</source>
+        <translation>Timer3</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="20"/>
+        <location filename="hardgrading.cpp" line="108"/>
+        <location filename="udiskshow.cpp" line="24"/>
+        <location filename="udiskshow.cpp" line="186"/>
+        <source>The current total number of disk: %1</source>
+        <translation>The current total number of disk: %1</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="58"/>
+        <location filename="exportdata.cpp" line="73"/>
+        <location filename="hardgrading.cpp" line="128"/>
+        <location filename="mainwindow.cpp" line="695"/>
+        <location filename="mainwindow.cpp" line="1081"/>
+        <location filename="qcvalue.cpp" line="55"/>
+        <location filename="qcwindow.cpp" line="239"/>
+        <location filename="qcwindow.cpp" line="454"/>
+        <location filename="querywindow.cpp" line="171"/>
+        <location filename="querywindow.cpp" line="267"/>
+        <location filename="querywindow.cpp" line="288"/>
+        <location filename="setwindow.cpp" line="591"/>
+        <location filename="setwindow.cpp" line="630"/>
+        <location filename="setwindow.cpp" line="885"/>
+        <location filename="testwindow.cpp" line="1570"/>
+        <location filename="testwindow.cpp" line="1768"/>
+        <location filename="testwindow.cpp" line="1888"/>
+        <location filename="testwindow.cpp" line="1992"/>
+        <location filename="testwindow.cpp" line="2050"/>
+        <location filename="testwindow.cpp" line="2161"/>
+        <location filename="upgrading.cpp" line="58"/>
+        <location filename="upgrading.cpp" line="79"/>
+        <location filename="upgrading.cpp" line="82"/>
+        <source>Note</source>
+        <translation>Note</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="59"/>
+        <location filename="upgrading.cpp" line="59"/>
+        <source>Please choose U disk</source>
+        <translation>Please choose U disk</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="76"/>
+        <source>File is written to failure</source>
+        <translation>File is written to failure</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="87"/>
+        <source>No query results available export</source>
+        <translation>No query results available export</translation>
+    </message>
+    <message>
+        <location filename="exportdata.cpp" line="99"/>
+        <source>Data export is successful</source>
+        <translation>Data export is successful</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="696"/>
+        <source>printer is out of paper</source>
+        <translation>printer is out of paper</translation>
+    </message>
+    <message>
+        <source>Batch number already exists. Overwrite?</source>
+        <translation type="obsolete">Batch number already exists. Overwrite?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="788"/>
+        <source>Data Update is successful</source>
+        <translation>Data Update is successful</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="791"/>
+        <source>Data Update is failed</source>
+        <translation>Data Update is failed</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="803"/>
+        <source>Data import is successful</source>
+        <translation>Data import is successful</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="806"/>
+        <source>Data import is failed</source>
+        <translation>Data import is failed</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1082"/>
+        <source>Close the instrument?</source>
+        <translation>Close the instrument?</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.cpp" line="63"/>
+        <source>Upper limit cannot be less than the lower limit value</source>
+        <translation>Upper limit cannot be less than the lower limit value</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.cpp" line="71"/>
+        <source>QC Batch number can&apos;t be empty</source>
+        <translation>QC Batch number can&apos;t be empty</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.cpp" line="76"/>
+        <source>Upper Limit can&apos;t be empty</source>
+        <translation>Upper Limit can&apos;t be empty</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.cpp" line="81"/>
+        <source>Lower Limit can&apos;t be empty</source>
+        <translation>Lower Limit can&apos;t be empty</translation>
+    </message>
+    <message>
+        <location filename="qcvalue.cpp" line="92"/>
+        <location filename="renfvalue.cpp" line="214"/>
+        <source>Save successful</source>
+        <translation>Save successful</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="172"/>
+        <source>No qualified result, please modify and query again</source>
+        <oldsource>No qualified result, please modify and query again.</oldsource>
+        <translation>No qualified result, please modify and query again</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="253"/>
+        <source>File Export</source>
+        <translation>File Export</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="268"/>
+        <source>No data in proceding</source>
+        <oldsource>No data in proceding.</oldsource>
+        <translation>No data in proceding</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="346"/>
+        <source>M</source>
+        <translation>M</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="348"/>
+        <source>F</source>
+        <translation>F</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="350"/>
+        <source>U</source>
+        <translation>U</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="168"/>
+        <location filename="querywindow.cpp" line="273"/>
+        <location filename="querywindow.cpp" line="294"/>
+        <source>Current is %1 Page Count %2 Page</source>
+        <translation>Current is %1 Page Count %2 Page</translation>
+    </message>
+    <message>
+        <location filename="querywindow.cpp" line="289"/>
+        <source>No data in the following</source>
+        <oldsource>No data in the following.</oldsource>
+        <translation>No data in the following</translation>
+    </message>
+    <message>
+        <source>It has already been done not have to Pre</source>
+        <translation type="obsolete">It has already been done not have to Pre</translation>
+    </message>
+    <message>
+        <source>It has already been done not have to Next</source>
+        <translation type="obsolete">It has already been done not have to Next</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.cpp" line="44"/>
+        <location filename="setwindow.cpp" line="308"/>
+        <source>Male/Female</source>
+        <translation>Male/Female</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.cpp" line="194"/>
+        <source>Item name cannnot be empty</source>
+        <translation>Item name cannnot be empty</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.cpp" line="201"/>
+        <source>Renf Upper limit and lower limit value can&apos;t be empty!</source>
+        <translation>Renf Upper limit and lower limit value can&apos;t be empty!</translation>
+    </message>
+    <message>
+        <source>Age Upper limit and lower limit value can&apos;t be empty!</source>
+        <translation type="obsolete">Age Upper limit and lower limit value can&apos;t be empty!</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="148"/>
+        <location filename="querywindow.cpp" line="202"/>
+        <location filename="renfvalue.cpp" line="44"/>
+        <location filename="renfvalue.cpp" line="122"/>
+        <location filename="setwindow.cpp" line="304"/>
+        <location filename="setwindow.cpp" line="329"/>
+        <location filename="setwindow.cpp" line="375"/>
+        <location filename="setwindow.cpp" line="382"/>
+        <location filename="testwindow.cpp" line="756"/>
+        <location filename="testwindow.cpp" line="1069"/>
+        <location filename="testwindow.cpp" line="1376"/>
+        <location filename="testwindow.cpp" line="1465"/>
+        <source>Male</source>
+        <translation>Male</translation>
+    </message>
+    <message>
+        <location filename="cchecktablewidget.cpp" line="150"/>
+        <location filename="querywindow.cpp" line="204"/>
+        <location filename="renfvalue.cpp" line="44"/>
+        <location filename="renfvalue.cpp" line="119"/>
+        <location filename="setwindow.cpp" line="306"/>
+        <location filename="setwindow.cpp" line="331"/>
+        <location filename="setwindow.cpp" line="377"/>
+        <location filename="setwindow.cpp" line="384"/>
+        <location filename="testwindow.cpp" line="758"/>
+        <location filename="testwindow.cpp" line="1071"/>
+        <location filename="testwindow.cpp" line="1378"/>
+        <location filename="testwindow.cpp" line="1467"/>
+        <source>Female</source>
+        <translation>Female</translation>
+    </message>
+    <message>
+        <location filename="settimer.cpp" line="77"/>
+        <source>Input time cannot be empty</source>
+        <oldsource>Input of time cannot be empty!</oldsource>
+        <translation>Input time cannot be empty</translation>
+    </message>
+    <message>
+        <location filename="settimer.cpp" line="78"/>
+        <location filename="testwindow.cpp" line="792"/>
+        <location filename="testwindow.cpp" line="866"/>
+        <source>Warning</source>
+        <translation>Warning</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="47"/>
+        <location filename="setwindow.cpp" line="116"/>
+        <source>General Setting</source>
+        <oldsource>Print Setting</oldsource>
+        <translation>General Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="48"/>
+        <location filename="setwindow.cpp" line="117"/>
+        <source>Renf Setting</source>
+        <translation>Renf Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="49"/>
+        <location filename="setwindow.cpp" line="118"/>
+        <source>Date/Time Setting</source>
+        <translation>Date/Time Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="50"/>
+        <location filename="setwindow.cpp" line="119"/>
+        <source>System Setting</source>
+        <translation>System Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="51"/>
+        <location filename="setwindow.cpp" line="120"/>
+        <source>System Info</source>
+        <translation>System Info</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="52"/>
+        <location filename="setwindow.cpp" line="121"/>
+        <source>Debug Mode</source>
+        <oldsource>Debug Model</oldsource>
+        <translation>Debug Mode</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="241"/>
+        <source>Item</source>
+        <translation>Item</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="241"/>
+        <source>Value</source>
+        <translation>Value</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="534"/>
+        <location filename="setwindow.cpp" line="676"/>
+        <location filename="setwindow.cpp" line="775"/>
+        <location filename="userinterface.cpp" line="173"/>
+        <source>operating info</source>
+        <translation>operating info</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="535"/>
+        <location filename="setwindow.cpp" line="677"/>
+        <location filename="setwindow.cpp" line="776"/>
+        <location filename="userinterface.cpp" line="174"/>
+        <source>Configuration saved successfully</source>
+        <translation>Configuration saved successfully</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="592"/>
+        <source>Please choose the data to modify</source>
+        <oldsource>Please choose to modify the data!</oldsource>
+        <translation>Please choose the data to modify</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="631"/>
+        <source>Please choose the data to delete</source>
+        <oldsource>Please choose to delete the data!</oldsource>
+        <translation>Please choose the data to delete</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="810"/>
+        <source>Soft Update</source>
+        <translation>Soft Update</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="826"/>
+        <source>Hard Update</source>
+        <translation>Hard Update</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="886"/>
+        <source>longin failed</source>
+        <translation>longin failed</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="245"/>
+        <location filename="testwindow.cpp" line="246"/>
+        <location filename="testwindow.cpp" line="247"/>
+        <source>Auto Prt</source>
+        <translation>Auto Prt</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="249"/>
+        <location filename="testwindow.cpp" line="250"/>
+        <location filename="testwindow.cpp" line="251"/>
+        <source>Manual Prt</source>
+        <translation>Manual Prt</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="270"/>
+        <location filename="testwindow.cpp" line="277"/>
+        <location filename="testwindow.cpp" line="284"/>
+        <source>Cancel Test</source>
+        <translation>Cancel Test</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="272"/>
+        <location filename="testwindow.cpp" line="279"/>
+        <location filename="testwindow.cpp" line="286"/>
+        <source>Auto Test</source>
+        <translation>Auto Test</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="795"/>
+        <source>Auto test is underway, cancel test will lead 
+ to the failure of reagent strip, whether to continue?</source>
+        <translation>Auto test is underway, cancel test will lead 
+ to the failure of reagent strip, whether to continue?</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="826"/>
+        <source>The serial number entered already exists, please enter again</source>
+        <translation>The serial number entered already exists, please enter again</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="830"/>
+        <source>User information insert failed, stop test</source>
+        <translation>User information insert failed, stop test</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="1571"/>
+        <source>updateing </source>
+        <translation>updateing</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="1769"/>
+        <source>Upgrade is complete</source>
+        <translation>Upgrade is complete</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="1895"/>
+        <source>There is no corresponding ID information, please import the relevant ID card</source>
+        <translation>There is no corresponding ID information, please import the relevant ID card</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="1929"/>
+        <source>Reagent Strip has expired</source>
+        <translation>Reagent Strip has expired</translation>
+    </message>
+    <message>
+        <source>Reagent card has expired</source>
+        <translation type="obsolete">Reagent card has expired</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2053"/>
+        <source>Motor initialization failed,Please contact 
+customer service</source>
+        <translation>Motor initialization failed,Please contact 
+customer service</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2056"/>
+        <source>Photoelectric switch A failed,Please contact 
+customer service</source>
+        <translation>Photoelectric switch A failed,Please contact 
+customer service</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2059"/>
+        <source>Photoelectric switch B failed,Please contact 
+customer service</source>
+        <translation>Photoelectric switch B failed,Please contact 
+customer service</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2062"/>
+        <source>Laser component failure,Please contact customer service</source>
+        <translation>Laser component failure,Please contact customer service</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2065"/>
+        <source>No barcode,Please check whether the reagent 
+card is plugged or insert</source>
+        <translation>No barcode,Please check whether the reagent 
+card is plugged or insert</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2068"/>
+        <source>Wrong barcode,Please check whether the reagent 
+card is plugged or insert</source>
+        <translation>Wrong barcode,Please check whether the reagent 
+card is plugged or insert</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="2162"/>
+        <source>The result data save failed,please check the equipment</source>
+        <translation>The result data save failed,please check the equipment</translation>
+    </message>
+    <message>
+        <source>Automatic testing is underway, cancel test failure will 
+ lead to the reagent card, whether to continue?</source>
+        <translation type="obsolete">Automatic testing is underway, cancel test failure will 
+ lead to the reagent card, whether to continue?</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="871"/>
+        <source>Enter the serial number of already exists,Please enter again</source>
+        <translation>Enter the serial number of already exists,Please enter again</translation>
+    </message>
+    <message>
+        <location filename="testwindow.cpp" line="875"/>
+        <source>User information insertion failure, stop test</source>
+        <translation>User information insertion failure, stop test</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.cpp" line="241"/>
+        <source>Please select a batch number</source>
+        <translation>Please select a batch number</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.cpp" line="255"/>
+        <location filename="qcwindow.cpp" line="270"/>
+        <location filename="testwindow.cpp" line="2008"/>
+        <source>Channel1 is busy</source>
+        <translation>Channel1 is busy</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.cpp" line="260"/>
+        <location filename="testwindow.cpp" line="2011"/>
+        <source>Channel2 is busy</source>
+        <translation>Channel2 is busy</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.cpp" line="265"/>
+        <location filename="testwindow.cpp" line="2014"/>
+        <source>Channel3 is busy</source>
+        <translation>Channel3 is busy</translation>
+    </message>
+    <message>
+        <location filename="qcwindow.cpp" line="456"/>
+        <source>The QC test results is %1, save the results?</source>
+        <oldsource>The QC test results is *, save the results?</oldsource>
+        <translation>The QC test results is %1, save the results?</translation>
+    </message>
+    <message>
+        <location filename="canbus.cpp" line="42"/>
+        <source>Faile</source>
+        <translation>Faile</translation>
+    </message>
+    <message>
+        <location filename="canbus.cpp" line="43"/>
+        <source>Open the socket failed</source>
+        <translation>Open the socket failed</translation>
+    </message>
+    <message>
+        <location filename="canbus.cpp" line="61"/>
+        <source>ioctl error</source>
+        <translation>ioctl error</translation>
+    </message>
+    <message>
+        <location filename="canbus.cpp" line="70"/>
+        <source>bind error</source>
+        <translation>bind error</translation>
+    </message>
+    <message>
+        <location filename="hardgrading.cpp" line="111"/>
+        <location filename="udiskshow.cpp" line="189"/>
+        <source>The current total number of disk: 0</source>
+        <translation>The current total number of disk: 0</translation>
+    </message>
+    <message>
+        <location filename="hardgrading.cpp" line="129"/>
+        <source>Please choose Update File</source>
+        <translation>Please choose Update File</translation>
+    </message>
+    <message>
+        <location filename="upgrading.cpp" line="80"/>
+        <source>Update is successful,Need to manually restart the instrument to take effect</source>
+        <oldsource>Update is successfulï¼Need to manually restart the instrument to take effect</oldsource>
+        <translation>Update is successful,Need to manually restart the instrument to take effect</translation>
+    </message>
+</context>
+<context>
+    <name>QextSerialPort</name>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="723"/>
+        <source>No Error has occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="725"/>
+        <source>Invalid file descriptor (port was not opened correctly)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="727"/>
+        <source>Unable to allocate memory tables (POSIX)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="729"/>
+        <source>Caught a non-blocked signal (POSIX)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="731"/>
+        <source>Operation timed out (POSIX)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="733"/>
+        <source>The file opened by the port is not a valid device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="735"/>
+        <source>The port detected a break condition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="737"/>
+        <source>The port detected a framing error (usually caused by incorrect baud rate settings)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="739"/>
+        <source>There was an I/O error while communicating with the port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="741"/>
+        <source>Character buffer overrun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="743"/>
+        <source>Receive buffer overflow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="745"/>
+        <source>The port detected a parity error in the received data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="747"/>
+        <source>Transmit buffer overflow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="749"/>
+        <source>General read operation failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="751"/>
+        <source>General write operation failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="753"/>
+        <source>The %1 file doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="755"/>
+        <source>Permission denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="757"/>
+        <source>Device is already locked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qextserial/qextserialport.cpp" line="759"/>
+        <source>Unknown error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QueryWindow</name>
+    <message>
+        <location filename="querywindow.ui" line="14"/>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="30"/>
+        <source>Number</source>
+        <oldsource>Numble</oldsource>
+        <translation>Number</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="53"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="92"/>
+        <source>Check Time</source>
+        <translation>Check Time</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="105"/>
+        <source>To</source>
+        <translation>To</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="76"/>
+        <location filename="querywindow.ui" line="118"/>
+        <source>yyyy/MM/dd</source>
+        <translation>yyyy/MM/dd</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="134"/>
+        <source>Query</source>
+        <translation>Query</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="147"/>
+        <source>Print</source>
+        <translation>Print</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="173"/>
+        <source>Export</source>
+        <translation>Export</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="186"/>
+        <source>Pre Page</source>
+        <translation>Pre Page</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="199"/>
+        <source>Next Page</source>
+        <translation>Next Page</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="212"/>
+        <source>Modify</source>
+        <translation>Modify</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="225"/>
+        <source>Delete</source>
+        <translation>Delete</translation>
+    </message>
+    <message>
+        <location filename="querywindow.ui" line="251"/>
+        <source>PostBack</source>
+        <translation>PostBack</translation>
+    </message>
+</context>
+<context>
+    <name>RenfValue</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="obsolete">Dialog</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="14"/>
+        <source>Rerf Setting</source>
+        <translation>Rerf Setting</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="30"/>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="43"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message utf8="true">
+        <location filename="renfvalue.ui" line="56"/>
+        <source>Note：</source>
+        <translation>Note：</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="69"/>
+        <source>While upper Limit is empty,the set value is : &gt; setting value </source>
+        <oldsource>Ceiling is empty, the setting value is: &gt; set value</oldsource>
+        <translation>While upper Limit is empty,the set value is : &gt; setting value</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="82"/>
+        <source>While both are set,the set value is : lower limt-upper limit</source>
+        <oldsource>Both are set, the set value is: set value - set value</oldsource>
+        <translation>While both are set,the set value is : lower limt-upper limit</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="95"/>
+        <source>While lower Limit is empty,the set value is : &lt; setting value </source>
+        <oldsource>Floor is empty, the setting value is: &lt; set value</oldsource>
+        <translation>While lower Limit is empty,the set value is : &lt; setting value</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="108"/>
+        <source>Hight Age Limit</source>
+        <translation>Hight Age Limit</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="141"/>
+        <source>Upper Reference Limit</source>
+        <oldsource>Upper Limit</oldsource>
+        <translation>Upper Reference Limit</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="174"/>
+        <source>Sex</source>
+        <translation>Sex</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="187"/>
+        <source>Item Name</source>
+        <translation>Item Name</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="200"/>
+        <source>Lower Age Limit</source>
+        <translation>Lower Age Limit</translation>
+    </message>
+    <message>
+        <source>Age</source>
+        <translation type="obsolete">Age</translation>
+    </message>
+    <message>
+        <location filename="renfvalue.ui" line="233"/>
+        <source>Lower Reference Limit</source>
+        <oldsource>Lower Limit</oldsource>
+        <translation>Lower Reference Limit</translation>
+    </message>
+</context>
+<context>
+    <name>SetTimerObj</name>
+    <message>
+        <location filename="settimer.ui" line="14"/>
+        <source>Timer</source>
+        <translation>Timer</translation>
+    </message>
+    <message>
+        <source>Cunstom Time</source>
+        <translation type="obsolete">Cunstom Time</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="30"/>
+        <source>User-defined</source>
+        <translation>User-defined</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="53"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="66"/>
+        <source>3Min</source>
+        <translation>3Min</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="79"/>
+        <source>5Min</source>
+        <translation>5Min</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="92"/>
+        <source>10Min</source>
+        <translation>10Min</translation>
+    </message>
+    <message>
+        <source>9Min</source>
+        <translation type="obsolete">9Min</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="105"/>
+        <source>15Min</source>
+        <translation>15Min</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="118"/>
+        <source>Min</source>
+        <translation>Min</translation>
+    </message>
+    <message>
+        <location filename="settimer.ui" line="131"/>
+        <source>Tips: User-defined time is 1-100 mins.</source>
+        <oldsource>Tip: effective custom for 1-100 minutes</oldsource>
+        <translation>Tips: User-defined time is 1-100 mins.</translation>
+    </message>
+</context>
+<context>
+    <name>SetWindow</name>
+    <message>
+        <location filename="setwindow.ui" line="14"/>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="86"/>
+        <source>General Setting</source>
+        <oldsource>Print Setting</oldsource>
+        <translation>General Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="103"/>
+        <source>Print Mode</source>
+        <oldsource>Print Model</oldsource>
+        <translation>Print Mode</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="115"/>
+        <source>Auto Printing</source>
+        <translation>Auto Printing</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="128"/>
+        <source>Manual Printing</source>
+        <translation>Manual Printing</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="142"/>
+        <location filename="setwindow.ui" line="615"/>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="155"/>
+        <location filename="setwindow.ui" line="628"/>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="168"/>
+        <source>Encode Mode</source>
+        <translation>Encode Mode</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="180"/>
+        <source>Auto Encode</source>
+        <translation>Auto Encode</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="193"/>
+        <source>Scanning Encode</source>
+        <translation>Scanning Encode</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="209"/>
+        <source>Renf Setting</source>
+        <translation>Renf Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="235"/>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="248"/>
+        <source>Modify</source>
+        <translation>Modify</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="261"/>
+        <source>Delete</source>
+        <translation>Delete</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="292"/>
+        <source>Date/Time Setting</source>
+        <translation>Date/Time Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="318"/>
+        <source>Time Setting</source>
+        <translation>Time Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="331"/>
+        <location filename="setwindow.ui" line="830"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="344"/>
+        <source>yyyy/MM/dd</source>
+        <translation>yyyy/MM/dd</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="360"/>
+        <source>HH:mm:ss</source>
+        <translation>HH:mm:ss</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="384"/>
+        <source>System Setting</source>
+        <translation>System Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="410"/>
+        <source>LIS Connection</source>
+        <oldsource>Lis Connect</oldsource>
+        <translation>LIS Connection</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="422"/>
+        <source>Null</source>
+        <translation>Null</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="435"/>
+        <source>HL7</source>
+        <translation>HL7</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="448"/>
+        <source>ASTM</source>
+        <translation>ASTM</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="462"/>
+        <source>Network Setting</source>
+        <translation>Network Setting</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="474"/>
+        <source>Local IP Add</source>
+        <translation>Local IP Add</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="487"/>
+        <source>Server IP Add</source>
+        <translation>Server IP Add</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="500"/>
+        <source>Server Port</source>
+        <translation>Server Port</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="544"/>
+        <source>Language Options</source>
+        <oldsource>Language Choice</oldsource>
+        <translation>Language Options</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="557"/>
+        <source>Chinese</source>
+        <translation>Chinese</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="590"/>
+        <source>Channel1</source>
+        <translation>Channel1</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="595"/>
+        <source>Channel2</source>
+        <translation>Channel2</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="600"/>
+        <source>Channel3</source>
+        <translation>Channel3</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="703"/>
+        <source>V0.26.0</source>
+        <oldsource>V0.25.1</oldsource>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="729"/>
+        <source>Soft Update</source>
+        <translation>Soft Update</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="742"/>
+        <source>Hard Update</source>
+        <translation>Hard Update</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="791"/>
+        <source>Logout</source>
+        <translation>Logout</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="804"/>
+        <source>Interface</source>
+        <translation>Interface</translation>
+    </message>
+    <message>
+        <source>Query</source>
+        <translation type="obsolete">Query</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="843"/>
+        <source>Login Password</source>
+        <translation>Login Password</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="562"/>
+        <source>English</source>
+        <translation>English</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="577"/>
+        <source>QC Channel</source>
+        <oldsource>Control Channel</oldsource>
+        <translation>QC Channel</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="651"/>
+        <source>System Info</source>
+        <translation>System Info</translation>
+    </message>
+    <message utf8="true">
+        <location filename="setwindow.ui" line="677"/>
+        <source>Software Version：</source>
+        <translation>Software Version：</translation>
+    </message>
+    <message utf8="true">
+        <location filename="setwindow.ui" line="690"/>
+        <source>Firmware version：</source>
+        <translation>Firmware version：</translation>
+    </message>
+    <message>
+        <source>V0.8.2</source>
+        <oldsource>V0.8.1</oldsource>
+        <translation type="obsolete">V1.0.0</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="716"/>
+        <source>V0.5.1</source>
+        <translation>V0.5.1</translation>
+    </message>
+    <message>
+        <source>Updage</source>
+        <translation type="obsolete">Updage</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="765"/>
+        <source>Debug Mode</source>
+        <oldsource>Debug Model</oldsource>
+        <translation>Debug Mode</translation>
+    </message>
+</context>
+<context>
+    <name>TestWindow</name>
+    <message>
+        <location filename="testwindow.ui" line="14"/>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="30"/>
+        <source>Channel1</source>
+        <translation>Channel1</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="42"/>
+        <location filename="testwindow.ui" line="299"/>
+        <location filename="testwindow.ui" line="556"/>
+        <source>Number</source>
+        <oldsource>Numble</oldsource>
+        <translation>Number</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="65"/>
+        <location filename="testwindow.ui" line="322"/>
+        <location filename="testwindow.ui" line="579"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="91"/>
+        <location filename="testwindow.ui" line="348"/>
+        <location filename="testwindow.ui" line="605"/>
+        <source>Age</source>
+        <translation>Age</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="117"/>
+        <location filename="testwindow.ui" line="374"/>
+        <location filename="testwindow.ui" line="631"/>
+        <source>Sex</source>
+        <translation>Sex</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="155"/>
+        <location filename="testwindow.ui" line="412"/>
+        <location filename="testwindow.ui" line="669"/>
+        <source>Test Item</source>
+        <translation>Test Item</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="136"/>
+        <location filename="testwindow.ui" line="393"/>
+        <location filename="testwindow.ui" line="650"/>
+        <source>Male</source>
+        <translation>Male</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="141"/>
+        <location filename="testwindow.ui" line="398"/>
+        <location filename="testwindow.ui" line="655"/>
+        <source>Female</source>
+        <translation>Female</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="181"/>
+        <location filename="testwindow.ui" line="438"/>
+        <location filename="testwindow.ui" line="695"/>
+        <source>Result</source>
+        <translation>Result</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="207"/>
+        <location filename="testwindow.ui" line="477"/>
+        <location filename="testwindow.ui" line="760"/>
+        <source>In Test</source>
+        <translation>In Test</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="220"/>
+        <location filename="testwindow.ui" line="464"/>
+        <location filename="testwindow.ui" line="747"/>
+        <source>Auto Test</source>
+        <translation>Auto Test</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="233"/>
+        <location filename="testwindow.ui" line="490"/>
+        <location filename="testwindow.ui" line="734"/>
+        <source>Print</source>
+        <translation>Print</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="246"/>
+        <location filename="testwindow.ui" line="503"/>
+        <location filename="testwindow.ui" line="721"/>
+        <source>New</source>
+        <translation>New</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="287"/>
+        <source>Channel2</source>
+        <translation>Channel2</translation>
+    </message>
+    <message>
+        <location filename="testwindow.ui" line="544"/>
+        <source>Channel3</source>
+        <translation>Channel3</translation>
+    </message>
+</context>
+<context>
+    <name>UDiskShow</name>
+    <message>
+        <location filename="udiskshow.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <location filename="udiskshow.ui" line="53"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="udiskshow.ui" line="66"/>
+        <source>Refresh</source>
+        <translation>Refresh</translation>
+    </message>
+    <message>
+        <location filename="udiskshow.ui" line="79"/>
+        <source>U Disk</source>
+        <translation>U Disk</translation>
+    </message>
+</context>
+<context>
+    <name>UserInterface</name>
+    <message>
+        <location filename="userinterface.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="49"/>
+        <source>老化测试</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="61"/>
+        <location filename="userinterface.ui" line="149"/>
+        <source>关闭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="74"/>
+        <location filename="userinterface.ui" line="162"/>
+        <source>开启</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="87"/>
+        <source>老化间隔时间:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="110"/>
+        <source>秒</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="123"/>
+        <source>停止老化</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="137"/>
+        <source>原始数据</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="176"/>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="189"/>
+        <source>退出</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="202"/>
+        <source>通道1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="214"/>
+        <location filename="userinterface.ui" line="286"/>
+        <location filename="userinterface.ui" line="312"/>
+        <source>放大偏移量</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="237"/>
+        <location filename="userinterface.ui" line="273"/>
+        <location filename="userinterface.ui" line="335"/>
+        <source>发送</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="251"/>
+        <source>通道2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="300"/>
+        <source>通道3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="351"/>
+        <source>清除数据库</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="364"/>
+        <source>复制数据库</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>frmInput</name>
+    <message utf8="true">
+        <location filename="frminput.ui" line="14"/>
+        <source>中文输入法面板</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="85"/>
+        <source>  中文输入法--小写</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="114"/>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="127"/>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="140"/>
+        <source>关闭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="415"/>
+        <source>!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="431"/>
+        <source>@</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="447"/>
+        <source>#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="463"/>
+        <source>$</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="479"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="495"/>
+        <source>^</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="511"/>
+        <source>&amp;&amp;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="527"/>
+        <source>*</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="543"/>
+        <source>(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="559"/>
+        <source>)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="575"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="591"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="607"/>
+        <source>←</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="639"/>
+        <source>7</source>
+        <translation>7</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="655"/>
+        <source>8</source>
+        <translation>8</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="671"/>
+        <source>9</source>
+        <translation>9</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="687"/>
+        <source>q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="703"/>
+        <source>w</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="719"/>
+        <source>e</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="735"/>
+        <source>r</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="751"/>
+        <source>t</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="767"/>
+        <source>y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="783"/>
+        <source>u</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="799"/>
+        <source>i</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="815"/>
+        <source>o</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="831"/>
+        <source>p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="847"/>
+        <source>_</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="863"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="879"/>
+        <source>|</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="895"/>
+        <source>4</source>
+        <translation>4</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="911"/>
+        <source>5</source>
+        <translation>5</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="927"/>
+        <source>6</source>
+        <translation>6</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="943"/>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="959"/>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="975"/>
+        <source>d</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="991"/>
+        <source>f</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1007"/>
+        <source>g</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1023"/>
+        <source>h</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1039"/>
+        <source>j</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1055"/>
+        <source>k</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1071"/>
+        <source>l</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1087"/>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1103"/>
+        <source>&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1119"/>
+        <source>?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1135"/>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1151"/>
+        <source>1</source>
+        <translation>1</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1167"/>
+        <source>2</source>
+        <translation>2</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1183"/>
+        <source>3</source>
+        <translation>3</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1199"/>
+        <source>z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1215"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1231"/>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1247"/>
+        <source>v</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1263"/>
+        <source>b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1279"/>
+        <source>n</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1295"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1311"/>
+        <source>,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1327"/>
+        <source>\</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1343"/>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1359"/>
+        <source>00</source>
+        <translation>00</translation>
+    </message>
+    <message>
+        <location filename="frminput.ui" line="1375"/>
+        <source>.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="1396"/>
+        <source>空格</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="1412"/>
+        <source>回车</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="frminput.ui" line="1428"/>
+        <source>小写</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+</TS>

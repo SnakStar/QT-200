@@ -1,0 +1,30 @@
+QPushButton{
+    border:2px solid gray;
+    border-radius: 10px;
+}
+QPushButton:hover{
+    color:white;
+    background:red;
+}
+
+    QPushButton:checked{ /*pushbutton checked style*/
+     background-color:#3da5fc;/*按钮选中背景为淡蓝色*/
+     border-color:#3da5fc;
+     padding: 15px 15px;
+     border-radius:1px;
+     font-size:12px;
+    }
+
+QPushButton:pressed{
+    color:white;
+    background:blue;
+}
+
+QGroupBox{
+    color:white;
+    background:66cc00;
+}
+QGroupBox{
+    color: white;
+    border: 2px solid green;
+}

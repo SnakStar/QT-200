@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RenfValue</class>
+ <widget class="QDialog" name="RenfValue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>544</width>
+    <height>388</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Rerf Setting</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qt200.qrc">
+    <normaloff>:/resource/image/Title.png</normaloff>:/resource/image/Title.png</iconset>
+  </property>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>260</y>
+     <width>70</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnOK">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>260</y>
+     <width>70</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>300</y>
+     <width>54</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Note：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>320</y>
+     <width>521</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>While upper Limit is empty,the set value is : &gt; setting value </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>360</y>
+     <width>521</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>While both are set,the set value is : lower limt-upper limit</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>340</y>
+     <width>521</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>While lower Limit is empty,the set value is : &lt; setting value </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbAgeHight">
+   <property name="geometry">
+    <rect>
+     <x>89</x>
+     <y>183</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hight Age Limit</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leAgeHight">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>179</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cBoxItem">
+   <property name="geometry">
+    <rect>
+     <x>236</x>
+     <y>20</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbRenfHigh">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>108</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Upper Reference Limit</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leRenfLow">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>64</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leAgeLow">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>142</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbSex">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>230</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sex</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbItem">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>26</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Item Name</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbAgeLow">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>149</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lower Age Limit</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leRenfHigh">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>105</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cBoxSex">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>220</y>
+     <width>221</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbRenfLow">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>67</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lower Reference Limit</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>btnOK</tabstop>
+  <tabstop>btnCancel</tabstop>
+  <tabstop>leRenfLow</tabstop>
+  <tabstop>leRenfHigh</tabstop>
+  <tabstop>leAgeLow</tabstop>
+  <tabstop>cBoxSex</tabstop>
+ </tabstops>
+ <resources>
+  <include location="qt200.qrc"/>
+ </resources>
+ <connections/>
+</ui>

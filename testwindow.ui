@@ -1,0 +1,836 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TestWindow</class>
+ <widget class="QWidget" name="TestWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qt200.qrc">
+    <normaloff>:/resource/image/Title.png</normaloff>:/resource/image/Title.png</iconset>
+  </property>
+  <widget class="QGroupBox" name="groupBox_c1">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-1</y>
+     <width>268</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Channel1</string>
+   </property>
+   <widget class="QLabel" name="lbNumber1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leNumber1">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>30</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbName1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leName1">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>60</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbAge1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Age</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leAge1">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>100</y>
+      <width>51</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbSex1">
+    <property name="geometry">
+     <rect>
+      <x>133</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sex</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cBoxSex1">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>100</y>
+      <width>61</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Male</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Female</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lbItem1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Test Item</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leItem1">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>160</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbResult1">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Result</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leResult1">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>200</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnInstantTest1">
+    <property name="geometry">
+     <rect>
+      <x>167</x>
+      <y>344</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>In Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnAutoTest1">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>344</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Auto Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPrint1">
+    <property name="geometry">
+     <rect>
+      <x>167</x>
+      <y>239</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Print</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNew1">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>239</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New</string>
+    </property>
+   </widget>
+   <widget class="QRoundProgressBar" name="wgRoundBar1" native="true">
+    <property name="geometry">
+     <rect>
+      <x>83</x>
+      <y>266</y>
+      <width>96</width>
+      <height>96</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>wgRoundBar1</zorder>
+   <zorder>lbNumber1</zorder>
+   <zorder>leNumber1</zorder>
+   <zorder>lbName1</zorder>
+   <zorder>leName1</zorder>
+   <zorder>lbAge1</zorder>
+   <zorder>leAge1</zorder>
+   <zorder>lbSex1</zorder>
+   <zorder>cBoxSex1</zorder>
+   <zorder>lbItem1</zorder>
+   <zorder>leItem1</zorder>
+   <zorder>lbResult1</zorder>
+   <zorder>leResult1</zorder>
+   <zorder>btnInstantTest1</zorder>
+   <zorder>btnAutoTest1</zorder>
+   <zorder>btnPrint1</zorder>
+   <zorder>btnNew1</zorder>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_c2">
+   <property name="geometry">
+    <rect>
+     <x>266</x>
+     <y>-1</y>
+     <width>270</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Channel2</string>
+   </property>
+   <widget class="QLabel" name="lbNumber2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leNumber2">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>30</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbName2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leName2">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>60</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbAge2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Age</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leAge2">
+    <property name="geometry">
+     <rect>
+      <x>74</x>
+      <y>100</y>
+      <width>51</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbSex2">
+    <property name="geometry">
+     <rect>
+      <x>133</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sex</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cBoxSex2">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>100</y>
+      <width>61</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Male</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Female</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lbItem2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Test Item</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leItem2">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>160</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbResult2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Result</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leResult2">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>200</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnAutoTest2">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>344</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Auto Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnInstantTest2">
+    <property name="geometry">
+     <rect>
+      <x>172</x>
+      <y>344</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>In Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPrint2">
+    <property name="geometry">
+     <rect>
+      <x>171</x>
+      <y>239</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Print</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNew2">
+    <property name="geometry">
+     <rect>
+      <x>17</x>
+      <y>239</y>
+      <width>81</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New</string>
+    </property>
+   </widget>
+   <widget class="QRoundProgressBar" name="wgRoundBar2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>88</x>
+      <y>267</y>
+      <width>96</width>
+      <height>96</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>wgRoundBar2</zorder>
+   <zorder>lbNumber2</zorder>
+   <zorder>leNumber2</zorder>
+   <zorder>lbName2</zorder>
+   <zorder>leName2</zorder>
+   <zorder>lbAge2</zorder>
+   <zorder>leAge2</zorder>
+   <zorder>lbSex2</zorder>
+   <zorder>cBoxSex2</zorder>
+   <zorder>lbItem2</zorder>
+   <zorder>leItem2</zorder>
+   <zorder>lbResult2</zorder>
+   <zorder>leResult2</zorder>
+   <zorder>btnAutoTest2</zorder>
+   <zorder>btnInstantTest2</zorder>
+   <zorder>btnPrint2</zorder>
+   <zorder>btnNew2</zorder>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_c3">
+   <property name="geometry">
+    <rect>
+     <x>534</x>
+     <y>-1</y>
+     <width>268</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Channel3</string>
+   </property>
+   <widget class="QLabel" name="lbNumber3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leNumber3">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>30</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbName3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leName3">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>60</y>
+      <width>171</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbAge3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Age</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leAge3">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>100</y>
+      <width>51</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbSex3">
+    <property name="geometry">
+     <rect>
+      <x>143</x>
+      <y>100</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sex</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cBoxSex3">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>100</y>
+      <width>61</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Male</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Female</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lbItem3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Test Item</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leItem3">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>160</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbResult3">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>200</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Result</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leResult3">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>200</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNew3">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>239</y>
+      <width>80</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPrint3">
+    <property name="geometry">
+     <rect>
+      <x>177</x>
+      <y>239</y>
+      <width>80</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Print</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnAutoTest3">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>344</y>
+      <width>80</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Auto Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnInstantTest3">
+    <property name="geometry">
+     <rect>
+      <x>177</x>
+      <y>344</y>
+      <width>80</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>In Test</string>
+    </property>
+   </widget>
+   <widget class="QRoundProgressBar" name="wgRoundBar3" native="true">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>266</y>
+      <width>96</width>
+      <height>96</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>wgRoundBar3</zorder>
+   <zorder>lbNumber3</zorder>
+   <zorder>leNumber3</zorder>
+   <zorder>lbName3</zorder>
+   <zorder>leName3</zorder>
+   <zorder>lbAge3</zorder>
+   <zorder>leAge3</zorder>
+   <zorder>lbSex3</zorder>
+   <zorder>cBoxSex3</zorder>
+   <zorder>lbItem3</zorder>
+   <zorder>leItem3</zorder>
+   <zorder>lbResult3</zorder>
+   <zorder>leResult3</zorder>
+   <zorder>btnNew3</zorder>
+   <zorder>btnPrint3</zorder>
+   <zorder>btnAutoTest3</zorder>
+   <zorder>btnInstantTest3</zorder>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QRoundProgressBar</class>
+   <extends>QWidget</extends>
+   <header>qroundprogressbar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>leNumber1</tabstop>
+  <tabstop>leName1</tabstop>
+  <tabstop>leAge1</tabstop>
+  <tabstop>cBoxSex1</tabstop>
+  <tabstop>leItem1</tabstop>
+  <tabstop>leResult1</tabstop>
+  <tabstop>btnNew1</tabstop>
+  <tabstop>btnPrint1</tabstop>
+  <tabstop>btnAutoTest1</tabstop>
+  <tabstop>btnInstantTest1</tabstop>
+  <tabstop>btnNew2</tabstop>
+  <tabstop>btnPrint2</tabstop>
+  <tabstop>btnAutoTest2</tabstop>
+  <tabstop>btnInstantTest2</tabstop>
+  <tabstop>leNumber2</tabstop>
+  <tabstop>leName2</tabstop>
+  <tabstop>leAge2</tabstop>
+  <tabstop>cBoxSex2</tabstop>
+  <tabstop>leItem2</tabstop>
+  <tabstop>leResult2</tabstop>
+  <tabstop>btnNew3</tabstop>
+  <tabstop>btnPrint3</tabstop>
+  <tabstop>btnAutoTest3</tabstop>
+  <tabstop>btnInstantTest3</tabstop>
+  <tabstop>leNumber3</tabstop>
+  <tabstop>leName3</tabstop>
+  <tabstop>leAge3</tabstop>
+  <tabstop>cBoxSex3</tabstop>
+  <tabstop>leItem3</tabstop>
+  <tabstop>leResult3</tabstop>
+ </tabstops>
+ <resources>
+  <include location="qt200.qrc"/>
+ </resources>
+ <connections/>
+</ui>

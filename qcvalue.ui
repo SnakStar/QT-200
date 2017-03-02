@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QCValue</class>
+ <widget class="QDialog" name="QCValue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>333</width>
+    <height>254</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QC Setting</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qt200.qrc">
+    <normaloff>:/resource/image/Title.png</normaloff>:/resource/image/Title.png</iconset>
+  </property>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>190</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbQCITEM">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>10</y>
+     <width>32</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leQCITEM">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>10</y>
+     <width>146</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leUpper">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>90</y>
+     <width>146</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbUpper">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>90</y>
+     <width>80</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Upper Limit</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbLower">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>130</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lower Limit</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbQCBN">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>50</y>
+     <width>123</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>QC Batch Number</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leQCBN">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>50</y>
+     <width>146</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leLower">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>130</y>
+     <width>146</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="qt200.qrc"/>
+ </resources>
+ <connections/>
+</ui>

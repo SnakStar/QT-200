@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/image/battery-charged.png</file>
+        <file>resource/image/battery-full.png</file>
+        <file>resource/image/battery-half.png</file>
+        <file>resource/image/down-alt.png</file>
+        <file>resource/image/Timer.png</file>
+        <file>resource/image/TimerChange.png</file>
+        <file>resource/image/QC.png</file>
+        <file>resource/image/Query.png</file>
+        <file>resource/image/Setting.png</file>
+        <file>resource/image/Test.png</file>
+        <file>resource/image/battery-empty.png</file>
+        <file>resource/image/left_bottom.png</file>
+        <file>resource/image/left_bottom_disabled.png</file>
+        <file>resource/image/left_bottom_pressed.png</file>
+        <file>resource/image/left_top.png</file>
+        <file>resource/image/left_top_pressed.png</file>
+        <file>resource/image/right_bottom.png</file>
+        <file>resource/image/right_bottom_disabled.png</file>
+        <file>resource/image/right_bottom_pressed.png</file>
+        <file>resource/image/right_top.png</file>
+        <file>resource/image/right_top_disabled.png</file>
+        <file>resource/image/right_top_pressed.png</file>
+        <file>resource/image/left_top_disabled.png</file>
+        <file>resource/image/Title.png</file>
+        <file>resource/qss/style.qss</file>
+    </qresource>
+</RCC>

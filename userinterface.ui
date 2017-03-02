@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserInterface</class>
+ <widget class="QDialog" name="UserInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>798</width>
+    <height>479</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QListWidget" name="lwNavBar">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>0</y>
+     <width>146</width>
+     <height>481</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>0</y>
+     <width>661</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="GeneralAPI">
+    <widget class="QGroupBox" name="groupBox_Aging">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>641</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>老化测试</string>
+     </property>
+     <widget class="QRadioButton" name="rbAgingClose">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>89</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>关闭</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbAgingOpen">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>20</y>
+        <width>89</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>开启</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAgingTime">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>老化间隔时间:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leAgingTime">
+      <property name="geometry">
+       <rect>
+        <x>112</x>
+        <y>61</y>
+        <width>113</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAgingUnit">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>60</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>秒</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnStopAging">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>50</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>停止老化</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_RawData">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>641</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>原始数据</string>
+     </property>
+     <widget class="QRadioButton" name="rbRawDataClose">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>89</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>关闭</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbRawDataOpen">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>30</y>
+        <width>89</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>开启</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="btnUIOK">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>390</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>确定</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnUIClose">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>390</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>退出</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_APOFFSET1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>201</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>通道1</string>
+     </property>
+     <widget class="QLabel" name="lbAPOffSet1">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>31</y>
+        <width>82</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>放大偏移量</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leAPOffSet1">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>29</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnAPOffSet1">
+      <property name="geometry">
+       <rect>
+        <x>146</x>
+        <y>20</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_APOFFSET2">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>220</y>
+       <width>221</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>通道2</string>
+     </property>
+     <widget class="QLineEdit" name="leAPOffSet2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>30</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnAPOffSet2">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>21</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAPOffSet2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>32</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>放大偏移量</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_APOFFSET3">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>220</y>
+       <width>201</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>通道3</string>
+     </property>
+     <widget class="QLabel" name="lbAPOffSet3">
+      <property name="geometry">
+       <rect>
+        <x>8</x>
+        <y>30</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>放大偏移量</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leAPOffSet3">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>28</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnAPOffSet3">
+      <property name="geometry">
+       <rect>
+        <x>144</x>
+        <y>19</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="DatabaseAPI">
+    <widget class="QPushButton" name="btnClearDb">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>380</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清除数据库</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnCopyDb">
+     <property name="geometry">
+      <rect>
+       <x>464</x>
+       <y>380</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>复制数据库</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="LogAPI"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
