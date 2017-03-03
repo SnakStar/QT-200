@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     QRoundProgressBar.cpp \
     hardgrading.cpp \
     userinterface.cpp \
-    csimplehl7.cpp
+    csimplehl7.cpp \
+    resultmodify.cpp
 win32{
     SOURCES += qextserial/qextserialport_win.cpp
 }
@@ -73,7 +74,8 @@ HEADERS  += mainwindow.h \
     QRoundProgressBar.h \
     hardgrading.h \
     userinterface.h \
-    csimplehl7.h
+    csimplehl7.h \
+    resultmodify.h
 
 
 FORMS    += mainwindow.ui \
@@ -86,7 +88,8 @@ FORMS    += mainwindow.ui \
     renfvalue.ui \
     qcvalue.ui \
     udiskshow.ui \
-    userinterface.ui
+    userinterface.ui \
+    resultmodify.ui
 
 RESOURCES += \
     qt200.qrc

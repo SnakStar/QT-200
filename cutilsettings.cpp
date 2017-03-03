@@ -625,6 +625,30 @@ QStringList CUtilSettings::ParseValue(QString value)
     return valueList;
 }
 
+/********************************************************
+ *@Name:        ParseTestUnit
+ *@Author:      HuaT
+ *@Description: 把结果和单位分离并返回
+ *@Param:       带结果单位的字符串
+ *@Return:      返回结果和单位的字符链表
+ *@Version:     1.0
+ *@Date:        2017-2-22
+********************************************************/
+QStringList CUtilSettings::ParseTestUnit(QString strResult)
+{
+    QStringList listResult;
+    quint8 nAsc;
+    for(int n=0; n<strResult.size(); n++){
+        nAsc = (quint8)strResult.at(n).toAscii();
+        //如果不是数字了,则就是单位开始了
+        if(nAsc > 62){
+            listResult.append(strResult.left(n));
+            listResult.append(strResult.right(strResult.size()-n));
+        }
+    }
+    return listResult;
+}
+
 
 /********************************************************
  *@Name:        GetRenfValue

@@ -79,6 +79,8 @@ SetWindow::SetWindow(QWidget *parent) :
     connect(ui->listWidget,SIGNAL(currentRowChanged(int)), ui->stackedWidget, SLOT(setCurrentIndex(int)));
     //初始化参考值表单
     InitRenfVTb();
+    //密码显示方式
+    ui->leDebugLoginPwd->setEchoMode(QLineEdit::Password);
     //隐藏ASTM选项
     ui->rbASTM->hide();
 }
@@ -904,6 +906,9 @@ void SetWindow::HideDebugFunc(bool bHide)
     ui->btnDebugLogout->setHidden(bHide);
     ui->btnSoftUpdate->setHidden(bHide);
     ui->btnHardUpdate->setHidden(bHide);
+
+    //数据库修改删除按钮
+    m_QueryWin->SetDbModifyFuncHide(bHide);
 }
 
 /********************************************************

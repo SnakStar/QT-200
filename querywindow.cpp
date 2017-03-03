@@ -47,8 +47,8 @@ QueryWindow::QueryWindow(QWidget *parent) :
     ui->dteStartDate->setProperty("noinput",true);
     ui->dteEndDate->setProperty("noinput",true);
     //隐藏修改和删除按钮
-    ui->btnModify->hide();
-    ui->btnDelete->hide();
+    //ui->btnModify->hide();
+    //ui->btnDelete->hide();
 
 
 }
@@ -70,6 +70,21 @@ QueryWindow::~QueryWindow()
 void QueryWindow::SetExportHide(bool bHide)
 {
     ui->btnExport->setHidden(bHide);
+}
+
+/********************************************************
+ *@Name:        SetDbModifyFuncHide
+ *@Author:      HuaT
+ *@Description: 设置数据库删除修改按钮是否隐藏
+ *@Param:       true-隐藏，false-显示
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-3-3
+********************************************************/
+void QueryWindow::SetDbModifyFuncHide(bool bHide)
+{
+    ui->btnModify->setHidden(bHide);
+    ui->btnDelete->setHidden(bHide);
 }
 
 /********************************************************
@@ -101,30 +116,6 @@ void QueryWindow::InitQueryDate()
 void QueryWindow::InitPatientInfo()
 {
     m_CheckTableWidget = new CCheckTableWidgetModel(ui->twPatientInfo,m_Query,m_SqlDB);
-}
-
-/********************************************************
- *@Name:        ParseTestUnit
- *@Author:      HuaT
- *@Description: 把结果和单位分离并返回
- *@Param:       带结果单位的字符串
- *@Return:      返回结果和单位的字符链表
- *@Version:     1.0
- *@Date:        2017-2-22
-********************************************************/
-QStringList QueryWindow::ParseTestUnit(QString strResult)
-{
-    QStringList listResult;
-    quint8 nAsc;
-    for(int n=0; n<strResult.size(); n++){
-        nAsc = (quint8)strResult.at(n).toAscii();
-        //如果不是数字了,则就是单位开始了
-        if(nAsc > 62){
-            listResult.append(strResult.left(n));
-            listResult.append(strResult.right(strResult.size()-n));
-        }
-    }
-    return listResult;
 }
 
 /********************************************************
@@ -306,7 +297,17 @@ void QueryWindow::on_btnNextPage_clicked()
 ********************************************************/
 void QueryWindow::on_btnModify_clicked()
 {
-
+    QVector<PatientInfo> vecPatientInfo = m_CheckTableWidget->GetPatientInfo();
+    for(int i=0; i<vecPatientInfo.count();i++){
+        if(vecPatientInfo.at(i).m_bSelected == true){
+            ResultModify* rm = new ResultModify(m_db,
+                                                QString::number(vecPatientInfo.at(i).m_nNumble),
+                                                vecPatientInfo.at(i).m_strTestDate,
+                                                vecPatientInfo.at(i).m_strResult,this);
+            rm->show();
+            break;
+        }
+    }
 }
 
 /********************************************************
@@ -320,7 +321,36 @@ void QueryWindow::on_btnModify_clicked()
 ********************************************************/
 void QueryWindow::on_btnDelete_clicked()
 {
-
+    //QVector<PatientInfo>::iterator it;
+    QVector<PatientInfo> vecPatientInfo = m_CheckTableWidget->GetPatientInfo();
+    QString strSql,strFilter;
+    strSql = QString("delete from patient where");
+    for(int i=0; i<vecPatientInfo.count();i++){
+        if(vecPatientInfo.at(i).m_bSelected == true){
+            if(i != 0){
+                strFilter.append(" or ");
+            }
+            strFilter.append(QString(" number=%1 and testdate='%2'")
+                    .arg(vecPatientInfo.at(i).m_nNumble)
+                    .arg(vecPatientInfo.at(i).m_strTestDate) );
+            strSql.append(strFilter);
+            strFilter.clear();
+        }
+    }
+    //qDebug()<<strSql;
+    QString strTitle,strContain;
+    strTitle = "提示";
+    strContain = "确定删除数据?删除后数据将无法恢复!";
+    if(QMessageBox::Yes == QMessageBox::information(this,strTitle,strContain,QMessageBox::Yes|QMessageBox::No)){
+        if(m_db->Exec(strSql)){
+            strContain = "删除成功";
+            QMessageBox::information(this,strTitle,strContain,QMessageBox::Ok);
+        }else{
+            strContain = QString("删除失败:%1").arg(m_db->LastError());
+            QMessageBox::critical(this,strTitle,strContain,QMessageBox::Ok);
+        }
+    }
+    on_btnQueryData_clicked();
 }
 
 /********************************************************
@@ -349,7 +379,7 @@ void QueryWindow::on_btnPostback_clicked()
                 }else{
                     strSex = QObject::tr("U");
                 }
-                QStringList listResult = ParseTestUnit(vecPatientInfo.at(i).m_strResult);
+                QStringList listResult = m_settings->ParseTestUnit(vecPatientInfo.at(i).m_strResult);
                 QString strCheckTime;
                 QDateTime dtCheckTime = QDateTime::fromString(vecPatientInfo.at(i).m_strTestDate,"yyyy-MM-dd hh:mm:ss");
                 strCheckTime = dtCheckTime.toString("yyyyMMddhhmmss");

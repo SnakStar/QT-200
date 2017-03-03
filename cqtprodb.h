@@ -45,6 +45,8 @@ public:
     bool Exec(QString strSql);
     //返回查询结果
     QStringList ExecQuery(QString strSql);
+    //返回出错信息
+    QString LastError();
 
     //void ShowTableData(QString strSql);
 private:

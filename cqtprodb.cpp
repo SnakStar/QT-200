@@ -178,6 +178,20 @@ QStringList CQtProDB::ExecQuery(QString strSql)
 }
 
 /************************************
+ *Name:           LastError
+ *Author:         HuaT
+ *Description:    返回数据库操作时的错误信息
+ *Param:          无
+ *Return:         错误信息内容
+ *Version:        1.0
+ *Date:           2017-3-3
+************************************/
+QString CQtProDB::LastError()
+{
+    return m_query->lastError().text();
+}
+
+/************************************
  *Name:CreateTable
  *Author:HuaT
  *Description:检测数据库中是否有指定表，如果没有则新建

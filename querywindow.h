@@ -28,6 +28,7 @@
 #include"exportdata.h"
 #include"cqtprodb.h"
 #include"csimplehl7.h"
+#include"resultmodify.h"
 
 namespace Ui {
 class QueryWindow;
@@ -42,14 +43,14 @@ public:
     ~QueryWindow();
 public:
     void SetExportHide(bool bHide);
+    void SetDbModifyFuncHide(bool bHide);
 //function
 private:
     //初始化时间控件
     void InitQueryDate();
     //初始化列表控件
     void InitPatientInfo();
-    //把结果和单位分离并返回
-    QStringList ParseTestUnit(QString strResult);
+
 private slots:
     void on_btnPrint_clicked();
 
