@@ -35,6 +35,10 @@ ResultModify::ResultModify(CQtProDB *db,QString strNumber, QString strTestDate,
     ui->leRMTestDate->setText(strTestDate);
     ui->leRMOldResult->setText(strResult);
 
+    ui->leRMNumber->setEnabled(false);
+    ui->leRMTestDate->setEnabled(false);
+    ui->leRMOldResult->setEnabled(false);
+
     connect(this,SIGNAL(accepted()),QueryWin,SLOT( on_btnQueryData_clicked())  );
     //QRegExp regExp("^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$");
     //QRegExpValidator* regValidator = new QRegExpValidator(regExp);
