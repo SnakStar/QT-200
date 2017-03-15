@@ -76,6 +76,7 @@ void CUtilSettings::DefaultSettings()
     settings.setValue(AGINGMODE,0);
     settings.setValue(AGINGTIME,0);
     settings.setValue(RAWDATAMODE,0);
+    settings.setValue(RFWRITEMODE,0);
 
     settings.setValue(APOFFSET1,0);
     settings.setValue(APOFFSET2,0);
@@ -142,6 +143,7 @@ QMap<QString,QString>* CUtilSettings::ReadSettingsInfoToMap()
     m_SetParam[AGINGMODE]   = settings.value(AGINGMODE,0).toString();
     m_SetParam[AGINGTIME]   = settings.value(AGINGTIME,0).toString();
     m_SetParam[RAWDATAMODE] = settings.value(RAWDATAMODE,0).toString();
+    m_SetParam[RFWRITEMODE] = settings.value(RFWRITEMODE,0).toString();
 
     m_SetParam[APOFFSET1]   = settings.value(APOFFSET1,0).toString();
     m_SetParam[APOFFSET2]   = settings.value(APOFFSET2,0).toString();

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>接口界面</string>
   </property>
   <widget class="QListWidget" name="lwNavBar">
    <property name="geometry">
@@ -33,7 +33,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="GeneralAPI">
     <widget class="QGroupBox" name="groupBox_Aging">
@@ -343,7 +343,7 @@
       <rect>
        <x>120</x>
        <y>380</y>
-       <width>81</width>
+       <width>91</width>
        <height>41</height>
       </rect>
      </property>
@@ -356,7 +356,7 @@
       <rect>
        <x>464</x>
        <y>380</y>
-       <width>81</width>
+       <width>91</width>
        <height>41</height>
       </rect>
      </property>
@@ -366,6 +366,194 @@
     </widget>
    </widget>
    <widget class="QWidget" name="LogAPI"/>
+   <widget class="QWidget" name="RFIDAPI">
+    <widget class="QGroupBox" name="groupBox_WriteMode">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>621</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>操作模式</string>
+     </property>
+     <widget class="QRadioButton" name="rbRFReadMode">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>23</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>读卡模式</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbRFWriteMode">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>23</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>写卡模式</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbRFCloseMode">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>23</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>关闭</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFItem">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>项目:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFBarCode">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>条码:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leRFItem">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>50</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leRFBarCode">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>80</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_Separate">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>1</y>
+        <width>1</width>
+        <height>110</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leRFWriteTotal">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>43</y>
+        <width>101</width>
+        <height>57</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFWriteTotal">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>23</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>烧录总数:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFWriteModeState">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>50</y>
+        <width>171</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnRFClearWriteTotal">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>60</y>
+        <width>71</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>清除记数</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_OptLog">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>621</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>操作日志</string>
+     </property>
+     <widget class="QTextEdit" name="teRFOptLog">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>25</y>
+        <width>601</width>
+        <height>286</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>

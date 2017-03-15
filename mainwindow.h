@@ -73,6 +73,8 @@ public:
     QextSerialPort* GetPrintSerialPort();
     //获取HL7串口对象
     QextSerialPort* GetHL7SerialPort();
+    //获取射频串口对象
+    QextSerialPort* GetRFSerialPort();
     //获取Can通信对象
 #ifdef Q_OS_LINUX
     CanBus *GetCanBus();
@@ -114,7 +116,8 @@ private slots:
 
     //计时器3事件
     void on_btnTimer_3_clicked();
-
+signals:
+    void NoPassword();
 private:
     Ui::MainWindow *ui;
     //RF串口对象

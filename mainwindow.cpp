@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->addWidget(m_QCWin);
     m_SetWin->SetDbObj(&m_db);
     ui->stackedWidget->addWidget(m_SetWin);
+    //连接免密码信号
+    connect(this,SIGNAL(NoPassword()), m_SetWin, SLOT(AutoUnlock()) );
     //设置默认widget
     ui->stackedWidget->setCurrentWidget(m_TestWin);
     //选择时间后，传递时间给按钮
@@ -102,6 +104,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_bUpdateHardVersion = true;
     //读取配置文件信息
     m_SetParam = m_settings.ReadSettingsInfoToMap();
+    //恢复射频烧写模式
+    m_settings.SetParam(RFWRITEMODE,"0");
+    m_settings.WriteSettingsInfoToMap();
 }
 
 MainWindow::~MainWindow()
@@ -312,6 +317,20 @@ CanBus* MainWindow::GetCanBus()
 QextSerialPort *MainWindow::GetHL7SerialPort()
 {
     return &m_SerialHL7;
+}
+
+/********************************************************
+ *@Name:        GetRFSerialPort
+ *@Author:      HuaT
+ *@Description: 获取RF串口对象
+ *@Param:       无
+ *@Return:      返回RF串口对象
+ *@Version:     1.0
+ *@Date:        2017-3-10
+********************************************************/
+QextSerialPort *MainWindow::GetRFSerialPort()
+{
+    return &m_SerialRF;
 }
 
 /********************************************************
@@ -724,8 +743,15 @@ void MainWindow::RecvHL7SerialData()
 ********************************************************/
 void MainWindow::RecvRfSerialData()
 {
+    //查看调试射频模式是否开启
+    int nRFSerialMode = m_SetParam->value(RFWRITEMODE,0).toInt();
+    if(nRFSerialMode != 0){
+        //qDebug()<<"MainWindo:RecvRfSerialData";
+        return;
+    }
     IDCardInfo CardInfo;
     m_RfidData.append(m_SerialRF.readAll());
+    //qDebug()<<m_RfidData.toHex().toUpper();
     QByteArray FrameStart,FrameEnd;
     FrameStart = m_RfidData.left(4);
     FrameEnd = m_RfidData.right(4);
@@ -739,6 +765,13 @@ void MainWindow::RecvRfSerialData()
         CardInfo.m_IDCardLen = m_RfidData.mid(12,4).toHex().toUInt(0,16);
         //16-len为数据
         CardInfo.m_IDCardData = m_RfidData.mid(16,CardInfo.m_IDCardLen).toHex().toUpper();
+        QString strCardData = m_RfidData.mid(16,CardInfo.m_IDCardLen);
+        if(0 == strCardData.compare("IMPROVE QT-200")){
+            //密钥卡,发送免密码信号，并清空数据
+            emit NoPassword();
+            m_RfidData.clear();
+            return;
+        }
         //16到16+14为批号
         CardInfo.m_IDCardBatchNo = m_RfidData.mid(16,14).toHex().toUpper();
         //len+16-len+20为检验码

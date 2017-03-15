@@ -249,7 +249,8 @@ QGroupBox {
 
 /*设置界面各设置框底色样式*/
 QGroupBox#groupBox_PrintModel,#groupBox_Encode,#groupBox_Lis,#groupBox_Language,#groupBox_Channel,#groupBox_Net
-,#groupBox_Aging,#groupBox_RawData,#groupBox_APOFFSET1,#groupBox_APOFFSET2,#groupBox_APOFFSET3
+,#groupBox_Aging,#groupBox_RawData,#groupBox_APOFFSET1,#groupBox_APOFFSET2,#groupBox_APOFFSET3,#groupBox_OptLog
+,#groupBox_WriteMode,#groupBox_Separate
  {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #E0E0E0, stop: 1 #FFFFFF);
     border: 1px solid gray;

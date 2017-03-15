@@ -52,6 +52,7 @@ public:
 private slots:
     void RecvAddRenfValue(RenfInfo& ri);
     void RecvModifyRenfValue(RenfInfo& ri);
+    void AutoUnlock();
 
 private slots:
 
@@ -103,10 +104,12 @@ private:
     RenfValue* m_RenfValueDlg;
     //导航栏字段内容
     QStringList m_ListContent;
-    //
+    //查询界面对象
     QueryWindow* m_QueryWin;
-    //
+    //测试界面对象
     TestWindow* m_TestWin;
+    //射频串口
+    QextSerialPort* m_RFSerialPort;
 //function
 private:
     //语言选择

@@ -41,6 +41,7 @@ SetWindow::SetWindow(QWidget *parent) :
     m_settings = MainWin->GetUtilSetting();
     m_QueryWin = MainWin->GetQueryWindow();
     m_TestWin = MainWin->GetTestWindow();
+    m_RFSerialPort = MainWin->GetRFSerialPort();
     //读取配置文件
     m_SetParam = m_settings->ReadSettingsInfoToMap();
     //初始化导航栏内容
@@ -508,6 +509,25 @@ void SetWindow::UpdateControl()
 }
 
 /********************************************************
+ *@Name:        AutoUnlock
+ *@Author:      HuaT
+ *@Description: 通过射频卡自动完成解密
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-3-15
+********************************************************/
+void SetWindow::AutoUnlock()
+{
+    ui->leDebugLoginPwd->setText("");
+    QString strAuthPassword;
+    QDate currentdate = QDate::currentDate();
+    strAuthPassword = QString("1996%1").arg(currentdate.toString("MMdd"));
+    ui->leDebugLoginPwd->setText(strAuthPassword);
+    //qDebug()<<strAuthPassword;
+}
+
+/********************************************************
  *@Name:        on_btnPrintSave_clicked
  *@Author:      HuaT
  *@Description: 普通设置-保存事件
@@ -948,13 +968,15 @@ void SetWindow::UpdateHardVersion(QString strVersion)
  *@Param:       无
  *@Return:      无
  *@Version:     1.0
- *@Date:        2016-11-9
+ *@Date:        2017-3-15
+ *@Modify:      1、添加退出时清空密码登陆框内容
 ********************************************************/
 void SetWindow::on_btnDebugLogout_clicked()
 {
     HideDebugFunc(true);
     HideDebugLogin(false);
     m_QueryWin->SetExportHide(true);
+    ui->leDebugLoginPwd->clear();
 }
 
 
@@ -970,7 +992,7 @@ void SetWindow::on_btnDebugLogout_clicked()
 ********************************************************/
 void SetWindow::on_btnDebugInterface_clicked()
 {
-    UserInterface* ui = new UserInterface(this,m_db,m_settings);
+    UserInterface* ui = new UserInterface(this,m_db,m_settings,m_RFSerialPort);
     ui->show();
 #ifdef Q_OS_LINUX
     ui->SetCanBusObj(&m_TestWin->GetCanBus());

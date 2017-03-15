@@ -30,6 +30,7 @@
 #define AGINGMODE   "GenaralSet/AgingMode"
 #define AGINGTIME   "GenaralSet/AgingTime"
 #define RAWDATAMODE "GenaralSet/RawdataMode"
+#define RFWRITEMODE "GenaralSet/RFWriteMode"
 
 #define APOFFSET1   "GenaralSet/APOFFSET1"
 #define APOFFSET2   "GenaralSet/APOFFSET2"
