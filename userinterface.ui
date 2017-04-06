@@ -373,7 +373,7 @@
        <x>20</x>
        <y>10</y>
        <width>621</width>
-       <height>111</height>
+       <height>161</height>
       </rect>
      </property>
      <property name="title">
@@ -382,7 +382,7 @@
      <widget class="QRadioButton" name="rbRFReadMode">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>520</x>
         <y>23</y>
         <width>91</width>
         <height>21</height>
@@ -395,8 +395,8 @@
      <widget class="QRadioButton" name="rbRFWriteMode">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>23</y>
+        <x>520</x>
+        <y>70</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -408,8 +408,8 @@
      <widget class="QRadioButton" name="rbRFCloseMode">
       <property name="geometry">
        <rect>
-        <x>540</x>
-        <y>23</y>
+        <x>520</x>
+        <y>120</y>
         <width>71</width>
         <height>21</height>
        </rect>
@@ -422,7 +422,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>50</y>
+        <y>20</y>
         <width>41</width>
         <height>16</height>
        </rect>
@@ -435,7 +435,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>80</y>
+        <y>58</y>
         <width>41</width>
         <height>16</height>
        </rect>
@@ -448,7 +448,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>50</y>
+        <y>20</y>
         <width>141</width>
         <height>20</height>
        </rect>
@@ -458,7 +458,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>80</y>
+        <y>58</y>
         <width>141</width>
         <height>20</height>
        </rect>
@@ -467,10 +467,10 @@
      <widget class="QGroupBox" name="groupBox_Separate">
       <property name="geometry">
        <rect>
-        <x>210</x>
+        <x>495</x>
         <y>1</y>
         <width>1</width>
-        <height>110</height>
+        <height>161</height>
        </rect>
       </property>
       <property name="title">
@@ -480,8 +480,8 @@
      <widget class="QLineEdit" name="leRFWriteTotal">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>43</y>
+        <x>240</x>
+        <y>90</y>
         <width>101</width>
         <height>57</height>
        </rect>
@@ -490,8 +490,8 @@
      <widget class="QLabel" name="lbRFWriteTotal">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>23</y>
+        <x>240</x>
+        <y>70</y>
         <width>71</width>
         <height>16</height>
        </rect>
@@ -503,8 +503,8 @@
      <widget class="QLabel" name="lbRFWriteModeState">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>50</y>
+        <x>240</x>
+        <y>19</y>
         <width>171</width>
         <height>51</height>
        </rect>
@@ -516,24 +516,86 @@
      <widget class="QPushButton" name="btnRFClearWriteTotal">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>60</y>
+        <x>380</x>
+        <y>90</y>
         <width>71</width>
-        <height>41</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="text">
        <string>清除记数</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="leRFCardNumber">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>94</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFCardNumber">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>94</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>卡号:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbRFBatchNo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>批号:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leRFBatchNumber">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <zorder>lbRFWriteModeState</zorder>
+     <zorder>rbRFReadMode</zorder>
+     <zorder>rbRFWriteMode</zorder>
+     <zorder>rbRFCloseMode</zorder>
+     <zorder>lbRFItem</zorder>
+     <zorder>lbRFBarCode</zorder>
+     <zorder>leRFItem</zorder>
+     <zorder>leRFBarCode</zorder>
+     <zorder>groupBox_Separate</zorder>
+     <zorder>leRFWriteTotal</zorder>
+     <zorder>lbRFWriteTotal</zorder>
+     <zorder>btnRFClearWriteTotal</zorder>
+     <zorder>leRFCardNumber</zorder>
+     <zorder>lbRFCardNumber</zorder>
+     <zorder>lbRFBatchNo</zorder>
+     <zorder>leRFBatchNumber</zorder>
     </widget>
     <widget class="QGroupBox" name="groupBox_OptLog">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>130</y>
+       <y>180</y>
        <width>621</width>
-       <height>341</height>
+       <height>281</height>
       </rect>
      </property>
      <property name="title">
@@ -545,7 +607,7 @@
         <x>10</x>
         <y>25</y>
         <width>601</width>
-        <height>286</height>
+        <height>238</height>
        </rect>
       </property>
       <property name="readOnly">

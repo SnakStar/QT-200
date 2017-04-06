@@ -79,7 +79,7 @@ void UserInterface::RecvRFSerialPortData()
     m_baRFSerialData.append(m_RFSerialPort->readAll());
     qDebug()<<m_baRFSerialData.size();
     quint32 nIDCardNumber,nIDCardCMD,nIDCardLen,nIDCardCheck;
-    QString strIDCardData,strIDCardBatchNo,strTestName;
+    QString strIDCardData,strIDCardBarCode,strTestName;
     QByteArray baFrameStart,baFrameEnd;
     baFrameStart = m_baRFSerialData.left(4);
     baFrameEnd = m_baRFSerialData.right(4);
@@ -89,24 +89,30 @@ void UserInterface::RecvRFSerialPortData()
         quint32 nCheck=0;
         //4-7为卡号
         nIDCardNumber = m_baRFSerialData.mid(4,4).toHex().toUInt(0,16);
+
         //8-11为命令
         nIDCardCMD = m_baRFSerialData.mid(8,4).toHex().toUInt(0,16);
+
         //12-15为数据长度
         nIDCardLen = m_baRFSerialData.mid(12,4).toHex().toUInt(0,16);
+
         //16-len为数据
         strIDCardData = m_baRFSerialData.mid(16,nIDCardLen).toHex().toUpper();
+
         //16到16+14为批号
         if(nIDCardLen <= 1){
-            strIDCardBatchNo = "";
+            strIDCardBarCode = "";
         }else{
             for(int n=16; n<16+14; n++){
-                strIDCardBatchNo += QString::number((quint8)m_baRFSerialData.at(n));
+                strIDCardBarCode += QString::number((quint8)m_baRFSerialData.at(n));
             }
         }
-        //strIDCardBatchNo = m_baRFSerialData.mid(16,14);
-        qDebug()<<"strIDCardBatchNo:"<<strIDCardBatchNo;
+        //strIDCardBarCode = m_baRFSerialData.mid(16,14);
+        //qDebug()<<"strIDCardBarCode:"<<strIDCardBarCode;
+
         //167到167+15为项目名称
         strTestName = m_baRFSerialData.mid(167,15).trimmed();
+
         //len+16-len+20为检验码
         nIDCardCheck = m_baRFSerialData.mid(nIDCardLen+16,4).toHex().toUInt(0,16);
         for(int n=12; n<nIDCardLen+4+12; n++){
@@ -130,8 +136,13 @@ void UserInterface::RecvRFSerialPortData()
             return ;
         }
         if(1 == nRfMode){//读模式
-            ui->leRFBarCode->setText(strIDCardBatchNo);
+            ui->leRFBarCode->setText(strIDCardBarCode);
             ui->leRFItem->setText(strTestName);
+            QString strDecimal;
+            strDecimal = QString("%1-%2").arg(strIDCardBarCode.mid(3,4).toInt(0,2)+1)
+                                         .arg(strIDCardBarCode.mid(8,5).toInt(0,2)+1);
+            //qDebug()<<strDecimal;
+            ui->leRFCardNumber->setText(strDecimal);
             //复制数据
             m_baWaitCopySerialData.clear();
             m_baWaitCopySerialData.append(m_baRFSerialData);
@@ -200,15 +211,17 @@ void UserInterface::RecvRFSerialPortData()
                 baQueryIDData[23] = (0x1A);
                 baQueryIDData[24] = (0x5A);
                 m_RFSerialPort->write(baQueryIDData);
-                //
-                //ui->lbRFWriteModeState->setStyleSheet("color:red;");
-                //ui->lbRFWriteModeState->setText("校验中");
+
+                ui->lbRFWriteModeState->setStyleSheet("color:blue;");
+                ui->lbRFWriteModeState->setText("校验中");
             }else if(3 == nIDCardCMD){
                 //滴新卡发来的数据,可不理会
-
+                //清空上次状态
+                ui->lbRFWriteModeState->setText("");
                 //然后烧录数据给新卡
                 //修改数据模式,2为写数据模式
-                QString strCardData = m_baWaitCopySerialData.mid(16,nIDCardLen);
+                QString strCardData = m_baWaitCopySerialData.mid(16,m_baWaitCopySerialData.mid(12,4).toHex().toUInt(0,16));
+                //qDebug()<<strCardData;
                 if(0 == strCardData.compare("IMPROVE QT-200")){
                     if(ui->teRFOptLog->toPlainText().length()>2000){
                         ui->teRFOptLog->clear();
@@ -227,33 +240,38 @@ void UserInterface::RecvRFSerialPortData()
                 m_RFSerialPort->write(m_baWaitCopySerialData);
 
             }else if(5 == nIDCardCMD){
-                for(int n=0; n<m_baRFSerialData.size(); n++){
-                    if((quint8)m_baRFSerialData.at(n) != (quint8)m_baWaitCopySerialData.at(n)){
-                        if(ui->teRFOptLog->toPlainText().length()>2000){
-                            ui->teRFOptLog->clear();
-                            ui->teRFOptLog->append("数据过多,清除当前缓存记录!");
+                if(m_baRFSerialData.size() == m_baWaitCopySerialData.size())
+                {
+                    for(int n=12; n<m_baRFSerialData.size(); n++){
+                        if((quint8)m_baRFSerialData.at(n) != (quint8)m_baWaitCopySerialData.at(n)){
+                            if(ui->teRFOptLog->toPlainText().length()>2000){
+                                ui->teRFOptLog->clear();
+                                ui->teRFOptLog->append("数据过多,清除当前缓存记录!");
+                            }
+                            QDateTime dt = QDateTime::currentDateTime();
+                            QString strLog = QString("%1    提示:校验数据不匹配,请重新复制此卡数据").arg(dt.toString("yyyy-MM-dd hh:mm:ss"));
+                            ui->teRFOptLog->append(strLog);
+                            //状态失败
+                            ui->lbRFWriteModeState->setStyleSheet("color:red;");
+                            ui->lbRFWriteModeState->setText("烧录失败");
+                            //清空数据
+                            m_baRFSerialData.clear();
+                            return;
                         }
-                        QDateTime dt = QDateTime::currentDateTime();
-                        QString strLog = QString("%1    提示:校验数据不匹配,请重新复制此卡数据").arg(dt.toString("yyyy-MM-dd hh:mm:ss"));
-                        ui->teRFOptLog->append(strLog);
-                        //状态失败
-                        ui->lbRFWriteModeState->setStyleSheet("color:red;");
-                        ui->lbRFWriteModeState->setText("烧录失败");
-                        //return;
                     }
+                    if(ui->teRFOptLog->toPlainText().length()>2000){
+                        ui->teRFOptLog->clear();
+                        ui->teRFOptLog->append("数据过多,清除当前缓存记录!");
+                    }
+                    QDateTime dt = QDateTime::currentDateTime();
+                    QString strLog = QString("%1    提示:校验成功,数据已成功复制").arg(dt.toString("yyyy-MM-dd hh:mm:ss"));
+                    ui->teRFOptLog->append(strLog);
+                    //状态成功
+                    ui->lbRFWriteModeState->setStyleSheet("color:green;");
+                    ui->lbRFWriteModeState->setText("烧录成功");
+                    m_nTotal++;
+                    ui->leRFWriteTotal->setText(QString::number(m_nTotal));
                 }
-                if(ui->teRFOptLog->toPlainText().length()>2000){
-                    ui->teRFOptLog->clear();
-                    ui->teRFOptLog->append("数据过多,清除当前缓存记录!");
-                }
-                QDateTime dt = QDateTime::currentDateTime();
-                QString strLog = QString("%1    提示:校验成功,数据已成功复制").arg(dt.toString("yyyy-MM-dd hh:mm:ss"));
-                ui->teRFOptLog->append(strLog);
-                //状态成功
-                ui->lbRFWriteModeState->setStyleSheet("color:green;");
-                ui->lbRFWriteModeState->setText("烧录成功");
-                m_nTotal++;
-                ui->leRFWriteTotal->setText(QString::number(m_nTotal));
             }
         }else{
             if(ui->teRFOptLog->toPlainText().length()>2000){
@@ -265,7 +283,7 @@ void UserInterface::RecvRFSerialPortData()
             ui->teRFOptLog->append(strLog);
             //return;
         }
-        //清除数据串口数据
+        //清除串口数据
         m_baRFSerialData.clear();
     }
 }
@@ -388,6 +406,8 @@ void UserInterface::InitRFUIControl()
 {
     ui->leRFItem->setEnabled(false);
     ui->leRFBarCode->setEnabled(false);
+    ui->leRFCardNumber->setEnabled(false);
+    ui->leRFBatchNumber->setEnabled(false);
     ui->teRFOptLog->setEnabled(false);
     ui->leRFWriteTotal->setEnabled(false);
 }
