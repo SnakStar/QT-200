@@ -33,7 +33,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="GeneralAPI">
     <widget class="QGroupBox" name="groupBox_Aging">
@@ -365,7 +365,34 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="LogAPI"/>
+   <widget class="QWidget" name="LogAPI">
+    <widget class="QPushButton" name="btnLogQuery">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>20</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>查询</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="teLogShow">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>621</width>
+       <height>401</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="RFIDAPI">
     <widget class="QGroupBox" name="groupBox_WriteMode">
      <property name="geometry">
@@ -396,7 +423,7 @@
       <property name="geometry">
        <rect>
         <x>520</x>
-        <y>70</y>
+        <y>55</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -572,6 +599,19 @@
        </rect>
       </property>
      </widget>
+     <widget class="QRadioButton" name="rbRFPCConnectMode">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>89</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PC连接模式</string>
+      </property>
+     </widget>
      <zorder>lbRFWriteModeState</zorder>
      <zorder>rbRFReadMode</zorder>
      <zorder>rbRFWriteMode</zorder>
@@ -588,6 +628,7 @@
      <zorder>lbRFCardNumber</zorder>
      <zorder>lbRFBatchNo</zorder>
      <zorder>leRFBatchNumber</zorder>
+     <zorder>rbRFPCConnectMode</zorder>
     </widget>
     <widget class="QGroupBox" name="groupBox_OptLog">
      <property name="geometry">

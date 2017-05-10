@@ -84,6 +84,8 @@ private slots:
     void on_btnDebugInterface_clicked();
 
 
+    void on_btnRFCQuery_clicked();
+
 public:
     //设置数据库对象
     void SetDbObj(CQtProDB* db);
@@ -110,6 +112,8 @@ private:
     TestWindow* m_TestWin;
     //射频串口
     QextSerialPort* m_RFSerialPort;
+    //仪器串口
+    QextSerialPort* m_HL7SerialPort;
 //function
 private:
     //语言选择
@@ -138,6 +142,8 @@ private:
     void HideDebugFunc(bool bHide);
     //隐藏登陆区域
     void HideDebugLogin(bool bHide);
+    //
+    void InitRFCardInfoControl();
 };
 
 #endif // SETWINDOW_H

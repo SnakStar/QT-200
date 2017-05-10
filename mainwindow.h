@@ -42,7 +42,15 @@ struct IDCardInfo{
     quint32    m_IDCardCMD;
     quint32    m_IDCardLen;
     QString    m_IDCardData;
+    //条形编码
+    QString    m_IDCardBarCode;
+    //测试项目
+    QString    m_IDCardItem;
+    //生产批号
     QString    m_IDCardBatchNo;
+    //有效期
+    QString    m_IDCardValidDate;
+    //校验码
     quint32    m_IDCardCheck;
 };
 
@@ -118,6 +126,7 @@ private slots:
     void on_btnTimer_3_clicked();
 signals:
     void NoPassword();
+    void MockTest(QByteArray byteData);
 private:
     Ui::MainWindow *ui;
     //RF串口对象
@@ -193,6 +202,8 @@ private:
     QByteArray     m_RfidData;
     //更新硬件版本
     bool           m_bUpdateHardVersion;
+    //PC串口数据
+    QByteArray     m_bytePCSerialData;
 private slots:
     //接收射频串口数据
     void RecvRfSerialData();

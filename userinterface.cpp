@@ -23,7 +23,7 @@ UserInterface::UserInterface(QWidget *parent) :
     ui->setupUi(this);
 }
 
-UserInterface::UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settings,QextSerialPort* rfSerialPort) :
+UserInterface::UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settings,QextSerialPort* rfSerialPort,QextSerialPort* hl7SerialPort) :
     QDialog(parent),
     ui(new Ui::UserInterface)
 {
@@ -55,13 +55,16 @@ UserInterface::UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settin
     //UpdateControl();
     ui->lbRFWriteModeState->setFont(QFont("simsun",26));
     ui->leRFWriteTotal->setFont(QFont("simsun",26));
+    //设置日志显示控件为只读
+    ui->teLogShow->setReadOnly(true);
+    ui->teLogShow->setProperty("noinput",true);
 }
 
 UserInterface::~UserInterface()
 {
     //qDebug()<<"~userinterface";
-    m_settings->SetParam(RFWRITEMODE,"0");
-    m_settings->WriteSettingsInfoToMap();
+    //m_settings->SetParam(RFWRITEMODE,"0");
+    //m_settings->WriteSettingsInfoToMap();
     delete ui;
 }
 
@@ -77,15 +80,15 @@ UserInterface::~UserInterface()
 void UserInterface::RecvRFSerialPortData()
 {
     m_baRFSerialData.append(m_RFSerialPort->readAll());
-    qDebug()<<m_baRFSerialData.size();
     quint32 nIDCardNumber,nIDCardCMD,nIDCardLen,nIDCardCheck;
-    QString strIDCardData,strIDCardBarCode,strTestName;
+    QString strIDCardData,strIDCardBarCode,strTestName,strBtachNumber;
     QByteArray baFrameStart,baFrameEnd;
     baFrameStart = m_baRFSerialData.left(4);
     baFrameEnd = m_baRFSerialData.right(4);
     int nRfMode = m_SetParam->value(RFWRITEMODE,"0").toInt();
 
     if(baFrameStart.toHex().toUInt(0,16) == FRAMESTART && baFrameEnd.toHex().toUInt(0,16) == FRAMEEND){
+        //qDebug()<<"m_baRFSerialData:"<<m_baRFSerialData.size()<<m_baRFSerialData.toHex().toUpper();
         quint32 nCheck=0;
         //4-7为卡号
         nIDCardNumber = m_baRFSerialData.mid(4,4).toHex().toUInt(0,16);
@@ -99,19 +102,29 @@ void UserInterface::RecvRFSerialPortData()
         //16-len为数据
         strIDCardData = m_baRFSerialData.mid(16,nIDCardLen).toHex().toUpper();
 
-        //16到16+14为批号
-        if(nIDCardLen <= 1){
-            strIDCardBarCode = "";
-        }else{
-            for(int n=16; n<16+14; n++){
-                strIDCardBarCode += QString::number((quint8)m_baRFSerialData.at(n));
-            }
-        }
         //strIDCardBarCode = m_baRFSerialData.mid(16,14);
         //qDebug()<<"strIDCardBarCode:"<<strIDCardBarCode;
 
-        //167到167+15为项目名称
-        strTestName = m_baRFSerialData.mid(167,15).trimmed();
+        if(m_baRFSerialData.size()<257){
+            //167到167+15为项目名称
+            strTestName = m_baRFSerialData.mid(167,15).trimmed();
+            //16到16+14为条码号
+            if(nIDCardLen <= 1){
+                strIDCardBarCode = "";
+            }else{
+                for(int n=16; n<16+14; n++){
+                    strIDCardBarCode += QString::number((quint8)m_baRFSerialData.at(n));
+                }
+            }
+            //批号
+            strBtachNumber = "";
+        }else{
+            strTestName = m_baRFSerialData.mid(62,20).trimmed();
+            strIDCardBarCode = m_baRFSerialData.mid(16,20).trimmed();
+            //批号
+            strBtachNumber = QString("20%1").arg(QString(m_baRFSerialData.mid(26,4)));
+        }
+
 
         //len+16-len+20为检验码
         nIDCardCheck = m_baRFSerialData.mid(nIDCardLen+16,4).toHex().toUInt(0,16);
@@ -136,8 +149,10 @@ void UserInterface::RecvRFSerialPortData()
             return ;
         }
         if(1 == nRfMode){//读模式
+            ui->lbRFWriteModeState->setText("");
             ui->leRFBarCode->setText(strIDCardBarCode);
             ui->leRFItem->setText(strTestName);
+            ui->leRFBatchNumber->setText(strBtachNumber);
             QString strDecimal;
             strDecimal = QString("%1-%2").arg(strIDCardBarCode.mid(3,4).toInt(0,2)+1)
                                          .arg(strIDCardBarCode.mid(8,5).toInt(0,2)+1);
@@ -146,6 +161,9 @@ void UserInterface::RecvRFSerialPortData()
             //复制数据
             m_baWaitCopySerialData.clear();
             m_baWaitCopySerialData.append(m_baRFSerialData);
+            //
+            ui->lbRFWriteModeState->setStyleSheet("color:green;");
+            ui->lbRFWriteModeState->setText("读取成功");
             //提示
             if(ui->teRFOptLog->toPlainText().length()>2000){
                 ui->teRFOptLog->clear();
@@ -368,6 +386,8 @@ void UserInterface::InitRadioControl()
             ui->rbRFReadMode->setChecked(true);
         }else if(2 == nRFWriteMode){
             ui->rbRFWriteMode->setChecked(true);
+        }else if(3 == nRFWriteMode){
+            ui->rbRFPCConnectMode->setChecked(true);
         }else{
             ui->rbRFCloseMode->setChecked(true);
         }
@@ -487,7 +507,22 @@ void UserInterface::SetCanBusObj(CanBus* cb)
 ********************************************************/
 void UserInterface::on_btnUIClose_clicked()
 {
-    this->close();
+    QString strTitle,strContain;
+    strTitle = "提示";
+    int nRFMode = m_SetParam->value(RFWRITEMODE,0).toInt();
+    switch(nRFMode){
+    case 3:
+        strContain = "射频模式处于PC连接状态,将占用仪器串口,是否继续退出";
+        if(QMessageBox::Ok == QMessageBox::information(this,strTitle,strContain,QMessageBox::Ok|QMessageBox::No)){
+            this->close();
+        }
+        break;
+    default:
+        m_settings->SetParam(RFWRITEMODE,"0");
+        m_settings->WriteSettingsInfoToMap();
+        this->close();
+        break;
+    }
 }
 
 /********************************************************
@@ -658,8 +693,56 @@ void UserInterface::on_rbRFCloseMode_clicked()
     m_settings->WriteSettingsInfoToMap();
 }
 
+/********************************************************
+ *@Name:        on_rbRFPCConnectMode_clicked
+ *@Author:      HuaT
+ *@Description: 仪器连接电脑模式,将射频数据通过仪器转发
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-03-13
+********************************************************/
+void UserInterface::on_rbRFPCConnectMode_clicked()
+{
+    m_settings->SetParam(RFWRITEMODE,"3");
+
+    m_settings->SetParam(LISMODE,"0");
+    m_settings->WriteSettingsInfoToMap();
+}
+
+/********************************************************
+ *@Name:        on_btnRFClearWriteTotal_clicked
+ *@Author:      HuaT
+ *@Description: 计数清除事件,清除记录的烧卡总数
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-03-13
+********************************************************/
 void UserInterface::on_btnRFClearWriteTotal_clicked()
 {
     m_nTotal = 0;
     ui->leRFWriteTotal->setText(QString::number(m_nTotal));
+}
+
+
+/********************************************************
+ *@Name:        on_btnLogQuery_clicked
+ *@Author:      HuaT
+ *@Description: 查看日志文件内容
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-05-9
+********************************************************/
+void UserInterface::on_btnLogQuery_clicked()
+{
+    ui->teLogShow->setText("");
+    QString strFilePath = "/home/root/qt200/log.txt";
+    QFile file(strFilePath);
+    file.open(QIODevice::ReadOnly);
+    QTextStream ts(&file);
+    QString strLog = ts.readAll();
+    ui->teLogShow->setText(strLog);
+    ui->teLogShow->moveCursor(QTextCursor::End);
 }

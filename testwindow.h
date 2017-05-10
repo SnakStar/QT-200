@@ -37,6 +37,73 @@ namespace Ui {
 class TestWindow;
 }
 
+//原始测试信息
+struct RawTestInfo{
+    //测试一面积1
+    long m_nTest1Area1;
+    //测试一面积2
+    long m_nTest1Area2;
+    //测试一比值
+    long m_nTest1Ratio;
+    //测试二面积1
+    long m_nTest2Area1;
+    //测试二面积2
+    long m_nTest2Area2;
+    //测试二比值
+    long m_nTest2Ratio;
+    //结果
+    double m_fTestResult;
+    //计算方案
+    quint8 m_nComputeMothed;
+    //扫描起始点
+    quint8 m_nScanStart;
+    //质控峰积分宽度
+    quint8 m_nQCIntegralBreadth;
+    //检测峰积分宽度
+    quint8 m_nCheckIntegralBreadt;
+    //放大参数
+    quint8 m_nAmpParam;
+    //质控峰高度
+    quint8 m_nQCMinHeightValue;
+    //测试通道号
+    quint8 m_nChannel;
+    //
+    RawTestInfo(){
+        Clear();
+    }
+
+    void Clear(){
+        //测试一面积1
+        m_nTest1Area1 = 0;
+        //测试一面积2
+        m_nTest1Area1 = 0;
+        //测试一比值
+        m_nTest1Ratio = 0;
+        //测试二面积1
+        m_nTest2Area1 = 0;
+        //测试二面积2
+        m_nTest2Area2 = 0;
+        //测试二比值
+        m_nTest2Ratio = 0;
+        //结果
+        m_fTestResult = 0;
+        //计算方案
+        m_nComputeMothed = 0;
+        //扫描起始点
+        m_nScanStart = 0;
+        //质控峰积分宽度
+        m_nQCIntegralBreadth = 0;
+        //检测峰积分宽度
+        m_nCheckIntegralBreadt = 0;
+        //放大参数
+        m_nAmpParam = 0;
+        //质控峰高度
+        m_nQCMinHeightValue = 0;
+        //
+        m_nChannel = 0;
+    }
+};
+
 struct ResultDataInfo{
     //本次测试的样本编号
     quint64 m_nNumberID;
@@ -52,10 +119,12 @@ struct ResultDataInfo{
     quint32 m_nDataLen;
     //测试数据
     QByteArray m_byteCanData;
-    //测试批号
-    QString m_strIDCardBatchNo;
+    //测试条码号
+    QString m_strIDCardBarCode;
     //测试ID卡信息
     QString m_strIDMessage;
+    //新旧卡标志
+    quint8 m_nCardFlag;
     //测试名称
     QString m_strTestName;
     //测试单位
@@ -66,12 +135,16 @@ struct ResultDataInfo{
     qint32 m_nReactionTime;
     //试剂有效期
     QString m_strValidDate;
+    //测试信息
+    RawTestInfo m_RawTestInfo;
     //初始化
     ResultDataInfo(){
+        m_RawTestInfo.Clear();
         m_byteCanData.clear();
         m_nDataLen = 0;
+        m_nCardFlag = 0;
         m_nSyncID = 0;
-        m_strIDCardBatchNo = "";
+        m_strIDCardBarCode = "";
         m_strIDMessage = "";
         m_strResult = "";
         m_strTestName = "";
@@ -131,6 +204,8 @@ private slots:
     void AgingTest3();
     //停止老化计时器
     void StopAgingTimer();
+    //
+    void MockTest(QByteArray byteData);
 
 signals:
     void UpdateQCResultMsg(QString strResult);
@@ -257,13 +332,15 @@ private:
     //解析测试数据
     void ParseTestData(quint8 nSync, QByteArray can_data, quint8 nChannel, ResultDataInfo& DataObj);
     //计算结果
-    unsigned char *CalcResult(ResultDataInfo DataObj);
+    unsigned char *CalcResult(ResultDataInfo& DataObj);
+    //计算新卡结果
+    QString CalcResult(ResultDataInfo& DataObj,bool bNewCard);
     //结果出来后，处理结果
     void ProcessResult(quint8 nChannel);
     //解析条码号
-    QString ParseBarCode(QByteArray can_data);
+    QString ParseBarCode(QByteArray can_data,bool bIsNewCard);
     //获得指定批号的ID卡信息
-    QString GetIDMessageInfo(QString strBatchNo);
+    QString GetIDMessageInfo(QString strBarCode);
     //解析ID卡数据
     void ParseIDMessageInfo(unsigned char* pIDMessage, quint8& StartPoint, quint8& Amp, ResultDataInfo &DataObj);
     //处理接收到的条码数据
@@ -343,6 +420,14 @@ private:
     //获取硬件版本信息
     void GetHardVersion();
 
+    //打包测试原始数据
+    QByteArray PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nChannel);
+    //转换字符输入值为16进制
+    QByteArray ValueToHex(QString strValue, quint8 nHexTotal, quint8 nDecimal);
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    void MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8 nChannel, ResultDataInfo& DataObj);
+    bool MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataInfo &data, QByteArray can_data);
 };
 
 #endif // TESTWINDOW_H

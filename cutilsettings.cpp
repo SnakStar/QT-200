@@ -240,7 +240,7 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
     bytecmd.clear();
     //SerialPort->write("Hospital");
     bytecmd[0] = 0x0A;
-    SerialPort->write(Utf8ToGbk("Inspection report"));
+    SerialPort->write(Utf8ToGbk("Test report"));
     SerialPort->write(bytecmd);
     bytecmd.clear();
     bytecmd[0] = 0x1B;
@@ -254,14 +254,14 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
     SerialPort->write(bytecmd);
     bytecmd.clear();
     QString str;
-    str = QString("Name:%1        Number:%2").arg(strName).arg(strNumber);
+    str = QString("Name:%1            Number:%2").arg(strName).arg(strNumber);
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);
     bytecmd.clear();
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("Age:%1         Sex:%2").arg(strAge).arg(strSex);
+    str = QString("Age:%1             Sex:%2").arg(strAge).arg(strSex);
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);
     bytecmd.clear();
@@ -303,11 +303,43 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
-    SerialPort->write(Utf8ToGbk(str));
-    bytecmd[0] = 0x0A;
-    SerialPort->write(bytecmd);
-    bytecmd.clear();
+
+    //hsCRP+CRP为多行结果
+    QStringList strlistResultUnit = ParseTestUnit(strResult);
+    if(strItem.compare("hsCRP+CRP") == 0){
+        if(strlistResultUnit.at(0).toFloat() <= 5){
+            str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("CRP: <5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }else{
+            str = QString("hsCRP: >5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }
+    }else{
+        str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
+        SerialPort->write(Utf8ToGbk(str));
+        bytecmd[0] = 0x0A;
+        SerialPort->write(bytecmd);
+        bytecmd.clear();
+    }
+
     str = QString("reference Value Range:");
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);
@@ -426,14 +458,14 @@ void CUtilSettings::PrintChineseData(QextSerialPort* SerialPort,QString strName,
     SerialPort->write(bytecmd);
     bytecmd.clear();
     QString str;
-    str = QString("姓名:%1        编号:%2").arg(strName).arg(strNumber);
+    str = QString("姓名:%1          编号:%2").arg(strName).arg(strNumber);
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);
     bytecmd.clear();
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("年龄:%1        性别:%2").arg(strAge).arg(strSex);
+    str = QString("年龄:%1          性别:%2").arg(strAge).arg(strSex);
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);
     bytecmd.clear();
@@ -475,11 +507,43 @@ void CUtilSettings::PrintChineseData(QextSerialPort* SerialPort,QString strName,
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
-    SerialPort->write(Utf8ToGbk(str));
-    bytecmd[0] = 0x0A;
-    SerialPort->write(bytecmd);
-    bytecmd.clear();
+
+    //hsCRP+CRP为多行结果
+    QStringList strlistResultUnit = ParseTestUnit(strResult);
+    if(strItem.compare("hsCRP+CRP") == 0){
+        if(strlistResultUnit.at(0).toFloat() <= 5){
+            str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("CRP: <5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }else{
+            str = QString("hsCRP: >5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }
+    }else{
+        str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
+        SerialPort->write(Utf8ToGbk(str));
+        bytecmd[0] = 0x0A;
+        SerialPort->write(bytecmd);
+        bytecmd.clear();
+    }
+
     str = QString("参考值范围:");
     bytecmd.append(Utf8ToGbk(str));
     SerialPort->write(bytecmd);

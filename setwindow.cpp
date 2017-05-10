@@ -42,6 +42,7 @@ SetWindow::SetWindow(QWidget *parent) :
     m_QueryWin = MainWin->GetQueryWindow();
     m_TestWin = MainWin->GetTestWindow();
     m_RFSerialPort = MainWin->GetRFSerialPort();
+    m_HL7SerialPort = MainWin->GetHL7SerialPort();
     //读取配置文件
     m_SetParam = m_settings->ReadSettingsInfoToMap();
     //初始化导航栏内容
@@ -49,6 +50,7 @@ SetWindow::SetWindow(QWidget *parent) :
     m_ListContent.append(QObject::tr("Renf Setting"));
     m_ListContent.append(QObject::tr("Date/Time Setting"));
     m_ListContent.append(QObject::tr("System Setting"));
+    m_ListContent.append(QObject::tr("RF Card Info"));
     m_ListContent.append(QObject::tr("System Info"));
     m_ListContent.append(QObject::tr("Debug Mode"));
 
@@ -80,6 +82,8 @@ SetWindow::SetWindow(QWidget *parent) :
     connect(ui->listWidget,SIGNAL(currentRowChanged(int)), ui->stackedWidget, SLOT(setCurrentIndex(int)));
     //初始化参考值表单
     InitRenfVTb();
+    //初始化射频卡信息控件
+    InitRFCardInfoControl();
     //密码显示方式
     ui->leDebugLoginPwd->setEchoMode(QLineEdit::Password);
     //隐藏ASTM选项
@@ -120,6 +124,7 @@ void SetWindow::UpdateListContent()
     m_ListContent.append(QObject::tr("Renf Setting"));
     m_ListContent.append(QObject::tr("Date/Time Setting"));
     m_ListContent.append(QObject::tr("System Setting"));
+    m_ListContent.append(QObject::tr("RF Card Info"));
     m_ListContent.append(QObject::tr("System Info"));
     m_ListContent.append(QObject::tr("Debug Mode"));
     for(int i=0; i<m_ListContent.count(); i++){
@@ -224,6 +229,38 @@ void SetWindow::InitRenfVTb()
     ui->twRefvInfo->setRowCount(5);
 
     InitRenfHeader();
+}
+
+/********************************************************
+ *@Name:        InitRFCardInfoControl
+ *@Author:      HuaT
+ *@Description: 初始化射频卡信息列表框
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-5-3
+********************************************************/
+void SetWindow::InitRFCardInfoControl()
+{
+    QStringList strlistRFCardInfo;
+    strlistRFCardInfo<<QObject::tr("Item")<<QObject::tr("Batch No")<<QObject::tr("Card No")
+                    <<QObject::tr("Expiry Date")<<QObject::tr("BarCode No");
+
+    ui->twRFCardInfo->setSelectionBehavior(QTableWidget::SelectRows);
+    ui->twRFCardInfo->setEditTriggers(QTableWidget::NoEditTriggers);
+    ui->twRFCardInfo->setSelectionMode(QTableWidget::SingleSelection);
+    ui->twRFCardInfo->setColumnCount(strlistRFCardInfo.size());
+
+    //ui->twRFCardInfo->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+    ui->twRFCardInfo->setColumnWidth(0,70);
+    ui->twRFCardInfo->setColumnWidth(1,90);
+    ui->twRFCardInfo->setColumnWidth(2,90);
+    ui->twRFCardInfo->setColumnWidth(3,90);
+    ui->twRFCardInfo->setColumnWidth(4,160);
+    ui->twRFCardInfo->horizontalHeader()->setStretchLastSection(true);
+    //ui->twRFCardInfo->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+
+    ui->twRFCardInfo->setHorizontalHeaderLabels(strlistRFCardInfo);
 }
 
 /********************************************************
@@ -656,29 +693,33 @@ void SetWindow::on_btnDelete_clicked()
         QMessageBox::information(this,Title,Msg,QMessageBox::Ok);
         return;
     }
-    QStringList stringList = GetRowValue(ui->twRefvInfo);
-    //更新数据库
-    QString deleteSql;
-    QStringList listAge;
-    listAge = m_settings->ParseValue(stringList.at(2));
-    quint8 nSex;
-    if(stringList.at(3).compare("Male") == 0){
-        nSex = 1;
-    }else if(stringList.at(3).compare("Female") == 0){
-        nSex = 2;
-    }else{
-        nSex = 0;
+    QString strTitle,strContent;
+    strTitle = QObject::tr("Note");
+    strContent = QObject::tr("Confirmed will have to delete?");
+
+    if(QMessageBox::Yes == QMessageBox::information(this,strTitle,strContent,QMessageBox::Yes | QMessageBox::No)){
+        QStringList stringList = GetRowValue(ui->twRefvInfo);
+        //更新数据库
+        QString deleteSql;
+        QStringList listAge;
+        listAge = m_settings->ParseValue(stringList.at(2));
+        quint8 nSex;
+        if(stringList.at(3).compare("Male") == 0){
+            nSex = 1;
+        }else if(stringList.at(3).compare("Female") == 0){
+            nSex = 2;
+        }else{
+            nSex = 0;
+        }
+        deleteSql = QString("delete from renfvalue where \
+                            item='%1' and value='%2' and agelow='%3' and agehight='%4'and sex=%5 ")\
+                .arg(stringList.at(0)).arg(stringList.at(1)).arg(listAge.at(0))
+                .arg(listAge.at(1)).arg(nSex);
+                m_db->Exec(deleteSql);
+        //qDebug()<<deleteSql;
+        //更新控件
+        ui->twRefvInfo->removeRow(CurrentRow);
     }
-    deleteSql = QString("delete from renfvalue where \
-                        item='%1' and value='%2' and agelow='%3' and agehight='%4'and sex=%5 ")\
-            .arg(stringList.at(0)).arg(stringList.at(1)).arg(listAge.at(0))
-            .arg(listAge.at(1)).arg(nSex);
-    m_db->Exec(deleteSql);
-    qDebug()<<deleteSql;
-    //更新控件
-    ui->twRefvInfo->removeRow(CurrentRow);
-
-
 }
 
 /********************************************************
@@ -767,6 +808,7 @@ void SetWindow::on_btnSysSave_clicked()
     }else if(ui->rbASTM->isChecked()){
         m_settings->SetParam(LISMODE,"1");
     }else if(ui->rbHL7->isChecked()){
+        m_settings->SetParam(RFWRITEMODE,"0");
         m_settings->SetParam(LISMODE,"2");
     }
     //本机IP
@@ -947,6 +989,7 @@ void SetWindow::HideDebugLogin(bool bHide)
     ui->btnDebugOk->setHidden(bHide);
 }
 
+
 /********************************************************
  *@Name:        InitHardVersion
  *@Author:      HuaT
@@ -992,10 +1035,61 @@ void SetWindow::on_btnDebugLogout_clicked()
 ********************************************************/
 void SetWindow::on_btnDebugInterface_clicked()
 {
-    UserInterface* ui = new UserInterface(this,m_db,m_settings,m_RFSerialPort);
+    UserInterface* ui = new UserInterface(this,m_db,m_settings,m_RFSerialPort,m_HL7SerialPort);
     ui->show();
 #ifdef Q_OS_LINUX
     ui->SetCanBusObj(&m_TestWin->GetCanBus());
 #endif
     connect(ui,SIGNAL(StopAgingTest()), m_TestWin,SLOT(StopAgingTimer()) );
+}
+
+/********************************************************
+ *@Name:        on_btnRFCQuery_clicked
+ *@Author:      HuaT
+ *@Description: 射频界面查询按钮
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-5-3
+********************************************************/
+void SetWindow::on_btnRFCQuery_clicked()
+{
+    ui->twRFCardInfo->setRowCount(0);
+
+    //"Item","Batch No","Card No","Expiry Date"
+    QString strCMD;
+    strCMD = QString("select * from idcard order by inputtime desc");
+    QSqlQuery* query = m_db->GetSqlQuery();
+    query->exec(strCMD);
+    int nRowCount = 0;
+    int nNumber = 1;
+    while(query->next()){
+        nRowCount = ui->twRFCardInfo->rowCount();
+        ui->twRFCardInfo->insertRow(nRowCount);
+        //序号
+        //QTableWidgetItem* item1 = new QTableWidgetItem;
+        //item1->setText(QString::number(nNumber));
+        //ui->twRFCardInfo->setItem(nRowCount,0,item1);
+        //项目
+        QTableWidgetItem* item2 = new QTableWidgetItem;
+        item2->setText(query->value(3).toString());
+        ui->twRFCardInfo->setItem(nRowCount,0,item2);
+        //批号
+        QTableWidgetItem* item3 = new QTableWidgetItem;
+        item3->setText(query->value(4).toString());
+        ui->twRFCardInfo->setItem(nRowCount,1,item3);
+        //卡号
+        QTableWidgetItem* item4 = new QTableWidgetItem;
+        item4->setText(query->value(5).toString());
+        ui->twRFCardInfo->setItem(nRowCount,2,item4);
+        //过期时间
+        QTableWidgetItem* item5 = new QTableWidgetItem;
+        item5->setText(query->value(6).toString());
+        ui->twRFCardInfo->setItem(nRowCount,3,item5);
+        //条码号
+        QTableWidgetItem* item6 = new QTableWidgetItem;
+        item6->setText(query->value(2).toString());
+        ui->twRFCardInfo->setItem(nRowCount,4,item6);
+        nNumber++;
+    }
 }

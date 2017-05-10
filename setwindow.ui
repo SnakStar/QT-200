@@ -55,7 +55,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="PrintSetPage">
     <widget class="QGroupBox" name="groupBox_Pinrt">
@@ -637,6 +637,31 @@
     <zorder>btnSysSave</zorder>
     <zorder>btnSysCancel</zorder>
    </widget>
+   <widget class="QWidget" name="RFCardInfoPage">
+    <widget class="QTableWidget" name="twRFCardInfo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>621</width>
+       <height>311</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnRFCQuery">
+     <property name="geometry">
+      <rect>
+       <x>524</x>
+       <y>20</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Query</string>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="SysInfoSetPage">
     <widget class="QLabel" name="lbSysInfoTitle">
      <property name="geometry">
@@ -700,7 +725,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>V0.28.3</string>
+      <string>V0.30.0</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbHardNum">

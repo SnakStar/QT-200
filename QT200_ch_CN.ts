@@ -161,13 +161,13 @@ completion of the test</source>
     </message>
     <message>
         <location filename="cchecktablewidget.cpp" line="37"/>
-        <location filename="setwindow.cpp" line="242"/>
+        <location filename="setwindow.cpp" line="282"/>
         <source>Age</source>
         <translation>年龄</translation>
     </message>
     <message>
         <location filename="cchecktablewidget.cpp" line="38"/>
-        <location filename="setwindow.cpp" line="242"/>
+        <location filename="setwindow.cpp" line="282"/>
         <source>Sex</source>
         <translation>性别</translation>
     </message>
@@ -192,17 +192,17 @@ completion of the test</source>
         <translation>V1.0.0</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="601"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>Timer1</source>
         <translation>计时器1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="633"/>
+        <location filename="mainwindow.cpp" line="654"/>
         <source>Timer2</source>
         <translation>计时器2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="665"/>
+        <location filename="mainwindow.cpp" line="686"/>
         <source>Timer3</source>
         <translation>计时器3</translation>
     </message>
@@ -218,23 +218,25 @@ completion of the test</source>
         <location filename="exportdata.cpp" line="58"/>
         <location filename="exportdata.cpp" line="73"/>
         <location filename="hardgrading.cpp" line="128"/>
-        <location filename="mainwindow.cpp" line="695"/>
-        <location filename="mainwindow.cpp" line="1081"/>
+        <location filename="mainwindow.cpp" line="716"/>
+        <location filename="mainwindow.cpp" line="1186"/>
         <location filename="qcvalue.cpp" line="55"/>
         <location filename="qcwindow.cpp" line="239"/>
         <location filename="qcwindow.cpp" line="454"/>
-        <location filename="querywindow.cpp" line="171"/>
-        <location filename="querywindow.cpp" line="267"/>
-        <location filename="querywindow.cpp" line="288"/>
-        <location filename="setwindow.cpp" line="591"/>
-        <location filename="setwindow.cpp" line="630"/>
-        <location filename="setwindow.cpp" line="885"/>
-        <location filename="testwindow.cpp" line="1570"/>
-        <location filename="testwindow.cpp" line="1768"/>
-        <location filename="testwindow.cpp" line="1888"/>
-        <location filename="testwindow.cpp" line="1992"/>
-        <location filename="testwindow.cpp" line="2050"/>
-        <location filename="testwindow.cpp" line="2161"/>
+        <location filename="querywindow.cpp" line="162"/>
+        <location filename="querywindow.cpp" line="258"/>
+        <location filename="querywindow.cpp" line="279"/>
+        <location filename="setwindow.cpp" line="650"/>
+        <location filename="setwindow.cpp" line="689"/>
+        <location filename="setwindow.cpp" line="697"/>
+        <location filename="setwindow.cpp" line="949"/>
+        <location filename="testwindow.cpp" line="1573"/>
+        <location filename="testwindow.cpp" line="1771"/>
+        <location filename="testwindow.cpp" line="1899"/>
+        <location filename="testwindow.cpp" line="2019"/>
+        <location filename="testwindow.cpp" line="2077"/>
+        <location filename="testwindow.cpp" line="2188"/>
+        <location filename="testwindow.cpp" line="3574"/>
         <location filename="upgrading.cpp" line="58"/>
         <location filename="upgrading.cpp" line="79"/>
         <location filename="upgrading.cpp" line="82"/>
@@ -263,7 +265,7 @@ completion of the test</source>
         <translation>数据导出成功</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="696"/>
+        <location filename="mainwindow.cpp" line="717"/>
         <source>printer is out of paper</source>
         <translation>打印机缺纸</translation>
     </message>
@@ -272,27 +274,27 @@ completion of the test</source>
         <translation type="obsolete">批号已经存在,是否覆盖?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="788"/>
+        <location filename="mainwindow.cpp" line="888"/>
         <source>Data Update is successful</source>
         <translation>数据更新成功</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="791"/>
+        <location filename="mainwindow.cpp" line="891"/>
         <source>Data Update is failed</source>
         <translation>数据更新失败</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="803"/>
+        <location filename="mainwindow.cpp" line="908"/>
         <source>Data import is successful</source>
         <translation>数据导入成功</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="806"/>
+        <location filename="mainwindow.cpp" line="911"/>
         <source>Data import is failed</source>
         <translation>数据导入失败</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1082"/>
+        <location filename="mainwindow.cpp" line="1187"/>
         <source>Close the instrument?</source>
         <translation>是否关闭仪器?</translation>
     </message>
@@ -323,46 +325,46 @@ completion of the test</source>
         <translation>保存成功</translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="172"/>
+        <location filename="querywindow.cpp" line="163"/>
         <source>No qualified result, please modify and query again</source>
         <oldsource>No qualified result, please modify and query again.</oldsource>
         <translation>无符合条件的结果,请修改条件后再查询</translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="253"/>
+        <location filename="querywindow.cpp" line="244"/>
         <source>File Export</source>
         <translation>文件导出</translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="268"/>
+        <location filename="querywindow.cpp" line="259"/>
         <source>No data in proceding</source>
         <oldsource>No data in proceding.</oldsource>
         <translation>前面已无数据了</translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="346"/>
+        <location filename="querywindow.cpp" line="376"/>
         <source>M</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="348"/>
+        <location filename="querywindow.cpp" line="378"/>
         <source>F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="350"/>
+        <location filename="querywindow.cpp" line="380"/>
         <source>U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="168"/>
-        <location filename="querywindow.cpp" line="273"/>
-        <location filename="querywindow.cpp" line="294"/>
+        <location filename="querywindow.cpp" line="159"/>
+        <location filename="querywindow.cpp" line="264"/>
+        <location filename="querywindow.cpp" line="285"/>
         <source>Current is %1 Page Count %2 Page</source>
         <translation>当前%1页 共%2页</translation>
     </message>
     <message>
-        <location filename="querywindow.cpp" line="289"/>
+        <location filename="querywindow.cpp" line="280"/>
         <source>No data in the following</source>
         <oldsource>No data in the following.</oldsource>
         <translation>后面已无数据了</translation>
@@ -377,7 +379,7 @@ completion of the test</source>
     </message>
     <message>
         <location filename="renfvalue.cpp" line="44"/>
-        <location filename="setwindow.cpp" line="308"/>
+        <location filename="setwindow.cpp" line="348"/>
         <source>Male/Female</source>
         <translation>男/女</translation>
     </message>
@@ -393,33 +395,33 @@ completion of the test</source>
     </message>
     <message>
         <location filename="cchecktablewidget.cpp" line="148"/>
-        <location filename="querywindow.cpp" line="202"/>
+        <location filename="querywindow.cpp" line="193"/>
         <location filename="renfvalue.cpp" line="44"/>
         <location filename="renfvalue.cpp" line="122"/>
-        <location filename="setwindow.cpp" line="304"/>
-        <location filename="setwindow.cpp" line="329"/>
-        <location filename="setwindow.cpp" line="375"/>
-        <location filename="setwindow.cpp" line="382"/>
+        <location filename="setwindow.cpp" line="344"/>
+        <location filename="setwindow.cpp" line="369"/>
+        <location filename="setwindow.cpp" line="415"/>
+        <location filename="setwindow.cpp" line="422"/>
         <location filename="testwindow.cpp" line="756"/>
-        <location filename="testwindow.cpp" line="1069"/>
-        <location filename="testwindow.cpp" line="1376"/>
-        <location filename="testwindow.cpp" line="1465"/>
+        <location filename="testwindow.cpp" line="1072"/>
+        <location filename="testwindow.cpp" line="1379"/>
+        <location filename="testwindow.cpp" line="1468"/>
         <source>Male</source>
         <translation>男</translation>
     </message>
     <message>
         <location filename="cchecktablewidget.cpp" line="150"/>
-        <location filename="querywindow.cpp" line="204"/>
+        <location filename="querywindow.cpp" line="195"/>
         <location filename="renfvalue.cpp" line="44"/>
         <location filename="renfvalue.cpp" line="119"/>
-        <location filename="setwindow.cpp" line="306"/>
-        <location filename="setwindow.cpp" line="331"/>
-        <location filename="setwindow.cpp" line="377"/>
-        <location filename="setwindow.cpp" line="384"/>
+        <location filename="setwindow.cpp" line="346"/>
+        <location filename="setwindow.cpp" line="371"/>
+        <location filename="setwindow.cpp" line="417"/>
+        <location filename="setwindow.cpp" line="424"/>
         <location filename="testwindow.cpp" line="758"/>
-        <location filename="testwindow.cpp" line="1071"/>
-        <location filename="testwindow.cpp" line="1378"/>
-        <location filename="testwindow.cpp" line="1467"/>
+        <location filename="testwindow.cpp" line="1074"/>
+        <location filename="testwindow.cpp" line="1381"/>
+        <location filename="testwindow.cpp" line="1470"/>
         <source>Female</source>
         <translation>女</translation>
     </message>
@@ -437,93 +439,129 @@ completion of the test</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="47"/>
-        <location filename="setwindow.cpp" line="116"/>
+        <location filename="setwindow.cpp" line="49"/>
+        <location filename="setwindow.cpp" line="123"/>
         <source>General Setting</source>
         <oldsource>Print Setting</oldsource>
         <translation>普通设置</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="48"/>
-        <location filename="setwindow.cpp" line="117"/>
+        <location filename="setwindow.cpp" line="50"/>
+        <location filename="setwindow.cpp" line="124"/>
         <source>Renf Setting</source>
         <translation>参考值设置</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="49"/>
-        <location filename="setwindow.cpp" line="118"/>
+        <location filename="setwindow.cpp" line="51"/>
+        <location filename="setwindow.cpp" line="125"/>
         <source>Date/Time Setting</source>
         <translation>日期/时间设置</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="50"/>
-        <location filename="setwindow.cpp" line="119"/>
+        <location filename="setwindow.cpp" line="52"/>
+        <location filename="setwindow.cpp" line="126"/>
         <source>System Setting</source>
         <translation>系统设置</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="51"/>
-        <location filename="setwindow.cpp" line="120"/>
+        <location filename="setwindow.cpp" line="53"/>
+        <location filename="setwindow.cpp" line="127"/>
+        <source>RF Card Info</source>
+        <translation>射频卡信息</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="54"/>
+        <location filename="setwindow.cpp" line="128"/>
         <source>System Info</source>
         <translation>系统信息</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="52"/>
-        <location filename="setwindow.cpp" line="121"/>
+        <location filename="setwindow.cpp" line="55"/>
+        <location filename="setwindow.cpp" line="129"/>
         <source>Debug Mode</source>
         <oldsource>Debug Model</oldsource>
         <translation>调试模式</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="241"/>
+        <location filename="setwindow.cpp" line="246"/>
+        <location filename="setwindow.cpp" line="281"/>
         <source>Item</source>
         <translation>项目</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="241"/>
+        <source>BarCode</source>
+        <translation type="obsolete">条码</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="246"/>
+        <source>Batch No</source>
+        <translation>批号</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="246"/>
+        <source>Card No</source>
+        <translation>卡号</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="247"/>
+        <source>Expiry Date</source>
+        <translation>过期时间</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="247"/>
+        <source>BarCode No</source>
+        <translation>条码号</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="281"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="534"/>
-        <location filename="setwindow.cpp" line="676"/>
-        <location filename="setwindow.cpp" line="775"/>
-        <location filename="userinterface.cpp" line="173"/>
+        <location filename="setwindow.cpp" line="593"/>
+        <location filename="setwindow.cpp" line="739"/>
+        <location filename="setwindow.cpp" line="839"/>
+        <location filename="userinterface.cpp" line="463"/>
         <source>operating info</source>
         <translation>操作信息</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="535"/>
-        <location filename="setwindow.cpp" line="677"/>
-        <location filename="setwindow.cpp" line="776"/>
-        <location filename="userinterface.cpp" line="174"/>
+        <location filename="setwindow.cpp" line="594"/>
+        <location filename="setwindow.cpp" line="740"/>
+        <location filename="setwindow.cpp" line="840"/>
+        <location filename="userinterface.cpp" line="464"/>
         <source>Configuration saved successfully</source>
         <translation>配置保存成功</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="592"/>
+        <location filename="setwindow.cpp" line="651"/>
         <source>Please choose the data to modify</source>
         <oldsource>Please choose to modify the data!</oldsource>
         <translation>请选择要修改的数据</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="631"/>
+        <location filename="setwindow.cpp" line="690"/>
         <source>Please choose the data to delete</source>
         <oldsource>Please choose to delete the data!</oldsource>
         <translation>请选择要删除的数据</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="810"/>
+        <location filename="setwindow.cpp" line="698"/>
+        <source>Confirmed will have to delete?</source>
+        <translation>确定要删除吗?</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="874"/>
         <source>Soft Update</source>
         <translation>软件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="826"/>
+        <location filename="setwindow.cpp" line="890"/>
         <source>Hard Update</source>
         <translation>固件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="886"/>
+        <location filename="setwindow.cpp" line="950"/>
         <source>longin failed</source>
         <translation>登陆失败</translation>
     </message>
@@ -572,22 +610,24 @@ completion of the test</source>
         <translation>用户信息插入失败，停止测试</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1571"/>
+        <location filename="testwindow.cpp" line="1574"/>
         <source>updateing </source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1769"/>
+        <location filename="testwindow.cpp" line="1772"/>
         <source>Upgrade is complete</source>
         <translation>更新完成</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1895"/>
+        <location filename="testwindow.cpp" line="1906"/>
+        <location filename="testwindow.cpp" line="3581"/>
         <source>There is no corresponding ID information, please import the relevant ID card</source>
         <translation>无对应ID信息,请导入对应ID卡信息</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1929"/>
+        <location filename="testwindow.cpp" line="1950"/>
+        <location filename="testwindow.cpp" line="3622"/>
         <source>Reagent Strip has expired</source>
         <translation>试剂卡已过期</translation>
     </message>
@@ -596,42 +636,42 @@ completion of the test</source>
         <translation type="obsolete">试剂卡已过期</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2053"/>
+        <location filename="testwindow.cpp" line="2080"/>
         <source>Motor initialization failed,Please contact 
 customer service</source>
         <translation>电机初始化故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2056"/>
+        <location filename="testwindow.cpp" line="2083"/>
         <source>Photoelectric switch A failed,Please contact 
 customer service</source>
         <translation>光电开关A故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2059"/>
+        <location filename="testwindow.cpp" line="2086"/>
         <source>Photoelectric switch B failed,Please contact 
 customer service</source>
         <translation>光电开关B故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2062"/>
+        <location filename="testwindow.cpp" line="2089"/>
         <source>Laser component failure,Please contact customer service</source>
         <translation>激光组件故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2065"/>
+        <location filename="testwindow.cpp" line="2092"/>
         <source>No barcode,Please check whether the reagent 
 card is plugged or insert</source>
         <translation>无条码,请检查试剂卡是否插好或插入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2068"/>
+        <location filename="testwindow.cpp" line="2095"/>
         <source>Wrong barcode,Please check whether the reagent 
 card is plugged or insert</source>
         <translation>条码错误,请检查试剂卡是否插好或插入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2162"/>
+        <location filename="testwindow.cpp" line="2189"/>
         <source>The result data save failed,please check the equipment</source>
         <translation>结果数据保存失败,请检查设备</translation>
     </message>
@@ -658,19 +698,19 @@ card is plugged or insert</source>
     <message>
         <location filename="qcwindow.cpp" line="255"/>
         <location filename="qcwindow.cpp" line="270"/>
-        <location filename="testwindow.cpp" line="2008"/>
+        <location filename="testwindow.cpp" line="2035"/>
         <source>Channel1 is busy</source>
         <translation>通道1忙</translation>
     </message>
     <message>
         <location filename="qcwindow.cpp" line="260"/>
-        <location filename="testwindow.cpp" line="2011"/>
+        <location filename="testwindow.cpp" line="2038"/>
         <source>Channel2 is busy</source>
         <translation>通道2忙</translation>
     </message>
     <message>
         <location filename="qcwindow.cpp" line="265"/>
-        <location filename="testwindow.cpp" line="2014"/>
+        <location filename="testwindow.cpp" line="2041"/>
         <source>Channel3 is busy</source>
         <translation>通道3忙</translation>
     </message>
@@ -973,6 +1013,39 @@ card is plugged or insert</source>
     </message>
 </context>
 <context>
+    <name>ResultModify</name>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="14"/>
+        <source>结果修改</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="26"/>
+        <source>编号</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="39"/>
+        <source>当前结果</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="52"/>
+        <source>测试时间</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="65"/>
+        <source>修改结果</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="resultmodify.ui" line="127"/>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SetTimerObj</name>
     <message>
         <location filename="settimer.ui" line="14"/>
@@ -1117,7 +1190,7 @@ card is plugged or insert</source>
     </message>
     <message>
         <location filename="setwindow.ui" line="331"/>
-        <location filename="setwindow.ui" line="830"/>
+        <location filename="setwindow.ui" line="855"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -1204,37 +1277,38 @@ card is plugged or insert</source>
         <translation>通道3</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="703"/>
-        <source>V0.26.0</source>
-        <oldsource>V0.25.1</oldsource>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="setwindow.ui" line="729"/>
+        <location filename="setwindow.ui" line="754"/>
         <source>Soft Update</source>
         <translation>软件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="742"/>
+        <location filename="setwindow.ui" line="767"/>
         <source>Hard Update</source>
         <translation>固件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="791"/>
+        <location filename="setwindow.ui" line="816"/>
         <source>Logout</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="804"/>
+        <location filename="setwindow.ui" line="829"/>
         <source>Interface</source>
         <translation>接口</translation>
     </message>
     <message>
+        <location filename="setwindow.ui" line="661"/>
         <source>Query</source>
-        <translation type="obsolete">查询</translation>
+        <translation>查询</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="843"/>
+        <location filename="setwindow.ui" line="728"/>
+        <source>V0.30.0</source>
+        <oldsource>V0.29.0</oldsource>
+        <translation>V0.30.0</translation>
+    </message>
+    <message>
+        <location filename="setwindow.ui" line="868"/>
         <source>Login Password</source>
         <translation>登陆密码</translation>
     </message>
@@ -1250,17 +1324,17 @@ card is plugged or insert</source>
         <translation>质控通道</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="651"/>
+        <location filename="setwindow.ui" line="676"/>
         <source>System Info</source>
         <translation>系统信息</translation>
     </message>
     <message utf8="true">
-        <location filename="setwindow.ui" line="677"/>
+        <location filename="setwindow.ui" line="702"/>
         <source>Software Version：</source>
         <translation>软件版本：</translation>
     </message>
     <message utf8="true">
-        <location filename="setwindow.ui" line="690"/>
+        <location filename="setwindow.ui" line="715"/>
         <source>Firmware version：</source>
         <translation>固件版本：</translation>
     </message>
@@ -1270,7 +1344,7 @@ card is plugged or insert</source>
         <translation type="obsolete">V1.0.0</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="716"/>
+        <location filename="setwindow.ui" line="741"/>
         <source>V0.5.1</source>
         <translation>V0.5.1</translation>
     </message>
@@ -1279,7 +1353,7 @@ card is plugged or insert</source>
         <translation type="obsolete">软件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="765"/>
+        <location filename="setwindow.ui" line="790"/>
         <source>Debug Mode</source>
         <oldsource>Debug Model</oldsource>
         <translation>调试模式</translation>
@@ -1419,9 +1493,13 @@ card is plugged or insert</source>
 <context>
     <name>UserInterface</name>
     <message>
-        <location filename="userinterface.ui" line="14"/>
         <source>Dialog</source>
-        <translation>对话框</translation>
+        <translation type="obsolete">对话框</translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="14"/>
+        <source>接口界面</source>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="userinterface.ui" line="49"/>
@@ -1431,6 +1509,7 @@ card is plugged or insert</source>
     <message utf8="true">
         <location filename="userinterface.ui" line="61"/>
         <location filename="userinterface.ui" line="149"/>
+        <location filename="userinterface.ui" line="445"/>
         <source>关闭</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1507,6 +1586,66 @@ card is plugged or insert</source>
     <message utf8="true">
         <location filename="userinterface.ui" line="364"/>
         <source>复制数据库</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="379"/>
+        <source>查询</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="407"/>
+        <source>操作模式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="419"/>
+        <source>读卡模式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="432"/>
+        <source>写卡模式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="458"/>
+        <source>项目:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="471"/>
+        <source>条码:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="527"/>
+        <source>烧录总数:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="553"/>
+        <source>清除记数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="576"/>
+        <source>卡号:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="589"/>
+        <source>批号:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="612"/>
+        <source>PC连接模式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="643"/>
+        <source>操作日志</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

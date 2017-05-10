@@ -104,9 +104,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_bUpdateHardVersion = true;
     //读取配置文件信息
     m_SetParam = m_settings.ReadSettingsInfoToMap();
-    //恢复射频烧写模式
+    //关闭射频烧写模式
     m_settings.SetParam(RFWRITEMODE,"0");
     m_settings.WriteSettingsInfoToMap();
+    //
+    connect(this,SIGNAL(MockTest(QByteArray)),m_TestWin, SLOT(MockTest(QByteArray)) );
 }
 
 MainWindow::~MainWindow()
@@ -145,7 +147,7 @@ bool MainWindow::InitRfSerial()
 {
     m_SerialRF.setBaudRate(BAUD19200);
 #ifdef Q_OS_WIN32
-    m_SerialRF.setPortName("\\\\.\\com1");
+    m_SerialRF.setPortName("\\\\.\\com6");
 #elif defined(Q_OS_LINUX)
     m_SerialRF.setPortName("/dev/ttyO1");
 #endif
@@ -170,7 +172,7 @@ bool MainWindow::InitPrintSerial()
     //串口初始化
     m_SerialPrint.setBaudRate(BAUD9600);
 #ifdef Q_OS_WIN32
-    m_SerialPrint.setPortName("\\\\.\\com5");
+    m_SerialPrint.setPortName("\\\\.\\com1");
 #else
     m_SerialPrint.setPortName("/dev/ttyO2");
 #endif
@@ -715,6 +717,8 @@ void MainWindow::RecvPrintSerialData()
         QString strContent = QObject::tr("printer is out of paper");
         QMessageBox::warning(this,strTitle,strContent,QMessageBox::Ok);
     }
+    //原始数据测试使用
+    //emit MockTest(m_SerialPrint.readAll());
 }
 
 /********************************************************
@@ -728,6 +732,20 @@ void MainWindow::RecvPrintSerialData()
 ********************************************************/
 void MainWindow::RecvHL7SerialData()
 {
+    //查看是否开启了PC连接模式，模式序号为3.
+    int nRFSerialMode = m_SetParam->value(RFWRITEMODE,0).toInt();
+    if(nRFSerialMode == 3){//转发数据模式开启,把收电脑端收到的数据发给射频卡
+        QByteArray byteHL7Data = m_SerialHL7.readAll();
+        m_bytePCSerialData.append(byteHL7Data);
+        qDebug()<<"m_SerialHL7:"<<byteHL7Data.size()<<byteHL7Data.toHex().toUpper();
+        QByteArray baFrameStart,baFrameEnd;
+        baFrameStart = m_bytePCSerialData.left(4);
+        baFrameEnd = m_bytePCSerialData.right(4);
+        if(baFrameStart.toHex().toUInt(0,16) == FRAMESTART && baFrameEnd.toHex().toUInt(0,16) == FRAMEEND){
+            m_SerialRF.write(m_bytePCSerialData);
+            m_bytePCSerialData.clear();
+        }
+    }
     //qDebug()<<m_SerialHL7.readAll().toHex().toUpper();
 }
 
@@ -745,8 +763,18 @@ void MainWindow::RecvRfSerialData()
 {
     //查看调试射频模式是否开启
     int nRFSerialMode = m_SetParam->value(RFWRITEMODE,0).toInt();
-    if(nRFSerialMode != 0){
-        //qDebug()<<"MainWindo:RecvRfSerialData";
+    if(nRFSerialMode == 3){//PC连接模式,收到射频卡发给电脑的数据,直接转发
+        m_RfidData.append(m_SerialRF.readAll());
+        //qDebug()<<m_RfidData.toHex().toUpper();
+        QByteArray FrameStart,FrameEnd;
+        FrameStart = m_RfidData.left(4);
+        FrameEnd = m_RfidData.right(4);
+        if(FrameEnd.toHex().toUInt(0,16) == FRAMEEND && FrameStart.toHex().toUInt(0,16) == FRAMESTART){
+            m_SerialHL7.write(m_RfidData);
+            m_RfidData.clear();
+        }
+        return;
+    }else if(nRFSerialMode == 1 || nRFSerialMode == 2){
         return;
     }
     IDCardInfo CardInfo;
@@ -765,15 +793,27 @@ void MainWindow::RecvRfSerialData()
         CardInfo.m_IDCardLen = m_RfidData.mid(12,4).toHex().toUInt(0,16);
         //16-len为数据
         CardInfo.m_IDCardData = m_RfidData.mid(16,CardInfo.m_IDCardLen).toHex().toUpper();
+        //测试项目
+        //有效期
+        //导入时间
         QString strCardData = m_RfidData.mid(16,CardInfo.m_IDCardLen);
         if(0 == strCardData.compare("IMPROVE QT-200")){
             //密钥卡,发送免密码信号，并清空数据
             emit NoPassword();
             m_RfidData.clear();
+            QString strTitle,strContent;
+            strTitle = "提示";
+            strContent = "免密钥卡数据填写完成";
+            QMessageBox::information(this,strTitle,strContent,QMessageBox::Ok);
             return;
         }
-        //16到16+14为批号
-        CardInfo.m_IDCardBatchNo = m_RfidData.mid(16,14).toHex().toUpper();
+        //16到16+14为条码编号
+        if(m_RfidData.size() > 210){
+            CardInfo.m_IDCardBarCode = m_RfidData.mid(16,14);
+        }else{
+            CardInfo.m_IDCardBarCode = m_RfidData.mid(16,14).toHex().toUpper();
+        }
+
         //len+16-len+20为检验码
         CardInfo.m_IDCardCheck = m_RfidData.mid(CardInfo.m_IDCardLen+16,4).toHex().toUInt(0,16);
         for(int n=12; n<CardInfo.m_IDCardLen+4+12; n++){
@@ -791,14 +831,46 @@ void MainWindow::RecvRfSerialData()
         //检验过后，如果正确则插入数据库，否则提示
         QString msgTitle,msgContain;
         QString strQueryCMD,strUpdataCMD,strInsertCMD;
-        strQueryCMD = QString("select BatchNo from IDCard where BatchNo='%1'")
-                .arg(CardInfo.m_IDCardBatchNo);
+        strQueryCMD = QString("select BarCode from IDCard where BarCode='%1'")
+                .arg(CardInfo.m_IDCardBarCode);
         //qDebug()<<strQueryCMD;
         QSqlQuery* sqlQuery = m_db.GetSqlQuery();
         //插入项目名称
         QString strCMD = "select item from itemtype";
         QStringList listItemName = m_db.ExecQuery(strCMD);
-        QString strItemName = m_RfidData.mid(167,15).trimmed();
+        //项目名称,有效期,录入时间
+        QString strItemName,strValidData,strInputData;
+        //批号,卡号(5-4)
+        QString strBatchNumber,strCardNumber;
+        if(m_RfidData.size() > 210){
+            strItemName = m_RfidData.mid(62,20).trimmed();
+            strValidData = QString("20%1-%2-%3").arg((quint8)m_RfidData.at(48)).arg(m_RfidData.at(49),2,10,QLatin1Char('0')).arg(m_RfidData.at(50),2,10,QLatin1Char('0'));
+            //批号
+            strBatchNumber = QString("20%1").arg(QString(m_RfidData.mid(26,4)));;
+            //卡号
+            strCardNumber = QString("%1-%2").arg(CardInfo.m_IDCardBarCode.mid(3,4).toInt(0,2)+1)
+                                            .arg(CardInfo.m_IDCardBarCode.mid(8,5).toInt(0,2)+1);
+        }else{
+            //项目名称
+            strItemName = m_RfidData.mid(167,15).trimmed();
+            //有效期
+            strValidData = QString("20%1%2-%3%4-%5%6").arg((quint8)m_RfidData.at(105)).arg((quint8)m_RfidData.at(106)).arg((quint8)m_RfidData.at(107))
+                    .arg((quint8)m_RfidData.at(108)).arg((quint8)m_RfidData.at(109)).arg((quint8)m_RfidData.at(110));
+            //批号
+            strBatchNumber = "";
+            QString strCardNo;
+            quint8 nTemp=0;
+            for(int n=0; n<CardInfo.m_IDCardBarCode.size(); n+=2){
+                nTemp = CardInfo.m_IDCardBarCode.mid(n,2).toInt();
+                strCardNo.append(QString::number(nTemp));
+            }
+            //卡号
+            strCardNumber = QString("%1-%2").arg(strCardNo.mid(3,4).toInt(0,2)+1)
+                                            .arg(strCardNo.mid(8,5).toInt(0,2)+1);
+        }
+
+        QDateTime dt = QDateTime::currentDateTime();
+        strInputData = dt.toString("yyyy-MM-dd hh:mm:ss");
         if(!listItemName.contains(strItemName)){
             strCMD = QString("insert into itemtype values(null,'%1')").arg(strItemName);
             if(!m_db.Exec(strCMD)){
@@ -812,10 +884,16 @@ void MainWindow::RecvRfSerialData()
                 //msgContain = QObject::tr("Batch number already exists. Overwrite?");
                 //int nRet = QMessageBox::information(this,msgTitle,msgContain,QMessageBox::Ok|QMessageBox::Cancel);
                 //if(nRet == QMessageBox::Ok){
-                    strUpdataCMD = QString("update IDCard set cardno=%1,data='%2' where batchno='%3';")
+                strUpdataCMD = QString("update IDCard set cardno=%1,BarCode='%2',item='%3',BatchNumber='%4',CardNumber='%5',validDate='%6',inputtime='%7',data='%8' where BarCode='%9';")
                             .arg(CardInfo.m_IDCardNumber)
+                            .arg(CardInfo.m_IDCardBarCode)
+                            .arg(strItemName)
+                            .arg(strBatchNumber)
+                            .arg(strCardNumber)
+                            .arg(strValidData)
+                            .arg(strInputData)
                             .arg(CardInfo.m_IDCardData)
-                            .arg(CardInfo.m_IDCardBatchNo);
+                            .arg(CardInfo.m_IDCardBarCode);
                     //qDebug()<<strUpdataCMD;
                     if(sqlQuery->exec(strUpdataCMD)){
                         msgContain=QObject::tr("Data Update is successful");
@@ -827,9 +905,14 @@ void MainWindow::RecvRfSerialData()
                 //}
             }else{
                 //没有数据，则插入
-                strInsertCMD = QString("insert into IDCard values(null,%1,'%2','%3');")
+                strInsertCMD = QString("insert into IDCard values(null,%1,'%2','%3','%4','%5','%6','%7','%8');")
                         .arg(CardInfo.m_IDCardNumber)
-                        .arg(CardInfo.m_IDCardBatchNo)
+                        .arg(CardInfo.m_IDCardBarCode)
+                        .arg(strItemName)
+                        .arg(strBatchNumber)
+                        .arg(strCardNumber)
+                        .arg(strValidData)
+                        .arg(strInputData)
                         .arg(CardInfo.m_IDCardData);
                 //qDebug()<<strCMD;
                 if(sqlQuery->exec(strInsertCMD)){

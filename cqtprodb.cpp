@@ -271,7 +271,12 @@ bool CQtProDB::CreateTable()
     strCreateTable = "create table if not exists \
             IDCard(ID INTEGER PRIMARY KEY AUTOINCREMENT,\
                    CardNo integer,\
-                   BatchNo text,\
+                   BarCode text,\
+                   Item text,\
+                   BatchNumber text,\
+                   CardNumber text,\
+                   ValidDate datetime,\
+                   InputTime datatime,\
                    Data text)";
     bOK5 = m_query->exec(strCreateTable);
     if(!bOK5){

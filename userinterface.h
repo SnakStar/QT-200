@@ -40,7 +40,7 @@ class UserInterface : public QDialog
     
 public:
     explicit UserInterface(QWidget *parent = 0);
-    explicit UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settings,QextSerialPort* rfSerialPort);
+    explicit UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settings,QextSerialPort* rfSerialPort, QextSerialPort* hl7SerialPort);
     ~UserInterface();
 public:
     //设置CanBus对象
@@ -72,6 +72,10 @@ private slots:
     void on_rbRFCloseMode_clicked();
 
     void on_btnRFClearWriteTotal_clicked();
+
+    void on_rbRFPCConnectMode_clicked();
+
+    void on_btnLogQuery_clicked();
 
 signals:
     void StopAgingTest();

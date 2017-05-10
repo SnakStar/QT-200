@@ -227,7 +227,7 @@ void TestWindow::PrintModelChange()
 ********************************************************/
 void TestWindow::SettingChange()
 {
-    qDebug()<<"SettingChange";
+    //qDebug()<<"SettingChange";
 }
 
 /********************************************************
@@ -884,6 +884,9 @@ void TestWindow::InstantTest(int nChannel)
     QByteArray byteRespond;
     byteRespond[0] = 0x00;
     PackageCanMsg(QT_TESTOPT_SETUPTEST,QT_NULL_SYNC,nChannel,byteRespond);
+    //用户开始测试
+    QString strTestMsg = QString("通道%1开始测试").arg(nChannel);
+    qDebug()<<strTestMsg;
 }
 
 /********************************************************
@@ -1532,7 +1535,7 @@ void TestWindow::RecvCanMsg(quint32 can_id, QByteArray can_data)
     qbaID = m_CanBus.UIntIDToByte(can_id);
 #endif
     //QString msgContain,strTemp;
-    qDebug()<<qbaID.toHex().toUpper() << can_data.size() << can_data.toHex().toUpper();
+    //qDebug()<<qbaID.toHex().toUpper() << can_data.size() << can_data.toHex().toUpper();
     //strTemp = qbaID.toHex().toUpper() + can_data.toHex().toUpper();
     //msgContain = QString("%1 %2").arg(strTemp).arg(can_data.size());
     //QMessageBox::information(this,"",msgContain,QMessageBox::Ok);
@@ -1880,10 +1883,18 @@ void TestWindow::StartHardUpdate(quint8 nChannel,quint32 nIndex)
 ********************************************************/
 bool TestWindow::ProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataInfo &data, QByteArray can_data)
 {
-    //获得批号
-    data.m_strIDCardBatchNo = ParseBarCode(can_data);
+    //获得条码编号,先用新条码规则,新的条码格式为10100000000101
+    data.m_strIDCardBarCode = ParseBarCode(can_data,true);
     //查询此批号的ID卡数据
-    data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBatchNo);
+    data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
+    if(data.m_strIDMessage.isEmpty()){//如果是空,则调用旧条码规则,旧的条码格式为010001000000000010001
+        data.m_strIDCardBarCode = ParseBarCode(can_data,false);
+        data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
+    }
+    //开始解析条码
+    QString strTestMsg = QString("[通道%1] 开始解析条码,条码号为:%2").arg(nChannel).arg(data.m_strIDCardBarCode);
+    qDebug()<<strTestMsg;
+
     QString strTitle,strContent,strLog;
     strTitle = QObject::tr("Note");
     if(data.m_strIDMessage.isEmpty()){
@@ -1895,7 +1906,7 @@ bool TestWindow::ProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataIn
         strContent = QObject::tr("There is no corresponding ID information, please import the relevant ID card");
         QMessageBox::information(this,strTitle,strContent,QMessageBox::Ok);
         //数据记录
-        strLog = QString("无对应ID信息:%1,请导入对应ID卡信息").arg(data.m_strIDCardBatchNo);
+        strLog = QString("无对应ID信息:%1,请导入对应ID卡信息").arg(data.m_strIDCardBarCode);
         InsertLogMsg(QT_LOGOPT_ERROR, data.m_nNumberID, strLog);
         //测试状态取消
         bTestStatus = false;
@@ -1910,10 +1921,20 @@ bool TestWindow::ProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataIn
         UpdateTestText(nChannel);
         //由于不能获取质控状态，不管是不是质控测试，出现异常恢复质控按钮状态
         emit UpdateQCControlStatus();
+        //无射频信息结束测试
+        QString strTestMsg = QString("[通道%1] 无条码号为:%2的射频信息,本次测试结束").arg(nChannel).arg(data.m_strIDCardBarCode);
+        qDebug()<<strTestMsg;
         return false;
     }
     //转换批号为无符号型指针
     unsigned char *cIDMessage = m_ResultCalc.ConvetIDCardToChar(data.m_strIDMessage);
+    //新旧卡标志
+    if(data.m_strIDMessage.size() > 400){
+        //data.m_nCardFlag = (quint8)pIDMessage[39];
+        data.m_nCardFlag = 1;
+    }else{
+        data.m_nCardFlag = 0;
+    }
     //解析ID卡数据
     quint8 nStartPoint,nAmp;
     ParseIDMessageInfo(cIDMessage,nStartPoint,nAmp,data);
@@ -1940,6 +1961,9 @@ bool TestWindow::ProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataIn
         UpdateTestText(nChannel);
         //由于不能获取质控状态，不管是不是质控测试，出现异常恢复质控按钮状态
         emit UpdateQCControlStatus();
+        //试剂过期,本次测试结束
+        QString strTestMsg = QString("[通道%1] 试剂过期,本次测试结束").arg(nChannel);
+        qDebug()<<strTestMsg;
         return false;
     }
     //显示测试项目
@@ -1950,6 +1974,9 @@ bool TestWindow::ProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataIn
     byteRespond[1] = nStartPoint;
     byteRespond[2] = nAmp;
     PackageCanMsg(QT_SYSOPT_ACK,QT_TESTOPT_BARCODE,nChannel,byteRespond);
+    //发送开始测试信息
+    strTestMsg = QString("[通道%1] 条码解析完成,发送开始测试信息给仪器").arg(nChannel);
+    qDebug()<<strTestMsg;
     return true;
 }
 
@@ -2257,29 +2284,44 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                 //unsigned int ScanData1[320];
                 //unsigned int ScanData2[320];
                 unsigned char* pRecord = NULL;
-                //memset(pRecord,0,40);
-                pRecord = CalcResult(DataObj);
-                //for(int i=0; i<32; i++){
-                //    qDebug()<<i<<pRecord[i];
-                //}
-                //小数位数
-                quint8 nDecimal = QString::number((quint8)pRecord[10]).toInt();
-                QString strTempResult;
-                if(48 == nDecimal){
-                    strTempResult = QString("%1").arg(pRecord[12]*256 + pRecord[13]);
-                }else{
-                    strTempResult = QString("%1.%2").arg(pRecord[12]*256 + pRecord[13]).arg(pRecord[11]);
+                //仪器数据接收完成,开始进行结果计算
+                QString strTestMsg = QString("[通道%1] 仪器数据接收完成,开始进行结果计算").arg(nChannel);
+                qDebug()<<strTestMsg;
+                //新旧卡标志区分
+                if(0 == DataObj.m_nCardFlag){ //旧卡数据
+                    pRecord = CalcResult(DataObj);
+                    //for(int i=0; i<32; i++){
+                    //    qDebug()<<i<<pRecord[i];
+                    //}
+                    //小数位数
+                    quint8 nDecimal = QString::number((quint8)pRecord[10]).toInt();
+                    QString strTempResult;
+                    if(48 == nDecimal){
+                        strTempResult = QString("%1").arg(pRecord[12]*256 + pRecord[13]);
+                    }else{
+                        strTempResult = QString("%1.%2").arg(pRecord[12]*256 + pRecord[13]).arg(pRecord[11]);
+                    }
+                    //最大值最小值标记
+                    quint8 nFlag = QString::number((quint8)pRecord[9]).toInt();
+                    //qDebug()<<"nFlag:"<<nFlag;
+                    if(0 == nFlag){
+                        DataObj.m_strResult = strTempResult;
+                    }else if(1 == nFlag){
+                        DataObj.m_strResult = QString("<%1").arg(strTempResult);
+                    }else if(2 == nFlag){
+                        DataObj.m_strResult = QString(">%1").arg(strTempResult);
+                    }
+                    DataObj.m_RawTestInfo.m_fTestResult = strTempResult.toDouble();
+                }else { //新卡数据
+                    DataObj.m_strResult = CalcResult(DataObj,true);
+                    //
+                    DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
                 }
-                //最大值最小值标记
-                quint8 nFlag = QString::number((quint8)pRecord[9]).toInt();
-                //qDebug()<<"nFlag:"<<nFlag;
-                if(0 == nFlag){
-                    DataObj.m_strResult = strTempResult;
-                }else if(1 == nFlag){
-                    DataObj.m_strResult = QString("<%1").arg(strTempResult);
-                }else if(2 == nFlag){
-                    DataObj.m_strResult = QString(">%1").arg(strTempResult);
-                }
+
+                //结果计算完成,本次测试正常结束
+                strTestMsg = QString("[通道%1] 结果计算完成,本次测试正常结束,结果值:%2").arg(nChannel).arg(DataObj.m_strResult);
+                qDebug()<<strTestMsg;
+
                 //删除结果数组
                 delete pRecord;
                 if(m_isQCResult){
@@ -2301,8 +2343,8 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                         AutoPrint(nChannel);
                     }
                     //如果打开LIS连接,则测试完成后自动上传
-                    int nLisMode = m_SetParam->value(LISMODE,0).toInt();
-                    if(2 == nLisMode){
+                    int nMode = m_SetParam->value(LISMODE,0).toInt();
+                    if(2 == nMode){
                         QDateTime curTime = QDateTime::currentDateTime();
                         QString strCurTime = curTime.toString("yyyyMMddhhmmss");
                         m_SimpleHL7.WriteHL7Msg(m_SerialHL7,QString::number(DataObj.m_nNumberID),
@@ -2310,6 +2352,13 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                                                 DataObj.m_strTestName,DataObj.m_strResult,
                                                 DataObj.m_strTestUnit,strCurTime,"ORU^R01");
                     }
+                    //如果打开了PC连接模式,则测试完成后发送结果到仪器串口
+                    nMode = m_SetParam->value(RFWRITEMODE,0).toInt();
+                    if(3 == nMode){
+                        QByteArray  byteDebugDataToSerial = PackageTestDataToSerial(DataObj,nChannel);
+                        m_SerialHL7->write(byteDebugDataToSerial);
+                    }
+
                     //恢复至新建时的按钮状态
                     //m_nCurrentDaleyChannel = nChannel;
                     //m_timerDaleyOpen.singleShot( 3000,  this , SLOT(DaleyOpenControl()) );
@@ -2326,6 +2375,360 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
         }
     }
 }
+
+/********************************************************
+ *@Name:          PackageTestDataToSerial
+ *@Author:        HuaT
+ *@Description:   打包测试数据为字节数据,以便发送到仪器串口
+ *@Param1:        测试中的各项数据，在此为结构体打包
+ *@Return:        按指定协议封装好的字节数据
+ *@Version:       1.0
+ *@Date:          2016-7-28
+********************************************************/
+QByteArray TestWindow::PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nChannel)
+{
+    QByteArray byteDebugDataToSerial;
+    QByteArray byteContent;
+    byteDebugDataToSerial[0] = (0x5A);
+    byteDebugDataToSerial[1] = (0x1A);
+    byteDebugDataToSerial[2] = (0xA1);
+    byteDebugDataToSerial[3] = (0xA5);
+    //卡号
+    byteDebugDataToSerial[4] = (0x00);
+    byteDebugDataToSerial[5] = (0x00);
+    byteDebugDataToSerial[6] = (0x00);
+    byteDebugDataToSerial[7] = (0x00);
+    //命令-6在文档中定义为测试数据,以图形显示此数据
+    byteDebugDataToSerial[8] = (0x00);
+    byteDebugDataToSerial[9] = (0x00);
+    byteDebugDataToSerial[10] = (0x00);
+    byteDebugDataToSerial[11] = (0x06);
+    //填充内容
+    byteContent.append(DataObj.m_byteCanData);
+    //测试信息顺序为,面积1，面积2，比值1，面积1，面积2，比值2，结果，计算方案，扫描起始点，质控峰积分长度，放大参数，检测峰积分长度，质控峰高度,测试通道号
+    //面积1,长度3
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1%256);
+    //面积2
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2%256);
+    //比值1
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio%256);
+    //面积1
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1%256);
+    //面积2
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2%256);
+    //比值2
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio/65536);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio/256);
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio%256);
+    //结果,长度4
+    byteContent.append(ValueToHex(QString::number(DataObj.m_RawTestInfo.m_fTestResult),4,2));
+    //计算方案,长度1
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nComputeMothed);
+    //扫描起始点
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nScanStart);
+    //质控峰积分长度
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nQCIntegralBreadth);
+    //放大参数
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nAmpParam);
+    //检测峰积分长度
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nCheckIntegralBreadt);
+    //质控峰高度
+    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nQCMinHeightValue);
+    //测试通道号
+    byteContent.append(nChannel);
+    //长度
+    byteDebugDataToSerial[12] = (quint8)(byteContent.size()/65536*256);
+    byteDebugDataToSerial[13] = (quint8)(byteContent.size()/65536);
+    byteDebugDataToSerial[14] = (quint8)(byteContent.size()/256);
+    byteDebugDataToSerial[15] = (quint8)(byteContent.size()%256);
+
+    byteDebugDataToSerial.append(byteContent);
+    //校验数据
+    qint32 nCheckSum,nTempTotal,nTemp;
+    nTempTotal = 0;
+    nTemp = 0;
+    qint32 nCurrentLen = byteDebugDataToSerial.size();
+    for(int n=12; n<nCurrentLen; n++){
+        nTemp = (quint8)byteDebugDataToSerial.at(n);
+        nTempTotal += nTemp;
+    }
+    nCheckSum = ~nTempTotal + 1;
+    quint8 nCheck1 = (nCheckSum>>24);
+    quint8 nCheck2 = (nCheckSum>>16);
+    quint8 nCheck3 = (nCheckSum>>8);
+    quint8 nCheck4 = (nCheckSum%(256));
+    byteDebugDataToSerial.append(nCheck1);
+    byteDebugDataToSerial.append(nCheck2);
+    byteDebugDataToSerial.append(nCheck3);
+    byteDebugDataToSerial.append(nCheck4);
+
+    byteDebugDataToSerial.append(0xA5);
+    byteDebugDataToSerial.append(0xA1);
+    byteDebugDataToSerial.append(0x1A);
+    byteDebugDataToSerial.append(0x5A);
+
+    return byteDebugDataToSerial;
+}
+
+/********************************************************
+ *@Name:        ValueToHex
+ *@Author:      HuaT
+ *@Description: 将指定值转换为十六进制
+ *@Param1:      需要转换的字符串数值
+ *@Param2:      十六进制位数
+ *@Param3:      小数点位数
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-3-27
+********************************************************/
+QByteArray TestWindow::ValueToHex(QString strValue, quint8 nHexTotal, quint8 nDecimal)
+{
+    QByteArray byteResult;
+    qint32 nInteger,nDecimalPoint;
+    qint16  nFindDecimalPoint;
+    quint8  nBit1,nBit2,nBit3,nBit4,nBit5;
+    qint16  nSymbol;
+    double  fTemp1,fTemp2;
+    char cZero = 0x00;
+    switch(nHexTotal){
+    case 1:{
+        nInteger = strValue.toInt();
+        byteResult.append((quint8)nInteger);
+        break;
+    }
+    case 2:{
+        nFindDecimalPoint = strValue.indexOf(".");
+        switch(nDecimal){
+        //没有小数点位
+        case 0:
+            nBit1 = strValue.toInt()/256;
+            nBit2 = strValue.toInt()%256;
+            byteResult.append(nBit1);
+            byteResult.append(nBit2);
+            break;
+        //一个字节的小数点位
+        case 1:
+            if(-1 == nFindDecimalPoint){
+                nBit1 = strValue.toInt()/256;
+                nBit2 = strValue.toInt()%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+            }else{
+                nInteger = strValue.left(nFindDecimalPoint).toInt();
+                fTemp1 = (strValue.toDouble()*100);
+                nDecimalPoint = ((quint32)fTemp1)%100;
+                byteResult.append(nInteger);
+                byteResult.append(nDecimalPoint);
+            }
+            break;
+        }
+
+        break;
+    }
+    case 3:{//总个三个字节
+        nFindDecimalPoint = strValue.indexOf(".");
+        switch(nDecimal){
+        case 0://没有小数字节
+            nBit1 = strValue.toInt()/65536;
+            nBit2 = strValue.toInt()/256;
+            nBit3 = strValue.toInt()%256;
+            byteResult.append(nBit1);
+            byteResult.append(nBit2);
+            byteResult.append(nBit3);
+            break;
+        case 1://一个小数字节
+            if(-1 == nFindDecimalPoint){
+                nBit1 = strValue.toInt()/256;
+                nBit2 = strValue.toInt()%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(cZero);
+            }else{
+                nInteger = strValue.left(nFindDecimalPoint).toInt();
+                fTemp1 = (strValue.toDouble()*100);
+                nDecimalPoint = ((quint32)fTemp1)%100;
+                nBit1 = nInteger/256;
+                nBit2 = nInteger%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nDecimalPoint);
+            }
+            break;
+        case 2://二个小数字节
+            if(-1 == nFindDecimalPoint){
+                nBit1 = strValue.toInt();
+                byteResult.append(nBit1);
+                byteResult.append(cZero);
+                byteResult.append(cZero);
+            }else{
+                nInteger = strValue.left(nFindDecimalPoint).toInt();
+                //nDecimalPoint = strValue.mid(nFindDecimalPoint+1).toInt();
+                nBit1 = nInteger;
+                fTemp1 = (strValue.toDouble()*100);
+                fTemp2 = (strValue.toDouble()*10000);
+                nBit2 = ((quint32)fTemp1)%100;
+                nBit3 = ((quint32)fTemp2)%100;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+            }
+            break;
+        }
+        break;
+    }
+    case 4:{//总共4个字节
+        nFindDecimalPoint = strValue.indexOf(".");
+        switch(nDecimal){
+        case 0://没有小数点位
+            nBit2 = strValue.toInt()/65536*256;
+            nBit2 = strValue.toInt()/65536;
+            nBit3 = strValue.toInt()/256;
+            nBit4 = strValue.toInt()%256;
+            byteResult.append(nBit1);
+            byteResult.append(nBit2);
+            byteResult.append(nBit3);
+            byteResult.append(nBit4);
+            break;
+        case 1://一个小数点位
+            if(-1 == nFindDecimalPoint){
+                nBit1 = strValue.toInt()/65536;
+                nBit2 = strValue.toInt()/256;
+                nBit3 = strValue.toInt()%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(cZero);
+            }else{
+                nInteger = strValue.left(nFindDecimalPoint).toInt();
+                fTemp1 = (strValue.toDouble()*100);
+                nDecimalPoint = ((quint32)fTemp1)%100;
+                nBit1 = nInteger/65536;
+                nBit2 = nInteger/256;
+                nBit3 = nInteger%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(nDecimalPoint);
+            }
+            break;
+        case 2://2个小数点位
+            if(-1 == nFindDecimalPoint){
+                nBit1 = strValue.toInt()/256;
+                nBit2 = strValue.toInt()%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(cZero);
+                byteResult.append(cZero);
+            }else{
+                nInteger = strValue.left(nFindDecimalPoint).toInt();
+                //nDecimalPoint = strValue.mid(nFindDecimalPoint+1).toInt();
+                nBit1 = nInteger/256;
+                nBit2 = nInteger%256;
+                fTemp1 = (strValue.toDouble()*100);
+                fTemp2 = (strValue.toDouble()*10000);
+                nBit3 = ((quint32)fTemp1)%100;
+                nBit4 = ((quint32)fTemp2)%100;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(nBit4);
+            }
+            break;
+        }
+        break;
+    }
+    case 5:{//总共5个字节
+        nFindDecimalPoint = strValue.indexOf(".");
+        nSymbol = strValue.indexOf("-");
+        if(-1 == nSymbol){
+            byteResult.append("+");
+        }else{
+            byteResult.append("-");
+        }
+        switch(nDecimal){
+        case 0://没有小数点位
+            nBit1 = qAbs( strValue.toInt() )/65536*256*256;
+            nBit2 = qAbs( strValue.toInt() )/65536*256;
+            nBit3 = qAbs( strValue.toInt() )/256*256;
+            nBit4 = qAbs( strValue.toInt() )/256;
+            nBit5 = qAbs( strValue.toInt() )%256;
+            byteResult.append(nBit1);
+            byteResult.append(nBit2);
+            byteResult.append(nBit3);
+            byteResult.append(nBit4);
+            byteResult.append(nBit5);
+            break;
+        case 1://1个小数点位
+            if(-1 == nFindDecimalPoint){
+                nBit1 = qAbs( strValue.toInt() )/65536*256;
+                nBit2 = qAbs( strValue.toInt() )/256*256;
+                nBit3 = qAbs( strValue.toInt() )/256;
+                nBit4 = qAbs( strValue.toInt() )%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(nBit4);
+                byteResult.append(cZero);
+            }else{
+                nInteger = qAbs( strValue.left(nFindDecimalPoint).toInt() );
+                fTemp1 = (qAbs(strValue.toDouble())*100);
+                nDecimalPoint = ((quint32)fTemp1)%100;
+                nBit1 = nInteger/65536*256;
+                nBit2 = nInteger/65536;
+                nBit3 = nInteger/256;
+                nBit4 = nInteger%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(nBit4);
+                byteResult.append(nDecimalPoint);
+            }
+            break;
+        case 2://2个小数点位
+            if(-1 == nFindDecimalPoint){
+                nBit1 = qAbs( strValue.toInt() )/65536;
+                nBit2 = qAbs( strValue.toInt() )/256;
+                nBit3 = qAbs( strValue.toInt() )%256;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(cZero);
+                byteResult.append(cZero);
+            }else{
+                nInteger = qAbs(strValue.left(nFindDecimalPoint).toInt());
+                //nDecimalPoint = qAbs(strValue.mid(nFindDecimalPoint+1).toInt());
+                nBit1 = nInteger/65536;
+                nBit2 = nInteger/256;
+                nBit3 = nInteger%256;
+                fTemp1 = (qAbs(strValue.toDouble())*100);
+                fTemp2 = (qAbs(strValue.toDouble())*10000);
+                nBit4 = ((quint32)fTemp1)%100;
+                nBit5 = ((quint32)fTemp2)%100;
+                byteResult.append(nBit1);
+                byteResult.append(nBit2);
+                byteResult.append(nBit3);
+                byteResult.append(nBit4);
+                byteResult.append(nBit5);
+            }
+            break;
+        }
+        break;
+    }
+
+    }
+    return byteResult;
+}
+
 
 /********************************************************
  *@Name:          ProcessResult
@@ -2366,10 +2769,12 @@ void TestWindow::ProcessResult(quint8 nChannel)
 ********************************************************/
 void TestWindow::ClearResultDataInfo(ResultDataInfo &DataObj)
 {
+    DataObj.m_RawTestInfo.Clear();
     DataObj.m_byteCanData.clear();
     DataObj.m_nDataLen = 0;
+    DataObj.m_nCardFlag = 0;
     DataObj.m_nSyncID = 0;
-    DataObj.m_strIDCardBatchNo = "";
+    DataObj.m_strIDCardBarCode = "";
     DataObj.m_strIDMessage = "";
     DataObj.m_strResult = "";
     DataObj.m_strTestName = "";
@@ -2469,14 +2874,12 @@ void TestWindow::CalcReactionTime3(){
  *@Name:          CalcResult
  *@Author:        HuaT
  *@Description:   计算结果
- *@Param1:        同步字
- *@Param2:        测试数据
- *@Param3:        通道号
+ *@Param1:        结果信息结构体对象
  *@Return:        无
  *@Version:       1.0
  *@Date:          2016-7-14
 ********************************************************/
-unsigned char* TestWindow::CalcResult(ResultDataInfo DataObj)
+unsigned char* TestWindow::CalcResult(ResultDataInfo &DataObj)
 {
     QVector<int> vectorRawPoint;
     int nIndex;
@@ -2505,21 +2908,81 @@ unsigned char* TestWindow::CalcResult(ResultDataInfo DataObj)
     //判断计算方案
     int nCalcNum = cIDMessage[148];
     //qDebug()<<nCalcNum;
+    DataObj.m_RawTestInfo.m_nComputeMothed = nCalcNum;
     switch(nCalcNum){
     case 0:
-        m_ResultCalc.calculateResult(ScanData1,ScanData2,pRecord,cIDMessage);
+        m_ResultCalc.calculateResult(DataObj,ScanData1,ScanData2,pRecord,cIDMessage);
         break;
     case 1:
-        m_ResultCalc.calculateResult(ScanData2,ScanData1,pRecord,cIDMessage);
+        m_ResultCalc.calculateResult(DataObj,ScanData2,ScanData1,pRecord,cIDMessage);
         break;
     default:
-        m_ResultCalc.calculateResult(ScanData1,ScanData2,pRecord,cIDMessage);
+        m_ResultCalc.calculateResult(DataObj,ScanData1,ScanData2,pRecord,cIDMessage);
         break;
     }
     //m_ResultCalc.calculateResult(ScanData1,ScanData2,pRecord,cIDMessage);
     delete [] cIDMessage;
     return pRecord;
 
+}
+
+/********************************************************
+ *@Name:          CalcResult
+ *@Author:        HuaT
+ *@Description:   计算结果
+ *@Param1:        同步字
+ *@Param2:        测试数据
+ *@Param3:        通道号
+ *@Return:        无
+ *@Version:       1.0
+ *@Date:          2016-7-14
+********************************************************/
+QString TestWindow::CalcResult(ResultDataInfo &DataObj, bool bNewCard)
+{
+    bNewCard = false;
+    QVector<int> vectorRawPoint;
+    int nIndex;
+    for(int n=0; n<DataObj.m_nDataLen; n+=2){
+        nIndex = (quint8)DataObj.m_byteCanData.at(n) + (quint8)DataObj.m_byteCanData.at(n+1)*256;
+        vectorRawPoint.append(nIndex);
+        //qDebug() << vectorRawPoint;
+    }
+    if(vectorRawPoint.size() != 640){
+        qDebug()<<"Calc Result: Failed";
+        //return ;
+    }
+    unsigned int ScanData1[320];
+    unsigned int ScanData2[320];
+    for(int i=0,n=320; i<320; i++,n++){
+        ScanData1[i] = vectorRawPoint.at(i);
+        ScanData2[i] = vectorRawPoint.at(n);
+    }
+    //数据滤波
+    m_ResultCalc.low_passfilter(ScanData1);
+    m_ResultCalc.low_passfilter(ScanData2);
+    //用ID卡数据计算结果
+    unsigned char* pRecord = new unsigned char[50];
+    unsigned char *cIDMessage = m_ResultCalc.ConvetIDCardToChar(DataObj.m_strIDMessage);
+    memset(pRecord,0,50);
+    //判断计算方案
+    int nCalcNum = cIDMessage[23];
+    DataObj.m_RawTestInfo.m_nComputeMothed = nCalcNum;
+    //qDebug()<<nCalcNum;
+    QString strResult;
+    switch(nCalcNum){
+    case 0:
+        strResult = m_ResultCalc.calculateResult2(DataObj,ScanData1,ScanData2,pRecord,cIDMessage);
+        break;
+    case 1:
+        strResult = m_ResultCalc.calculateResult2(DataObj,ScanData2,ScanData1,pRecord,cIDMessage);
+        break;
+    default:
+        strResult = m_ResultCalc.calculateResult2(DataObj,ScanData1,ScanData2,pRecord,cIDMessage);
+        break;
+    }
+    //m_ResultCalc.calculateResult(ScanData1,ScanData2,pRecord,cIDMessage);
+    delete [] cIDMessage;
+    return strResult;
 }
 
 
@@ -2529,11 +2992,12 @@ unsigned char* TestWindow::CalcResult(ResultDataInfo DataObj)
  *@Description:   解析条码号，数据的第一和第二个字节，结合后转为二进制，然后从
  *                数据库中查出对应批号的ID卡信息，低位在前，高位在后
  *@Param1:        条码数据
+ *@Param2:        新旧卡标志
  *@Return:        无
  *@Version:       1.0
  *@Date:          2016-7-25
 ********************************************************/
-QString TestWindow::ParseBarCode(QByteArray can_data)
+QString TestWindow::ParseBarCode(QByteArray can_data, bool bIsNewCard)
 {
     quint16 n = (quint8)can_data.at(0) + (quint8)can_data.at(1)*256;
     QString str = QString::number(n,2);
@@ -2546,23 +3010,28 @@ QString TestWindow::ParseBarCode(QByteArray can_data)
         }
     }
     //qDebug()<<strResult<<strResult.size()<<str<<str.size();
-    return strResult;
+    if(bIsNewCard){
+        return str;
+    }else{
+        return strResult;
+    }
 }
+
 
 /********************************************************
  *@Name:          GetIDMessageInfo
  *@Author:        HuaT
  *@Description:   获得指定批号的ID卡信息
- *@Param1:        试剂批号-101000之类的
+ *@Param1:        试剂批号-101000之类的条码号
  *@Return:        试剂卡信息内容,如果查询失败或者无对应数据，则返回空
  *@Version:       1.0
  *@Date:          2016-7-26
 ********************************************************/
-QString TestWindow::GetIDMessageInfo(QString strBatchNo)
+QString TestWindow::GetIDMessageInfo(QString strBarCode)
 {
     QString strIDMessage;
     QString strCMD;
-    strCMD = QString("select data from idcard where batchno='%1';").arg(strBatchNo);
+    strCMD = QString("select data from idcard where barcode='%1';").arg(strBarCode);
     if(m_Query->exec(strCMD)){
         if(m_Query->next()){
             strIDMessage = m_Query->value(0).toString();
@@ -2585,31 +3054,76 @@ QString TestWindow::GetIDMessageInfo(QString strBatchNo)
 void TestWindow::ParseIDMessageInfo(unsigned char *pIDMessage, quint8& StartPoint, quint8& Amp,
                                     ResultDataInfo& DataObj)
 {
-    StartPoint = (quint8)pIDMessage[108];
-    Amp = (quint8)pIDMessage[146];
-    QString strTempName,strTempUnit;
-    for(int n=151,m=166; n<165; n++,m++){
-        //测试名称
-        strTempName += pIDMessage[n];
-        //测试单位
-        strTempUnit += pIDMessage[m];
-    }
-    if(strTempName.contains("-HCG"))
+    switch(DataObj.m_nCardFlag){
+    case 0://旧ID卡
     {
-        strTempName = "β-HCG";
+        StartPoint = (quint8)pIDMessage[108];
+        DataObj.m_RawTestInfo.m_nScanStart = StartPoint;
+        Amp = (quint8)pIDMessage[146];
+        DataObj.m_RawTestInfo.m_nAmpParam = Amp;
+        QString strTempName,strTempUnit;
+        for(int n=151,m=166; n<166; n++,m++){
+            //测试名称
+            strTempName += pIDMessage[n];
+            //测试单位
+            strTempUnit += pIDMessage[m];
+        }
+        if(strTempName.contains("-HCG"))
+        {
+            strTempName = "β-HCG";
+        }
+        DataObj.m_strTestName = strTempName.trimmed();
+        DataObj.m_strTestUnit = strTempUnit.trimmed();
+        //反应时间
+        QString strReactionTime=QString("%1%2").arg(pIDMessage[107]).arg(pIDMessage[106]);
+        //试剂有效期
+        QString year,month,day;
+        year = QString("20%1%2").arg(pIDMessage[89]).arg(pIDMessage[90]);
+        month = QString("%1%2").arg(pIDMessage[91]).arg(pIDMessage[92]);
+        day = QString("%1%2").arg(pIDMessage[93]).arg(pIDMessage[94]);
+        DataObj.m_strValidDate = QString("%1-%2-%3").arg(year).arg(month).arg(day);
+        //qDebug()<<pIDMessage[106] << pIDMessage[107]<<ss.toInt()*60;
+        DataObj.m_nReactionTime = strReactionTime.toInt() * 60;
+        break;
     }
-    DataObj.m_strTestName = strTempName.trimmed();
-    DataObj.m_strTestUnit = strTempUnit.trimmed();
-    //反应时间
-    QString strReactionTime=QString("%1%2").arg(pIDMessage[107]).arg(pIDMessage[106]);
-    //试剂有效期
-    QString year,month,day;
-    year = QString("20%1%2").arg(pIDMessage[89]).arg(pIDMessage[90]);
-    month = QString("%1%2").arg(pIDMessage[91]).arg(pIDMessage[92]);
-    day = QString("%1%2").arg(pIDMessage[93]).arg(pIDMessage[94]);
-    DataObj.m_strValidDate = QString("%1-%2-%3").arg(year).arg(month).arg(day);
-    //qDebug()<<pIDMessage[106] << pIDMessage[107]<<ss.toInt()*60;
-    DataObj.m_nReactionTime = strReactionTime.toInt() * 60;
+    case 1:
+    {
+        StartPoint = (quint8)pIDMessage[36];
+        DataObj.m_RawTestInfo.m_nScanStart = StartPoint;
+        Amp = (quint8)pIDMessage[22];
+        DataObj.m_RawTestInfo.m_nAmpParam = Amp;
+        QString strTempName,strTempUnit;
+        for(int n=46; n<66; n++){
+            //测试名称
+            strTempName += pIDMessage[n];
+        }
+        for(int m=66; m<76; m++){
+            //测试单位
+            strTempUnit += pIDMessage[m];
+        }
+        /*if(strTempName.contains("-HCG"))
+        {
+            strTempName = "β-HCG";
+        }*/
+        DataObj.m_strTestName = strTempName.trimmed();
+        DataObj.m_strTestUnit = strTempUnit.trimmed();
+        //反应时间
+        DataObj.m_nReactionTime = (quint8)pIDMessage[20]*256 + (quint8)pIDMessage[21];
+        //试剂有效期
+        QString year,month,day;
+        year = QString("20%1").arg(pIDMessage[32]);
+        month = QString("%1").arg(pIDMessage[33]);
+        day = QString("%1").arg(pIDMessage[34]);
+        DataObj.m_strValidDate = QString("%1-%2-%3").arg(year).arg(month).arg(day);
+        //qDebug()<<pIDMessage[106] << pIDMessage[107]<<ss.toInt()*60;
+        break;
+    }
+    default:
+        QMessageBox::information(this,"提示","卡标志数据不符合,测试可能存在问题",QMessageBox::Ok);
+        break;
+    }
+
+
 }
 
 
@@ -2931,3 +3445,203 @@ bool TestWindow::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj,event);
 }
 
+
+/********************************************************
+ *@Name:          MockTest
+ *@Author:        HuaT
+ *@Description:   模拟测试,通过串口发送数据，模拟测试
+ *@Param1:        测试原始数据
+ *@Param2:        事件内容
+ *@Return:        是否处理过此事件
+ *@Version:       1.0
+ *@Date:          2016-9-12
+********************************************************/
+void TestWindow::MockTest(QByteArray byteData)
+{
+    bool b = false;
+    QByteArray byteBarCode = byteData.mid(0,14);
+    QByteArray byteRawData = byteData.mid(14);
+    MockTestProcessBarCode(1,b,m_Candata1,byteBarCode);
+    m_Candata1.m_nDataLen = 1280;
+    m_Candata1.m_byteCanData = byteRawData;
+    MockTestParseTestData(11,byteRawData,1,m_Candata1);
+}
+
+void TestWindow::MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8 nChannel, ResultDataInfo &DataObj)
+{
+    if(DataObj.m_nDataLen == (quint32)DataObj.m_byteCanData.size()){
+        //计算结果
+        //unsigned int ScanData1[320];
+        //unsigned int ScanData2[320];
+        unsigned char* pRecord = NULL;
+        //memset(pRecord,0,40);
+        //新旧卡标志区分
+        if(0 == DataObj.m_nCardFlag){ //旧卡数据
+            pRecord = CalcResult(DataObj);
+            //for(int i=0; i<32; i++){
+            //    qDebug()<<i<<pRecord[i];
+            //}
+            //小数位数
+            quint8 nDecimal = QString::number((quint8)pRecord[10]).toInt();
+            QString strTempResult;
+            if(48 == nDecimal){
+                strTempResult = QString("%1").arg(pRecord[12]*256 + pRecord[13]);
+            }else{
+                strTempResult = QString("%1.%2").arg(pRecord[12]*256 + pRecord[13]).arg(pRecord[11]);
+            }
+            //最大值最小值标记
+            quint8 nFlag = QString::number((quint8)pRecord[9]).toInt();
+            //qDebug()<<"nFlag:"<<nFlag;
+            if(0 == nFlag){
+                DataObj.m_strResult = strTempResult;
+            }else if(1 == nFlag){
+                DataObj.m_strResult = QString("<%1").arg(strTempResult);
+            }else if(2 == nFlag){
+                DataObj.m_strResult = QString(">%1").arg(strTempResult);
+            }
+            DataObj.m_RawTestInfo.m_fTestResult = strTempResult.toDouble();
+        }else { //新卡数据
+            DataObj.m_strResult = CalcResult(DataObj,true);
+            //
+            DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
+        }
+
+
+        //删除结果数组
+        delete pRecord;
+        if(m_isQCResult){
+            //发送结果数据给质控界面
+            emit UpdateQCResultMsg(DataObj.m_strResult);
+            //设置通道状态为空闲
+            SetTestStatus(nChannel,false);
+            //清除结果结构体
+            ClearResultDataInfo(DataObj);
+        }else{
+            //结果数据已出，关闭取消测试
+            AutoTestButtonState(nChannel,false);
+            //显示结果数据
+            ShowTestResult(nChannel,DataObj.m_strResult,DataObj.m_strTestUnit);
+            //保存结果到数据库
+            SaveResultToDB(DataObj);
+            //如果为自动打印,则打印数据
+            if(m_isAutoPrint){
+                AutoPrint(nChannel);
+            }
+            //如果打开LIS连接,则测试完成后自动上传
+            int nMode = m_SetParam->value(LISMODE,0).toInt();
+            if(2 == nMode){
+                QDateTime curTime = QDateTime::currentDateTime();
+                QString strCurTime = curTime.toString("yyyyMMddhhmmss");
+                m_SimpleHL7.WriteHL7Msg(m_SerialHL7,QString::number(DataObj.m_nNumberID),
+                                        DataObj.m_strName,DataObj.m_strAge,DataObj.m_strSex,
+                                        DataObj.m_strTestName,DataObj.m_strResult,
+                                        DataObj.m_strTestUnit,strCurTime,"ORU^R01");
+            }
+            //如果打开了PC连接模式,则测试完成后发送结果到仪器串口
+            nMode = m_SetParam->value(RFWRITEMODE,0).toInt();
+            if(3 == nMode){
+                QByteArray  byteDebugDataToSerial = PackageTestDataToSerial(DataObj,nChannel);
+                m_SerialHL7->write(byteDebugDataToSerial);
+            }
+
+            //恢复至新建时的按钮状态
+            //m_nCurrentDaleyChannel = nChannel;
+            //m_timerDaleyOpen.singleShot( 3000,  this , SLOT(DaleyOpenControl()) );
+            ProcessResult(nChannel);
+            //设置通道状态为空闲
+            SetTestStatus(nChannel,false);
+            //清除结果结构体
+            ClearResultDataInfo(DataObj);
+            //不管是不是自动测试,都关闭模式状态
+            ChangeAutoModeStates(nChannel,false);
+        }
+    }
+}
+
+
+bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, ResultDataInfo &data, QByteArray can_data)
+{
+    //获得条码编号,先用新条码规则,新的条码格式为10100000000101
+    data.m_strIDCardBarCode = ParseBarCode(can_data,true);
+    //查询此批号的ID卡数据
+    data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
+    if(data.m_strIDMessage.isEmpty()){//如果是空,则调用旧条码规则,旧的条码格式为010001000000000010001
+        data.m_strIDCardBarCode = ParseBarCode(can_data,false);
+        //data.m_strIDCardBarCode = "10101000000101";//测试原始数据专用
+        data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
+    }
+    QString strTitle,strContent,strLog;
+    strTitle = QObject::tr("Note");
+    if(data.m_strIDMessage.isEmpty()){
+        //没找到批号,回复仪器
+        QByteArray byteRespond;
+        byteRespond[0] = QT_BARCODE_INVALID;
+        PackageCanMsg(QT_SYSOPT_ACK,QT_TESTOPT_BARCODE,nChannel,byteRespond);
+        //提示用户导入ID卡数据
+        strContent = QObject::tr("There is no corresponding ID information, please import the relevant ID card");
+        QMessageBox::information(this,strTitle,strContent,QMessageBox::Ok);
+        //数据记录
+        strLog = QString("无对应ID信息:%1,请导入对应ID卡信息").arg(data.m_strIDCardBarCode);
+        InsertLogMsg(QT_LOGOPT_ERROR, data.m_nNumberID, strLog);
+        //测试状态取消
+        bTestStatus = false;
+        //自动测试模式关闭
+        ChangeAutoModeStates(nChannel,false);
+        //恢复按钮状态
+        //恢复至新建时的按钮状态
+        InitChannelState(nChannel,false);
+        //得到结果，更新打印按钮
+        UPdatePrintState(nChannel);
+        //更新测试按钮文本
+        UpdateTestText(nChannel);
+        //由于不能获取质控状态，不管是不是质控测试，出现异常恢复质控按钮状态
+        emit UpdateQCControlStatus();
+        return false;
+    }
+    //转换批号为无符号型指针
+    unsigned char *cIDMessage = m_ResultCalc.ConvetIDCardToChar(data.m_strIDMessage);
+    //新旧卡标志
+    if(data.m_strIDMessage.size() > 400){
+        //data.m_nCardFlag = (quint8)pIDMessage[39];
+        data.m_nCardFlag = 1;
+    }else{
+        data.m_nCardFlag = 0;
+    }
+    //解析ID卡数据
+    quint8 nStartPoint,nAmp;
+    ParseIDMessageInfo(cIDMessage,nStartPoint,nAmp,data);
+    //检测有效日期
+    bool bRet = CheckValidDate(data.m_strValidDate);
+    if(!bRet){
+        //试剂过期,回复仪器
+        QByteArray byteRespond;
+        //当条码无效时仪器不管1-2字节的内容
+        byteRespond[0] = QT_BARCODE_INVALID;
+        PackageCanMsg(QT_SYSOPT_ACK,QT_TESTOPT_BARCODE,nChannel,byteRespond);
+        //提示用户试剂卡已过期
+        strContent = QObject::tr("Reagent Strip has expired");
+        QMessageBox::information(this,strTitle,strContent,QMessageBox::Ok);
+        //测试状态取消
+        bTestStatus = false;
+        //自动测试模式关闭
+        ChangeAutoModeStates(nChannel,false);
+        //恢复至新建时的按钮状态
+        InitChannelState(nChannel,false);
+        //得到结果，更新打印按钮
+        UPdatePrintState(nChannel);
+        //更新测试按钮文本
+        UpdateTestText(nChannel);
+        //由于不能获取质控状态，不管是不是质控测试，出现异常恢复质控按钮状态
+        emit UpdateQCControlStatus();
+        return false;
+    }
+    //显示测试项目
+    ShowTestItem(nChannel,data.m_strTestName);
+    //找到批号,响应仪器
+    QByteArray byteRespond;
+    byteRespond[0] = QT_BARCODE_VALID;
+    byteRespond[1] = nStartPoint;
+    byteRespond[2] = nAmp;
+    PackageCanMsg(QT_SYSOPT_ACK,QT_TESTOPT_BARCODE,nChannel,byteRespond);
+    return true;
+}
