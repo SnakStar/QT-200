@@ -2407,43 +2407,47 @@ QByteArray TestWindow::PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nC
     byteContent.append(DataObj.m_byteCanData);
     //测试信息顺序为,面积1，面积2，比值1，面积1，面积2，比值2，结果，计算方案，扫描起始点，质控峰积分长度，放大参数，检测峰积分长度，质控峰高度,测试通道号
     //面积1,长度3
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area1%256);
+    qDebug()<<(quint8)DataObj.m_RawTestInfo.m_nTest1Area1/65536;
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1%256) );
+    //qDebug()<<(quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/65536);
+    //qDebug()<<(quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/256);
+    //qDebug()<<(quint8)(DataObj.m_RawTestInfo.m_nTest1Area1%256);
     //面积2
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Area2%256);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area2/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area2/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area2%256) );
     //比值1
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest1Ratio%256);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Ratio/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Ratio/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Ratio%256) );
     //面积1
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area1%256);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area1/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area1/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area1%256) );
     //面积2
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Area2%256);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area2/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area2/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Area2%256) );
     //比值2
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio/65536);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio/256);
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nTest2Ratio%256);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Ratio/65536) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Ratio/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest2Ratio%256) );
     //结果,长度4
     byteContent.append(ValueToHex(QString::number(DataObj.m_RawTestInfo.m_fTestResult),4,2));
     //计算方案,长度1
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nComputeMothed);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nComputeMothed) );
     //扫描起始点
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nScanStart);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nScanStart) );
     //质控峰积分长度
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nQCIntegralBreadth);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nQCIntegralBreadth) );
     //放大参数
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nAmpParam);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nAmpParam) );
     //检测峰积分长度
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nCheckIntegralBreadt);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nCheckIntegralBreadt) );
     //质控峰高度
-    byteContent.append((quint8)DataObj.m_RawTestInfo.m_nQCMinHeightValue);
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nQCMinHeightValue) );
     //测试通道号
     byteContent.append(nChannel);
     //长度
@@ -3112,8 +3116,8 @@ void TestWindow::ParseIDMessageInfo(unsigned char *pIDMessage, quint8& StartPoin
         //试剂有效期
         QString year,month,day;
         year = QString("20%1").arg(pIDMessage[32]);
-        month = QString("%1").arg(pIDMessage[33]);
-        day = QString("%1").arg(pIDMessage[34]);
+        month = QString("%1").arg(pIDMessage[33],2,10,QLatin1Char('0'));
+        day = QString("%1").arg(pIDMessage[34],2,10,QLatin1Char('0'));
         DataObj.m_strValidDate = QString("%1-%2-%3").arg(year).arg(month).arg(day);
         //qDebug()<<pIDMessage[106] << pIDMessage[107]<<ss.toInt()*60;
         break;
@@ -3509,6 +3513,7 @@ void TestWindow::MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8
 
         //删除结果数组
         delete pRecord;
+        m_isQCResult = false;
         if(m_isQCResult){
             //发送结果数据给质控界面
             emit UpdateQCResultMsg(DataObj.m_strResult);
@@ -3563,6 +3568,7 @@ bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, Resu
 {
     //获得条码编号,先用新条码规则,新的条码格式为10100000000101
     data.m_strIDCardBarCode = ParseBarCode(can_data,true);
+    data.m_strIDCardBarCode = "10101111000101";
     //查询此批号的ID卡数据
     data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
     if(data.m_strIDMessage.isEmpty()){//如果是空,则调用旧条码规则,旧的条码格式为010001000000000010001

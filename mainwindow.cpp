@@ -718,7 +718,7 @@ void MainWindow::RecvPrintSerialData()
         QMessageBox::warning(this,strTitle,strContent,QMessageBox::Ok);
     }
     //原始数据测试使用
-    //emit MockTest(m_SerialPrint.readAll());
+    //emit MockTest(PrintData);
 }
 
 /********************************************************

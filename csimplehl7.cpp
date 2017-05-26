@@ -35,7 +35,7 @@ void CSimpleHL7::WriteHL7Msg(QextSerialPort *SerialHL7,
     QString strCurrentTime;
     currentTime = QDateTime::currentDateTime();
     strCurrentTime = currentTime.toString("yyyyMMddhhmmss");
-    strMSH = QString("MSH|^~\&|IMPORVE|QT200|%1|||%2||P|2.3.1|||ASCII||").arg(strEventType).arg(strCurrentTime);
+    strMSH = QString("MSH|^~\&|IMPORVE|QT-200|%1|||%2||P|2.3.1|||ASCII||").arg(strCurrentTime).arg(strEventType);
     byteResult.append(strMSH);
     //MSH结果
     byteResult.append(0x0D);
