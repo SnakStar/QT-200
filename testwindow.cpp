@@ -2405,9 +2405,14 @@ QByteArray TestWindow::PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nC
     byteDebugDataToSerial[11] = (0x06);
     //填充内容
     byteContent.append(DataObj.m_byteCanData);
-    //测试信息顺序为,面积1，面积2，比值1，面积1，面积2，比值2，结果，计算方案，扫描起始点，质控峰积分长度，放大参数，检测峰积分长度，质控峰高度,测试通道号
+
+    //测试信息顺序为:
+    //面积1，面积2，比值1，面积1，面积2，比值2，结果，计算方案，
+    //扫描起始点，质控峰积分长度，放大参数，检测峰积分长度，质控峰高度,
+    //测试通道号,波峰位置1,波谷左1,波谷右1,波峰位置2,波谷左2,波谷右2
+
     //面积1,长度3
-    qDebug()<<(quint8)DataObj.m_RawTestInfo.m_nTest1Area1/65536;
+    //qDebug()<<(quint8)DataObj.m_RawTestInfo.m_nTest1Area1/65536;
     byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/65536) );
     byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1/256) );
     byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTest1Area1%256) );
@@ -2450,6 +2455,24 @@ QByteArray TestWindow::PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nC
     byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nQCMinHeightValue) );
     //测试通道号
     byteContent.append(nChannel);
+    //波峰位置1
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nCrestPos1/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nCrestPos1%256) );
+    //波谷左1
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosLeft1/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosLeft1%256) );
+    //波谷右1
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosRight1/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosRight1%256) );
+    //波峰位置2
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nCrestPos2/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nCrestPos2%256) );
+    //波谷左2
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosLeft2/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosLeft2%256) );
+    //波谷右2
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosRight2/256) );
+    byteContent.append((quint8)(DataObj.m_RawTestInfo.m_nTroughPosRight2%256) );
     //长度
     byteDebugDataToSerial[12] = (quint8)(byteContent.size()/65536*256);
     byteDebugDataToSerial[13] = (quint8)(byteContent.size()/65536);
@@ -3097,10 +3120,13 @@ void TestWindow::ParseIDMessageInfo(unsigned char *pIDMessage, quint8& StartPoin
         Amp = (quint8)pIDMessage[22];
         DataObj.m_RawTestInfo.m_nAmpParam = Amp;
         QString strTempName,strTempUnit;
+        QByteArray baTempName;
+        baTempName.clear();
         for(int n=46; n<66; n++){
             //测试名称
-            strTempName += pIDMessage[n];
+            baTempName.append((quint8)pIDMessage[n]);
         }
+        strTempName = QTextCodec::codecForName("GBK")->toUnicode(baTempName);
         for(int m=66; m<76; m++){
             //测试单位
             strTempUnit += pIDMessage[m];

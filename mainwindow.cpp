@@ -843,7 +843,8 @@ void MainWindow::RecvRfSerialData()
         //批号,卡号(5-4)
         QString strBatchNumber,strCardNumber;
         if(m_RfidData.size() > 210){
-            strItemName = m_RfidData.mid(62,20).trimmed();
+            //qDebug()<<QTextCodec->toUnicode(m_RfidData.mid(62,20).trimmed());
+            strItemName = QTextCodec::codecForName("GBK")->toUnicode(m_RfidData.mid(62,20).trimmed());
             strValidData = QString("20%1-%2-%3").arg((quint8)m_RfidData.at(48)).arg(m_RfidData.at(49),2,10,QLatin1Char('0')).arg(m_RfidData.at(50),2,10,QLatin1Char('0'));
             //批号
             strBatchNumber = QString("20%1").arg(QString(m_RfidData.mid(26,4)));;
@@ -852,7 +853,7 @@ void MainWindow::RecvRfSerialData()
                                             .arg(CardInfo.m_IDCardBarCode.mid(8,5).toInt(0,2)+1);
         }else{
             //项目名称
-            strItemName = m_RfidData.mid(167,15).trimmed();
+            strItemName = QTextCodec::codecForName("GBK")->toUnicode(m_RfidData.mid(167,15).trimmed());
             //有效期
             strValidData = QString("20%1%2-%3%4-%5%6").arg((quint8)m_RfidData.at(105)).arg((quint8)m_RfidData.at(106)).arg((quint8)m_RfidData.at(107))
                     .arg((quint8)m_RfidData.at(108)).arg((quint8)m_RfidData.at(109)).arg((quint8)m_RfidData.at(110));

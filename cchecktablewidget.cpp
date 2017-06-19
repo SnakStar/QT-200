@@ -39,6 +39,14 @@ CCheckTableWidgetModel::CCheckTableWidgetModel(QTableWidget *tableWidget,
              <<QObject::tr("Check Result") <<QObject::tr("Check Time");
     m_tableWidget->setHorizontalHeaderLabels(headerList);
 
+    m_tableWidget->setColumnWidth(0,150);
+    m_tableWidget->setColumnWidth(1,80);
+    m_tableWidget->setColumnWidth(2,50);
+    m_tableWidget->setColumnWidth(3,50);
+    m_tableWidget->setColumnWidth(4,150);
+    m_tableWidget->setColumnWidth(5,130);
+
+
     m_tableWidget->setSelectionBehavior(QTableWidget::SelectRows);
     m_tableWidget->setEditTriggers(QTableWidget::NoEditTriggers);
 

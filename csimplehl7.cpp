@@ -46,7 +46,7 @@ void CSimpleHL7::WriteHL7Msg(QextSerialPort *SerialHL7,
     byteResult.append(0x0D);
     //OBX
     strOBX = QString("OBX|1|||%1|%2|%3|%4||||F|").arg(strItem).arg(strResult).arg(strUnit).arg(strCheckTime);
-    byteResult.append(strOBX);
+    byteResult.append(m_Settings.Utf8ToGbk(strOBX));
     //OBX结束
     byteResult.append(0x1C);
     byteResult.append(0x0D);

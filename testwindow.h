@@ -67,6 +67,18 @@ struct RawTestInfo{
     quint8 m_nQCMinHeightValue;
     //测试通道号
     quint8 m_nChannel;
+    //波峰位置1
+    quint16 m_nCrestPos1;
+    //波谷位置左1
+    quint16 m_nTroughPosLeft1;
+    //波谷位置右1
+    quint16 m_nTroughPosRight1;
+    //波峰位置2
+    quint16 m_nCrestPos2;
+    //波谷位置左2
+    quint16 m_nTroughPosLeft2;
+    //波谷位置右2
+    quint16 m_nTroughPosRight2;
     //
     RawTestInfo(){
         Clear();
@@ -99,8 +111,20 @@ struct RawTestInfo{
         m_nAmpParam = 0;
         //质控峰高度
         m_nQCMinHeightValue = 0;
-        //
+        //测试通道号
         m_nChannel = 0;
+        //波峰位置1
+        m_nCrestPos1 = 0;
+        //波谷位置左1
+        m_nTroughPosLeft1 = 0;
+        //波谷位置右1
+        m_nTroughPosRight1 = 0;
+        //波峰位置2
+        m_nCrestPos2 = 0;
+        //波谷位置左2
+        m_nTroughPosLeft2 = 0;
+        //波谷位置右2
+        m_nTroughPosRight2 = 0;
     }
 };
 

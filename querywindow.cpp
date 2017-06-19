@@ -383,11 +383,20 @@ void QueryWindow::on_btnPostback_clicked()
                 QString strCheckTime;
                 QDateTime dtCheckTime = QDateTime::fromString(vecPatientInfo.at(i).m_strTestDate,"yyyy-MM-dd hh:mm:ss");
                 strCheckTime = dtCheckTime.toString("yyyyMMddhhmmss");
-                m_SimpleHL7.WriteHL7Msg(m_SerialHL7,QString::number(vecPatientInfo.at(i).m_nNumble),
-                                        vecPatientInfo.at(i).m_strName,
-                                        QString::number(vecPatientInfo.at(i).m_nAge),
-                                        strSex,vecPatientInfo.at(i).m_strItems,
-                                        listResult.at(0),listResult.at(1),strCheckTime,"ORU^R01");
+                if(listResult.size() == 0){
+                    m_SimpleHL7.WriteHL7Msg(m_SerialHL7,QString::number(vecPatientInfo.at(i).m_nNumble),
+                                            vecPatientInfo.at(i).m_strName,
+                                            QString::number(vecPatientInfo.at(i).m_nAge),
+                                            strSex,vecPatientInfo.at(i).m_strItems,
+                                            "","",strCheckTime,"ORU^R01");
+                }else {
+                    m_SimpleHL7.WriteHL7Msg(m_SerialHL7,QString::number(vecPatientInfo.at(i).m_nNumble),
+                                            vecPatientInfo.at(i).m_strName,
+                                            QString::number(vecPatientInfo.at(i).m_nAge),
+                                            strSex,vecPatientInfo.at(i).m_strItems,
+                                            listResult.at(0),listResult.at(1),strCheckTime,"ORU^R01");
+                }
+
             }
         }
     }

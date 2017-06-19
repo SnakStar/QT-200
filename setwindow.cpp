@@ -252,11 +252,11 @@ void SetWindow::InitRFCardInfoControl()
     ui->twRFCardInfo->setColumnCount(strlistRFCardInfo.size());
 
     //ui->twRFCardInfo->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
-    ui->twRFCardInfo->setColumnWidth(0,70);
+    ui->twRFCardInfo->setColumnWidth(0,100);
     ui->twRFCardInfo->setColumnWidth(1,90);
-    ui->twRFCardInfo->setColumnWidth(2,90);
+    ui->twRFCardInfo->setColumnWidth(2,70);
     ui->twRFCardInfo->setColumnWidth(3,90);
-    ui->twRFCardInfo->setColumnWidth(4,160);
+    ui->twRFCardInfo->setColumnWidth(4,150);
     ui->twRFCardInfo->horizontalHeader()->setStretchLastSection(true);
     //ui->twRFCardInfo->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 

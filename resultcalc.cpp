@@ -215,6 +215,13 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         {
             MaxPosition[0] = (p[0]+p[1])/2;
             MaxPosition[1] = (p[2]+p[3])/2;
+            //记录波峰波谷位置，to PC Draw;
+            datainfo.m_RawTestInfo.m_nCrestPos1 = MaxPosition[0];
+            datainfo.m_RawTestInfo.m_nTroughPosLeft1 = MaxPosition[0]-CSignallength/2;
+            datainfo.m_RawTestInfo.m_nTroughPosRight1 = MaxPosition[0]+CSignallength/2;
+            datainfo.m_RawTestInfo.m_nCrestPos2 = MaxPosition[1];
+            datainfo.m_RawTestInfo.m_nTroughPosLeft2 = MaxPosition[1]-CSignallength/2;
+            datainfo.m_RawTestInfo.m_nTroughPosRight2 = MaxPosition[1]+CSignallength/2;
 
             //计算第一次的扫描数据的 面积积分
             area1 =0; //面积一
@@ -744,6 +751,13 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         {
             MaxPosition[0] = (p[0]+p[1])/2;
             MaxPosition[1] = (p[2]+p[3])/2;
+            //记录波峰波谷位置，to PC Draw;
+            datainfo.m_RawTestInfo.m_nCrestPos1 = MaxPosition[0];
+            datainfo.m_RawTestInfo.m_nTroughPosLeft1 = MaxPosition[0]-CSignallength/2;
+            datainfo.m_RawTestInfo.m_nTroughPosRight1 = MaxPosition[0]+CSignallength/2;
+            datainfo.m_RawTestInfo.m_nCrestPos2 = MaxPosition[1];
+            datainfo.m_RawTestInfo.m_nTroughPosLeft2 = MaxPosition[1]-CSignallength/2;
+            datainfo.m_RawTestInfo.m_nTroughPosRight2 = MaxPosition[1]+CSignallength/2;
 
             //计算第一次的扫描数据的 面积积分
             area1 =0; //面积一

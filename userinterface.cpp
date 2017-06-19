@@ -107,7 +107,7 @@ void UserInterface::RecvRFSerialPortData()
 
         if(m_baRFSerialData.size()<257){
             //167到167+15为项目名称
-            strTestName = m_baRFSerialData.mid(167,15).trimmed();
+            strTestName = QTextCodec::codecForName("GBK")->toUnicode(m_baRFSerialData.mid(167,15).trimmed());
             //16到16+14为条码号
             if(nIDCardLen <= 1){
                 strIDCardBarCode = "";
@@ -119,7 +119,7 @@ void UserInterface::RecvRFSerialPortData()
             //批号
             strBtachNumber = "";
         }else{
-            strTestName = m_baRFSerialData.mid(62,20).trimmed();
+            strTestName = QTextCodec::codecForName("GBK")->toUnicode(m_baRFSerialData.mid(62,20).trimmed());
             strIDCardBarCode = m_baRFSerialData.mid(16,20).trimmed();
             //批号
             strBtachNumber = QString("20%1").arg(QString(m_baRFSerialData.mid(26,4)));
