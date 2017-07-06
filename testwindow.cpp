@@ -2317,6 +2317,9 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                     //
                     DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
                 }
+                if(DataObj.m_strResult.isEmpty()){
+                    DataObj.m_strResult = "0";
+                }
 
                 //结果计算完成,本次测试正常结束
                 strTestMsg = QString("[通道%1] 结果计算完成,本次测试正常结束,结果值:%2").arg(nChannel).arg(DataObj.m_strResult);
@@ -3494,6 +3497,7 @@ void TestWindow::MockTest(QByteArray byteData)
     MockTestProcessBarCode(1,b,m_Candata1,byteBarCode);
     m_Candata1.m_nDataLen = 1280;
     m_Candata1.m_byteCanData = byteRawData;
+    qDebug()<<byteRawData.size();
     MockTestParseTestData(11,byteRawData,1,m_Candata1);
 }
 
@@ -3535,7 +3539,9 @@ void TestWindow::MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8
             //
             DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
         }
-
+        if(DataObj.m_strResult.isEmpty()){
+            DataObj.m_strResult = "0";
+        }
 
         //删除结果数组
         delete pRecord;
@@ -3594,7 +3600,7 @@ bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, Resu
 {
     //获得条码编号,先用新条码规则,新的条码格式为10100000000101
     data.m_strIDCardBarCode = ParseBarCode(can_data,true);
-    data.m_strIDCardBarCode = "10101111000101";
+    data.m_strIDCardBarCode = "10100110000111";
     //查询此批号的ID卡数据
     data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
     if(data.m_strIDMessage.isEmpty()){//如果是空,则调用旧条码规则,旧的条码格式为010001000000000010001

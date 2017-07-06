@@ -134,8 +134,11 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
             }
         }
 
+        quint32 nMaxValue = scanData1[MaxPosition[0]];
+        quint32 nRightValue1 = scanData1[MaxPosition[0]]+1;
+        quint32 nRightValue2 = scanData1[MaxPosition[0]]+2;
         //  如果 最大值在 边上 且 不是峰 ，则缩减范围 寻找峰值
-        if( (p[0]==0|| p[1]==0|| p[2]==0|| p[3]==0) && (MaxPosition[0]>140 || MaxPosition[1]<180))
+        if( ((nMaxValue < nRightValue1)&&(nRightValue1<nRightValue2)) && (MaxPosition[0]>140 || MaxPosition[1]<180))
         {
             for (i=0;i<4;i++)
             {
@@ -669,8 +672,11 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             }
         }
 
+        quint32 nMaxValue = scanData1[MaxPosition[0]];
+        quint32 nRightValue1 = scanData1[MaxPosition[0]]+1;
+        quint32 nRightValue2 = scanData1[MaxPosition[0]]+2;
         //  如果 最大值在 边上 且 不是峰 ，则缩减范围 寻找峰值
-        if( (p[0]==0|| p[1]==0|| p[2]==0|| p[3]==0) && (MaxPosition[0]>140 || MaxPosition[1]<180))
+        if( ((nMaxValue < nRightValue1)&&(nRightValue1<nRightValue2)) && (MaxPosition[0]>140 || MaxPosition[1]<180))
         {
             for (i=0;i<4;i++)
             {

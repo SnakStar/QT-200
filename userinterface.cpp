@@ -233,7 +233,21 @@ void UserInterface::RecvRFSerialPortData()
                 ui->lbRFWriteModeState->setStyleSheet("color:blue;");
                 ui->lbRFWriteModeState->setText("校验中");
             }else if(3 == nIDCardCMD){
-                //滴新卡发来的数据,可不理会
+                //滴新卡发来的数据,判断是否为母卡,如果是则禁止写入
+                if((quint8)m_baRFSerialData.at(56) == 1 && m_baRFSerialData.size()>257){
+                    if(ui->teRFOptLog->toPlainText().length()>2000){
+                        ui->teRFOptLog->clear();
+                        ui->teRFOptLog->append("数据过多,清除当前缓存记录!");
+                    }
+                    QDateTime dt = QDateTime::currentDateTime();
+                    QString strLog = QString("%1    提示:此卡为母卡,不能覆盖此卡数据").arg(dt.toString("yyyy-MM-dd hh:mm:ss"));
+                    ui->teRFOptLog->append(strLog);
+                    //状态失败
+                    ui->lbRFWriteModeState->setStyleSheet("color:red;");
+                    ui->lbRFWriteModeState->setText("烧录失败");
+                    m_baRFSerialData.clear();
+                    return;
+                }
                 //清空上次状态
                 ui->lbRFWriteModeState->setText("");
                 //然后烧录数据给新卡
@@ -253,6 +267,22 @@ void UserInterface::RecvRFSerialPortData()
                     ui->lbRFWriteModeState->setText("烧录失败");
                     m_baRFSerialData.clear();
                     return;
+                }
+                if(m_baWaitCopySerialData.size() > 257){
+                    quint32 nTempTotal = 0;
+                    m_baWaitCopySerialData[56] = 2;
+                    quint32 nCount = m_baWaitCopySerialData.size();
+                    quint32 nCheckCode = 0;
+                    for(int n = 12; n<nCount-8; n++){
+                        nTempTotal += (quint8)m_baWaitCopySerialData.at(n);
+                    }
+                    nCheckCode = ~nTempTotal+1;
+                    qDebug()<<m_baWaitCopySerialData.toHex().toUpper();
+                    m_baWaitCopySerialData[nCount-8] = (quint8)(nCheckCode>>24);
+                    m_baWaitCopySerialData[nCount-7] = (quint8)(nCheckCode>>16);
+                    m_baWaitCopySerialData[nCount-6] = (quint8)(nCheckCode>>8);
+                    m_baWaitCopySerialData[nCount-5] = (quint8)(nCheckCode%256);
+                    qDebug()<<m_baWaitCopySerialData.toHex().toUpper();
                 }
                 m_baWaitCopySerialData[11] = 2;
                 m_RFSerialPort->write(m_baWaitCopySerialData);
@@ -429,6 +459,7 @@ void UserInterface::InitRFUIControl()
     ui->leRFCardNumber->setEnabled(false);
     ui->leRFBatchNumber->setEnabled(false);
     ui->teRFOptLog->setEnabled(false);
+    ui->teRFOptLog->setTextColor(QColor(Qt::black));
     ui->leRFWriteTotal->setEnabled(false);
 }
 
@@ -723,6 +754,8 @@ void UserInterface::on_btnRFClearWriteTotal_clicked()
 {
     m_nTotal = 0;
     ui->leRFWriteTotal->setText(QString::number(m_nTotal));
+
+    ui->teRFOptLog->append("testteatassdfa");
 }
 
 
