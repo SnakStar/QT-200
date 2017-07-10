@@ -424,6 +424,17 @@ void UserInterface::InitRadioControl()
     }else{
         ui->rbRFCloseMode->setChecked(true);
     }
+    //更新日志记录控件
+    if(m_SetParam->contains(LOGRECORDMODE)){
+        int nLogRecordMode = m_SetParam->value(LOGRECORDMODE).toInt();
+        if(1 == nLogRecordMode){
+            ui->rbLogRecordOpen->setChecked(true);
+        }else if(0 == nLogRecordMode){
+            ui->rbLogRecordClose->setChecked(true);
+        }else{
+            ui->rbLogRecordClose->setChecked(true);
+        }
+    }
 
 }
 
@@ -754,8 +765,6 @@ void UserInterface::on_btnRFClearWriteTotal_clicked()
 {
     m_nTotal = 0;
     ui->leRFWriteTotal->setText(QString::number(m_nTotal));
-
-    ui->teRFOptLog->append("testteatassdfa");
 }
 
 
@@ -778,4 +787,68 @@ void UserInterface::on_btnLogQuery_clicked()
     QString strLog = ts.readAll();
     ui->teLogShow->setText(strLog);
     ui->teLogShow->moveCursor(QTextCursor::End);
+}
+
+/********************************************************
+ *@Name:        on_rbLogRecordOpen_clicked
+ *@Author:      HuaT
+ *@Description: 开启日志记录功能
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-07-7
+********************************************************/
+void UserInterface::on_rbLogRecordOpen_clicked()
+{
+    qInstallMsgHandler(myMessageOutput);
+    m_settings->SetParam(LOGRECORDMODE,"1");
+    m_settings->WriteSettingsInfoToMap();
+}
+
+/********************************************************
+ *@Name:        on_rbLogRecordClose_clicked
+ *@Author:      HuaT
+ *@Description: 关闭日志记录功能
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-07-7
+********************************************************/
+void UserInterface::on_rbLogRecordClose_clicked()
+{
+    qInstallMsgHandler(0);
+    m_settings->SetParam(LOGRECORDMODE,"0");
+    m_settings->WriteSettingsInfoToMap();
+}
+
+/********************************************************
+ *@Name:        on_btnLogDelete_clicked
+ *@Author:      HuaT
+ *@Description: 删除日志文件
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-05-9
+********************************************************/
+void UserInterface::on_btnLogDelete_clicked()
+{
+    QString strTitle,strContent;
+    QByteArray byteError;
+    QString strError;
+    QString strFilePath = "/home/root/qt200/log.txt";
+    QString strCMD = QString("rm %1").arg(strFilePath);
+    QProcess pc;
+    strContent = "是否删除日志文件?";
+    if(QMessageBox::Yes == QMessageBox::information(this,strTitle,strContent,QMessageBox::Yes|QMessageBox::No)){
+        pc.start(strCMD);
+        pc.waitForFinished(-1);
+        byteError = pc.readAllStandardError();
+        strError = byteError.data();
+        strTitle = "提示";
+        if(strError.size() == 0){
+            QMessageBox::information(this,strTitle,"日志文件删除成功",QMessageBox::Ok);
+        }else{
+            QMessageBox::information(this,strTitle,strError,QMessageBox::Ok);
+        }
+    }
 }

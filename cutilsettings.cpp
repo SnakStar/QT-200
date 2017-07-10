@@ -77,6 +77,7 @@ void CUtilSettings::DefaultSettings()
     settings.setValue(AGINGTIME,0);
     settings.setValue(RAWDATAMODE,0);
     settings.setValue(RFWRITEMODE,0);
+    settings.setValue(LOGRECORDMODE,0);
 
     settings.setValue(APOFFSET1,0);
     settings.setValue(APOFFSET2,0);
@@ -138,25 +139,26 @@ bool CUtilSettings::CheckFileExist()
 QMap<QString,QString>* CUtilSettings::ReadSettingsInfoToMap()
 {
     QSettings settings(m_IniFilePath,QSettings::IniFormat);
-    m_SetParam[PRINTMODE]   = settings.value(PRINTMODE,0).toString();
-    m_SetParam[ENCODEMODE]  = settings.value(ENCODEMODE,0).toString();
-    m_SetParam[AGINGMODE]   = settings.value(AGINGMODE,0).toString();
-    m_SetParam[AGINGTIME]   = settings.value(AGINGTIME,0).toString();
-    m_SetParam[RAWDATAMODE] = settings.value(RAWDATAMODE,0).toString();
-    m_SetParam[RFWRITEMODE] = settings.value(RFWRITEMODE,0).toString();
+    m_SetParam[PRINTMODE]     = settings.value(PRINTMODE,0).toString();
+    m_SetParam[ENCODEMODE]    = settings.value(ENCODEMODE,0).toString();
+    m_SetParam[AGINGMODE]     = settings.value(AGINGMODE,0).toString();
+    m_SetParam[AGINGTIME]     = settings.value(AGINGTIME,0).toString();
+    m_SetParam[RAWDATAMODE]   = settings.value(RAWDATAMODE,0).toString();
+    m_SetParam[RFWRITEMODE]   = settings.value(RFWRITEMODE,0).toString();
+    m_SetParam[LOGRECORDMODE] = settings.value(LOGRECORDMODE,0).toString();
 
-    m_SetParam[APOFFSET1]   = settings.value(APOFFSET1,0).toString();
-    m_SetParam[APOFFSET2]   = settings.value(APOFFSET2,0).toString();
-    m_SetParam[APOFFSET3]   = settings.value(APOFFSET3,0).toString();
+    m_SetParam[APOFFSET1]     = settings.value(APOFFSET1,0).toString();
+    m_SetParam[APOFFSET2]     = settings.value(APOFFSET2,0).toString();
+    m_SetParam[APOFFSET3]     = settings.value(APOFFSET3,0).toString();
 
-    m_SetParam[HARDVERSION] = settings.value(HARDVERSION,"V0.0.0").toString();
+    m_SetParam[HARDVERSION]   = settings.value(HARDVERSION,"V0.0.0").toString();
 
-    m_SetParam[LISMODE]     = settings.value(LISMODE,0).toString();
-    m_SetParam[LOCALIP]     = settings.value(LOCALIP,"").toString();
-    m_SetParam[SERVERIP]    = settings.value(SERVERIP,"").toString();
-    m_SetParam[SERVERPORT]  = settings.value(SERVERPORT,0).toString();
-    m_SetParam[LANGUAGESET] = settings.value(LANGUAGESET,0).toString();
-    m_SetParam[CHANNELSET]  = settings.value(CHANNELSET,0).toString();
+    m_SetParam[LISMODE]       = settings.value(LISMODE,0).toString();
+    m_SetParam[LOCALIP]       = settings.value(LOCALIP,"").toString();
+    m_SetParam[SERVERIP]      = settings.value(SERVERIP,"").toString();
+    m_SetParam[SERVERPORT]    = settings.value(SERVERPORT,0).toString();
+    m_SetParam[LANGUAGESET]   = settings.value(LANGUAGESET,0).toString();
+    m_SetParam[CHANNELSET]    = settings.value(CHANNELSET,0).toString();
     return &m_SetParam;
 }
 

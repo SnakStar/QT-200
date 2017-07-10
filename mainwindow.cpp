@@ -106,6 +106,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_SetParam = m_settings.ReadSettingsInfoToMap();
     //关闭射频烧写模式
     m_settings.SetParam(RFWRITEMODE,"0");
+    //关闭日志记录模式
+    m_settings.SetParam(LOGRECORDMODE,"0");
     m_settings.WriteSettingsInfoToMap();
     //
     connect(this,SIGNAL(MockTest(QByteArray)),m_TestWin, SLOT(MockTest(QByteArray)) );

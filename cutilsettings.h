@@ -25,25 +25,26 @@
 #include<QTextCodec>
 #include"qextserial/qextserialport.h"
 
-#define PRINTMODE   "GeneralSet/PrintMode"
-#define ENCODEMODE  "GenaralSet/EncodeMode"
-#define AGINGMODE   "GenaralSet/AgingMode"
-#define AGINGTIME   "GenaralSet/AgingTime"
-#define RAWDATAMODE "GenaralSet/RawdataMode"
-#define RFWRITEMODE "GenaralSet/RFWriteMode"
+#define PRINTMODE     "GeneralSet/PrintMode"
+#define ENCODEMODE    "GenaralSet/EncodeMode"
+#define AGINGMODE     "GenaralSet/AgingMode"
+#define AGINGTIME     "GenaralSet/AgingTime"
+#define RAWDATAMODE   "GenaralSet/RawdataMode"
+#define RFWRITEMODE   "GenaralSet/RFWriteMode"
+#define LOGRECORDMODE "GenaralSet/LogRecordMode"
 
-#define APOFFSET1   "GenaralSet/APOFFSET1"
-#define APOFFSET2   "GenaralSet/APOFFSET2"
-#define APOFFSET3   "GenaralSet/APOFFSET3"
+#define APOFFSET1     "GenaralSet/APOFFSET1"
+#define APOFFSET2     "GenaralSet/APOFFSET2"
+#define APOFFSET3     "GenaralSet/APOFFSET3"
 
-#define HARDVERSION "GenaralSet/HardVersion"
+#define HARDVERSION   "GenaralSet/HardVersion"
 
-#define LISMODE     "SystemSet/LisMode"
-#define LOCALIP     "SystemSet/LocalIP"
-#define SERVERIP    "SystemSet/ServerIP"
-#define SERVERPORT  "SystemSet/ServerPort"
-#define LANGUAGESET "SystemSet/LanguageSet"
-#define CHANNELSET  "SystemSet/ChannelSet"
+#define LISMODE       "SystemSet/LisMode"
+#define LOCALIP       "SystemSet/LocalIP"
+#define SERVERIP      "SystemSet/ServerIP"
+#define SERVERPORT    "SystemSet/ServerPort"
+#define LANGUAGESET   "SystemSet/LanguageSet"
+#define CHANNELSET    "SystemSet/ChannelSet"
 
 
 class CUtilSettings : public QObject
