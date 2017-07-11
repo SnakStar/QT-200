@@ -309,7 +309,20 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
     //hsCRP+CRP为多行结果
     QStringList strlistResultUnit = ParseTestUnit(strResult);
     if(strItem.compare("hsCRP+CRP") == 0){
-        if(strlistResultUnit.at(0).toFloat() <= 5){
+        QString strValue = strlistResultUnit.at(0);
+        if(strValue.indexOf('>') != -1 ){
+            str = QString("hsCRP: >5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }else if(strValue.indexOf('<') != -1){
             str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
             SerialPort->write(Utf8ToGbk(str));
             bytecmd[0] = 0x0A;
@@ -322,17 +335,31 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
             SerialPort->write(bytecmd);
             bytecmd.clear();
         }else{
-            str = QString("hsCRP: >5mg/L");
-            SerialPort->write(Utf8ToGbk(str));
-            bytecmd[0] = 0x0A;
-            SerialPort->write(bytecmd);
-            bytecmd.clear();
+            if(strlistResultUnit.at(0).toFloat() <= 5){
+                str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
 
-            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
-            SerialPort->write(Utf8ToGbk(str));
-            bytecmd[0] = 0x0A;
-            SerialPort->write(bytecmd);
-            bytecmd.clear();
+                str = QString("CRP: <5mg/L");
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+            }else{
+                str = QString("hsCRP: >5mg/L");
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+
+                str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+            }
         }
     }else{
         str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
@@ -513,7 +540,20 @@ void CUtilSettings::PrintChineseData(QextSerialPort* SerialPort,QString strName,
     //hsCRP+CRP为多行结果
     QStringList strlistResultUnit = ParseTestUnit(strResult);
     if(strItem.compare("hsCRP+CRP") == 0){
-        if(strlistResultUnit.at(0).toFloat() <= 5){
+        QString strValue = strlistResultUnit.at(0);
+        if(strValue.indexOf('>') != -1 ){
+            str = QString("hsCRP: >5mg/L");
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+
+            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+            SerialPort->write(Utf8ToGbk(str));
+            bytecmd[0] = 0x0A;
+            SerialPort->write(bytecmd);
+            bytecmd.clear();
+        }else if(strValue.indexOf('<') != -1){
             str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
             SerialPort->write(Utf8ToGbk(str));
             bytecmd[0] = 0x0A;
@@ -526,17 +566,31 @@ void CUtilSettings::PrintChineseData(QextSerialPort* SerialPort,QString strName,
             SerialPort->write(bytecmd);
             bytecmd.clear();
         }else{
-            str = QString("hsCRP: >5mg/L");
-            SerialPort->write(Utf8ToGbk(str));
-            bytecmd[0] = 0x0A;
-            SerialPort->write(bytecmd);
-            bytecmd.clear();
+            if(strlistResultUnit.at(0).toFloat() <= 5){
+                str = QString("%1: %2 %3").arg("hsCRP").arg(strResult).arg(strFlag);
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
 
-            str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
-            SerialPort->write(Utf8ToGbk(str));
-            bytecmd[0] = 0x0A;
-            SerialPort->write(bytecmd);
-            bytecmd.clear();
+                str = QString("CRP: <5mg/L");
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+            }else{
+                str = QString("hsCRP: >5mg/L");
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+
+                str = QString("%1: %2 %3").arg("CRP").arg(strResult).arg(strFlag);
+                SerialPort->write(Utf8ToGbk(str));
+                bytecmd[0] = 0x0A;
+                SerialPort->write(bytecmd);
+                bytecmd.clear();
+            }
         }
     }else{
         str = QString("%1: %2 %3").arg(strItem).arg(strResult).arg(strFlag);
@@ -782,9 +836,14 @@ QString CUtilSettings::GetResultFlag(QString strRenf, QString strResult)
         return strFlag;
     }
     QString re;
-    for(int n=0; n<strResult.size(); n++){
-        if((quint8)(strResult.at(n).toAscii())>=48 && (quint8)(strResult.at(n).toAscii())<=57 ||
-                (quint8)(strResult.at(n).toAscii())==46){
+    quint8 nAscii = 0;
+    quint16 nResultCount = strResult.size();
+    for(int n=0; n<nResultCount; n++){
+        nAscii = (quint8)(strResult.at(n).toAscii());
+        if(nAscii == 62 || nAscii == 60){
+            continue;
+        }
+        if(nAscii >= 48 && nAscii <=57 || nAscii == 46){
             re.append(strResult.at(n));
         }else{
             break;
