@@ -121,6 +121,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
             {
                 p[1]=i;
             }
+            if( (p[0] != 0) && (p[1]!=0) && (p[0]<p[1]) ){
+                break;
+            }
         }
         for(i=MaxPosition[1]-CSignallength/2;i<(MaxPosition[1]+CSignallength/2);i++)
         {
@@ -131,6 +134,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
             if((scanData2[i-1]>=Threshold2)&&(scanData2[i]<Threshold2))
             {
                 p[3]=i;
+            }
+            if( (p[2] != 0) && (p[3]!=0) && (p[2]<p[3]) ){
+                break;
             }
         }
 
@@ -178,6 +184,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
                 {
                     p[1]=i;
                 }
+                if( (p[0] != 0) && (p[1]!=0) && (p[0]<p[1]) ){
+                    break;
+                }
             }
             for(i=MaxPosition[1]-CSignallength/2-10;i<(MaxPosition[1]+CSignallength/2+10);i++)
             {
@@ -188,6 +197,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
                 if((scanData2[i-1]>=Threshold2)&&(scanData2[i]<Threshold2))
                 {
                     p[3]=i;
+                }
+                if( (p[2] != 0) && (p[3]!=0) && (p[2]<p[3]) ){
+                    break;
                 }
             }
             // MaxPosition[0] = (p[1]+p[0])/2;
@@ -549,17 +561,23 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
     for(int n=0; n<320; n++){
         byteScan1.append((quint8)scanData1[n]);
         byteScan2.append((quint8)scanData2[n]);
+        qDebug()<<n<<"   "<<"1:"<<scanData1[n]<<"    2:"<<scanData2[n];
     }*/
+    //测试日志信息
+    QString strTestLogInfo = "测试信息: ";
+    QString strTempLogInfo;
     unsigned int i;
     long temp1,temp2;
     unsigned int p[4]={0,0,0,0};
     float value,value1,value2;
     unsigned int Threshold1,Threshold2;
+    unsigned int TempMaxPos1,TempMaxPos2;
     float maxresult,minresult;
     long  area1,area2;
     //long Threshold = 0;
     unsigned int TempMax1,TempMax2;
-    unsigned int MaxPosition[2]; //存放波峰位置
+    //存放波峰位置
+    unsigned int MaxPosition[4];
 
 
     long Tempbase1 = 0,Tempbase2 = 0;
@@ -581,6 +599,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
     datainfo.m_RawTestInfo.m_nCheckIntegralBreadt = TSignallength;
     CSignallength = *(pIdmessgae+35);   //质控峰积分长度
     datainfo.m_RawTestInfo.m_nQCIntegralBreadth = CSignallength;
+    //TSignallength = 120;
+    //CSignallength = 80;
     if(0 == CSignallength || CSignallength > MAX_CSignallength || *(pIdmessgae+ID_NO_CALNUM) > MAX_CALNUM)//旧的ID卡
     {
         CSignallength = 100;        //旧卡的质控峰积分长度都是100
@@ -604,25 +624,26 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
     //Result_index = Tempbase2;//for test
     //寻找最大值位置
     TempMax1 = scanData1[20];
-    MaxPosition[0] = 20;
-    for(i=20;i<150;i++)
+    //MaxPosition[0] = 20;
+    for(i=0;i<320;i++)
     {
         if((scanData1[i]>TempMax1))
         {
             TempMax1 = scanData1[i];
-            MaxPosition[0]=i;
+            TempMaxPos1=i;
         }
 
     }
     //Result_index = TempMax1;
     //Result_index = MaxPosition[0];
     TempMax2 = scanData2[320 -20];
-    MaxPosition[1] = 320 - 20;
-    for(i=(320-20);i>170;i--)
+    //MaxPosition[2] = 320 - 20;
+    for(i=0;i<320;i++)
     {
         if(scanData2[i] > TempMax2)
-        {TempMax2 = scanData2[i];
-            MaxPosition[1]=i;
+        {
+            TempMax2 = scanData2[i];
+            TempMaxPos2=i;
         }
     }
     //Result_index =  MaxPosition[1];
@@ -632,6 +653,7 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
     for (i=0;i<4;i++)
     {
         p[i]=0;
+        MaxPosition[i]=0;
     }
     if( (TempMax1-Tempbase1)< PeakHighValue || (TempMax2-Tempbase2)< PeakHighValue)   //峰值过低
     {
@@ -647,9 +669,71 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
 
         Threshold1 =  (TempMax1 - Tempbase1)/2+Tempbase1;
         Threshold2 =  (TempMax2 - Tempbase2)/2+Tempbase2;
-        /**///检测最大值 是否为峰值位置
-        for(i=MaxPosition[0]-CSignallength/2;i<(MaxPosition[0]+CSignallength/2);i++)
+
+
+        if(TempMaxPos1>150){
+            TempMax1 = scanData1[TempMaxPos1 - TSignallength/2];
+            for(int n=TempMaxPos1 - TSignallength/2; n>TempMaxPos1 - TSignallength/2 - CSignallength; n--){
+                if(TempMax1<scanData1[n]){
+                    MaxPosition[0] = n;
+                    TempMax1 = scanData1[n];
+                }
+            }
+            MaxPosition[1] = TempMaxPos1;
+        }else{
+            TempMax1 = scanData1[TempMaxPos1 + CSignallength/2];
+            for(int n=TempMaxPos1 + CSignallength/2; n<TempMaxPos1+CSignallength/2+TSignallength; n++){
+                if(TempMax1<scanData1[n]){
+                    MaxPosition[1] = n;
+                    TempMax1 = scanData1[n];
+                }
+            }
+
+            MaxPosition[0] = TempMaxPos1;
+        }
+        //判断右峰峰顶是否超出了范围内,如果超出则使用偏移的方法
+        if(MaxPosition[1]<MaxPosition[0]+CSignallength/2+TSignallength/4 || MaxPosition[1]<MaxPosition[0]){
+            MaxPosition[1] = MaxPosition[0]+CSignallength/2+TSignallength/2;
+        }
+        if(TempMaxPos2>150){
+            TempMax2 = scanData2[TempMaxPos2 - CSignallength/2];
+            for(int n=TempMaxPos2 - CSignallength/2; n>TempMaxPos2-CSignallength/2-TSignallength; n--){
+                if(TempMax2<scanData2[n]){
+                    MaxPosition[3] = n;
+                    TempMax2 = scanData2[n];
+                }
+            }
+
+            MaxPosition[2] = TempMaxPos2;
+        }else{
+            TempMax2 = scanData2[TempMaxPos2 + TSignallength/2];
+            for(int n=TempMaxPos2 + TSignallength/2; n<TempMaxPos2+TSignallength/2+CSignallength; n++){
+                if(TempMax2<scanData2[n]){
+                    MaxPosition[2] = n;
+                    TempMax2 = scanData2[n];
+                }
+            }
+
+            MaxPosition[3] = TempMaxPos2;
+        }
+        //判断左峰峰顶是否超出了范围内,如果超出则使用偏移的方法
+        if(MaxPosition[3]>MaxPosition[2]-CSignallength/2-TSignallength/4 || MaxPosition[3]>MaxPosition[2]){
+            MaxPosition[3] = MaxPosition[2] - CSignallength/2 - TSignallength/2;
+        }
+
+        /*
+        //位置1的峰。
+        MaxPosition[0] = TempMaxPos1;
+
+        //位置2的峰，
+        MaxPosition[2] = TempMaxPos2;
+
+        ///判断右边是不是一个峰。//
+        for(i=MaxPosition[0]+CSignallength/2;i<(MaxPosition[0]+CSignallength/2)+TSignallength;i++)
         {
+            if(i>320){
+                break;
+            }
             if((scanData1[i-1]<Threshold1)&&(scanData1[i]>=Threshold1))
             {
                 p[0]=i;
@@ -659,9 +743,46 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             {
                 p[1]=i;
             }
+            if ((p[0]!=0)&&(p[1]!=0)&&(p[0]<p[1]))
+            {
+                break;
+            }
         }
-        for(i=MaxPosition[1]-CSignallength/2;i<(MaxPosition[1]+CSignallength/2);i++)
+        //判断左边是不是一个峰。
+        for(i=MaxPosition[0]-CSignallength/2; i>(MaxPosition[0]-CSignallength/2-TSignallength);i--){
+            if(i<0){
+                break;
+            }
+            if((scanData1[i-1]<Threshold1)&&(scanData1[i]>=Threshold1))
+            {
+                p[2]=i;
+            }
+
+            if((scanData1[i-1]>=Threshold1)&&(scanData1[i]<Threshold1))
+            {
+                p[3]=i;
+            }
+            if ((p[2]!=0)&&(p[3]!=0)&&(p[2]<p[3]))
+            {
+                break;
+            }
+        }
+        //如果右边有峰，可能2个峰都在大于160以内，所以maxposition[0]需要把减少的CSignallength/2偏移量加回来。
+        if( (p[0] != 0) && (p[1] != 0) ){
+            MaxPosition[0] =  MaxPosition[0];
+        }else if( (p[2] != 0) && (p[3]!=0)){//左边有峰，移动到左边
+            MaxPosition[0] = TempMaxPos1 - CSignallength/2-TSignallength/2;
+        }
+        for(int n=0; n<4; n++){
+            p[n]=0;
+        }
+
+        //第二个波峰图形,左边是否有峰
+        for(i=MaxPosition[1]-CSignallength/2;i>(MaxPosition[1]-CSignallength/2-TSignallength);i--)
         {
+            if(i<0){
+                break;
+            }
             if((scanData2[i-1]<Threshold2)&&(scanData2[i]>=Threshold2))
             {
                 p[2]=i;
@@ -670,81 +791,43 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             {
                 p[3]=i;
             }
+            if ((p[2]!=0)&&(p[3]!=0)&&(p[2]<p[3]))
+            {
+                break;
+            }
         }
-
-        quint32 nMaxValue = scanData1[MaxPosition[0]];
-        quint32 nRightValue1 = scanData1[MaxPosition[0]]+1;
-        quint32 nRightValue2 = scanData1[MaxPosition[0]]+2;
-        //  如果 最大值在 边上 且 不是峰 ，则缩减范围 寻找峰值
-        if( ((nMaxValue < nRightValue1)&&(nRightValue1<nRightValue2)) && (MaxPosition[0]>140 || MaxPosition[1]<180))
+        //查找右边是否有峰
+        for(i=MaxPosition[1]+CSignallength/2;i<(MaxPosition[1]+CSignallength/2+TSignallength);i++)
         {
-            for (i=0;i<4;i++)
-            {
-                p[i]=0;
+            if(i>320){
+                break;
             }
-            TempMax1 = scanData1[20];
-            MaxPosition[0] = 20;
-            for(i=20;i<120;i++)
+            if((scanData2[i-1]<Threshold2)&&(scanData2[i]>=Threshold2))
             {
-                if((scanData1[i]>TempMax1))
-                {
-                    TempMax1 = scanData1[i];
-                    MaxPosition[0]=i;
-                }
+                p[0]=i;
             }
-            TempMax2 = scanData2[320 -20];
-            MaxPosition[1] = 320 - 20;
-            for(i=(320-20);i>200;i--)
+            if((scanData2[i-1]>=Threshold2)&&(scanData2[i]<Threshold2))
             {
-                if(scanData2[i] > TempMax2)
-                {
-                    TempMax2 = scanData2[i];
-                    MaxPosition[1]=i;
-                }
+                p[1]=i;
             }
-            Threshold1 =  (TempMax1 - Tempbase1)/2+Tempbase1;
-            Threshold2 =  (TempMax2 - Tempbase2)/2+Tempbase2;
-            /**///检测最大值 是否为峰值位置
-            for(i=MaxPosition[0]-CSignallength/2-10;i<(MaxPosition[0]+CSignallength/2+10);i++)
+            if ((p[0]!=0)&&(p[1]!=0)&&(p[0]<p[1]))
             {
-                if((scanData1[i-1]<Threshold1)&&(scanData1[i]>=Threshold1))
-                {
-                    p[0]=i;
-                }
-
-                if((scanData1[i-1]>=Threshold1)&&(scanData1[i]<Threshold1))
-                {
-                    p[1]=i;
-                }
+                break;
             }
-            for(i=MaxPosition[1]-CSignallength/2-10;i<(MaxPosition[1]+CSignallength/2+10);i++)
-            {
-                if((scanData2[i-1]<Threshold2)&&(scanData2[i]>=Threshold2))
-                {
-                    p[2]=i;
-                }
-                if((scanData2[i-1]>=Threshold2)&&(scanData2[i]<Threshold2))
-                {
-                    p[3]=i;
-                }
-            }
-            // MaxPosition[0] = (p[1]+p[0])/2;
-            //  MaxPosition[1] = (p[3]+p[2])/2;
         }
+        //如果左边有峰,则为需要寻找的右峰
+        if( (p[2] != 0) && (p[3] != 0) ){
+            MaxPosition[1] = TempMaxPos2;
+        }else if( (p[0] != 0) && (p[1] != 0)){
+            MaxPosition[1] = MaxPosition[1] + CSignallength/2 + TSignallength/2;
+        }*/
+        //strTempLogInfo = QString("p[0]:%1,p[1]:%2,p[2]:%3,p[3]:%4").arg(p[0]).arg(p[1]).arg(p[2]).arg(p[3]);
+        //strTestLogInfo = strTestLogInfo + strTempLogInfo;
 
-        if((p[0]==0 || p[1]==0) && (MaxPosition[0] > CSignallength/2))
-        {
-            p[0] = MaxPosition[0]/2;
-            p[1] = MaxPosition[0]/2;
-        }
 
-        if((p[2]==0 || p[3]==0) && (MaxPosition[1] > CSignallength/2+TSignallength))
-        {
-            p[2] = MaxPosition[1]/2;
-            p[3] = MaxPosition[1]/2;
-        }
 
-        if(p[0]==0|| p[1]==0|| p[2]==0|| p[3]==0 || (MaxPosition[0]>150 && MaxPosition[1]<170))
+
+        if(MaxPosition[0] == 0)
         {
             // 生成空(零)记录
             for(i=0;i<RECORDLENTH;i++)
@@ -755,15 +838,17 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         }
         else
         {
-            MaxPosition[0] = (p[0]+p[1])/2;
-            MaxPosition[1] = (p[2]+p[3])/2;
+            //MaxPosition[0] = (p[0]+p[1])/2;
+            //MaxPosition[1] = (p[2]+p[3])/2;
+            strTempLogInfo = QString(" 波峰1:%1,波峰2:%2").arg(MaxPosition[0]).arg(MaxPosition[2]);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
             //记录波峰波谷位置，to PC Draw;
             datainfo.m_RawTestInfo.m_nCrestPos1 = MaxPosition[0];
             datainfo.m_RawTestInfo.m_nTroughPosLeft1 = MaxPosition[0]-CSignallength/2;
             datainfo.m_RawTestInfo.m_nTroughPosRight1 = MaxPosition[0]+CSignallength/2;
-            datainfo.m_RawTestInfo.m_nCrestPos2 = MaxPosition[1];
-            datainfo.m_RawTestInfo.m_nTroughPosLeft2 = MaxPosition[1]-CSignallength/2;
-            datainfo.m_RawTestInfo.m_nTroughPosRight2 = MaxPosition[1]+CSignallength/2;
+            datainfo.m_RawTestInfo.m_nCrestPos2 = MaxPosition[2];
+            datainfo.m_RawTestInfo.m_nTroughPosLeft2 = MaxPosition[2]-CSignallength/2;
+            datainfo.m_RawTestInfo.m_nTroughPosRight2 = MaxPosition[2]+CSignallength/2;
 
             //计算第一次的扫描数据的 面积积分
             area1 =0; //面积一
@@ -778,9 +863,12 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             temp1 = scanData1[MaxPosition[0]-CSignallength/2];
             temp2 = scanData1[MaxPosition[0]+CSignallength/2];
             area1 = area1-(temp1+temp2)*CSignallength/2;
+            if(area1<0){
+                area1 = 0;
+            }
             datainfo.m_RawTestInfo.m_nTest1Area1 = area1;
             area2 =0;//面积二
-            for(i=MaxPosition[0]+CSignallength/2;i<MaxPosition[0]+CSignallength/2+TSignallength;i++)
+            for(i=MaxPosition[1]-TSignallength/2;i<MaxPosition[1]+TSignallength/2;i++)
             {
                 if(i< m_ScanDataSize)
                 {
@@ -788,10 +876,12 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
                 }
             }
 
-            temp1 = scanData1[MaxPosition[0]+CSignallength/2];
-            temp2 = scanData1[MaxPosition[0]+CSignallength/2+TSignallength];
+            temp1 = scanData1[MaxPosition[1]-TSignallength/2];
+            temp2 = scanData1[MaxPosition[1]+TSignallength/2];
             area2 = area2-(temp1+temp2)*TSignallength/2;
             datainfo.m_RawTestInfo.m_nTest1Area2 = area2;
+            strTempLogInfo = QString(" [1][面积1:%1,面积2:%2]").arg(area1).arg(area2);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
             if(area2<0){
                 area2 = 0;
                 datainfo.m_RawTestInfo.m_nTest1Area2 = 0;
@@ -802,32 +892,39 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
                 value1 = (area2*bit5)/area1; //比值1
             }
             datainfo.m_RawTestInfo.m_nTest1Ratio = value1;
+
+            /*
             //计算第二次的扫描数据的 面积积分
             area1 =0; //面积一
-            for(i=MaxPosition[1]+CSignallength/2;i>MaxPosition[1]-CSignallength/2;i--)
+            for(i=MaxPosition[2]+CSignallength/2;i>MaxPosition[2]-CSignallength/2;i--)
             {
                 if(i< m_ScanDataSize)
                 {
                     area1 =area1 + scanData2[i];
                 }
             }
-            temp1 = scanData2[MaxPosition[1]+CSignallength/2];
-            temp2 = scanData2[MaxPosition[1]-CSignallength/2];
+            temp1 = scanData2[MaxPosition[2]+CSignallength/2];
+            temp2 = scanData2[MaxPosition[2]-CSignallength/2];
             area1 = area1-(temp1+temp2)*CSignallength/2;
+            if(area1<0){
+                area1 = 0;
+            }
             datainfo.m_RawTestInfo.m_nTest2Area1 = area1;
             area2 =0;//temp1 = 0;temp2 = 0;//面积二
-            for(i=MaxPosition[1]-CSignallength/2;i>MaxPosition[1]-CSignallength/2-TSignallength;i--)
+            for(i=MaxPosition[3]+TSignallength/2;i>MaxPosition[3]-TSignallength/2;i--)
             {
                 if(i< m_ScanDataSize)
                 {
                     area2 = area2 + scanData2[i];
                 }
             }
-            temp1 = scanData2[MaxPosition[1]-CSignallength/2];
-            temp2 = scanData2[MaxPosition[1]-CSignallength/2-TSignallength];
+            temp1 = scanData2[MaxPosition[3]-TSignallength/2];
+            temp2 = scanData2[MaxPosition[3]+TSignallength/2];
 
             area2 = area2-(temp1 + temp2)*TSignallength/2;
             datainfo.m_RawTestInfo.m_nTest2Area2 = area2;
+            strTempLogInfo = QString(" [2][面积1:%1,面积2:%2]").arg(area1).arg(area2);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
             if(area2<0){
                 area2 = 0;
                 datainfo.m_RawTestInfo.m_nTest2Area2 = 0;
@@ -839,17 +936,23 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             }
             datainfo.m_RawTestInfo.m_nTest2Ratio = value2;
 
-            if( MaxPosition[0]>150 ||  MaxPosition[1]<170)  //提防 信号位置偏出扫描区域
+            if( MaxPosition[0]>150 ||  MaxPosition[2]<130)  //提防 信号位置偏出扫描区域
             {
                 if(MaxPosition[0]>150)
                 {value = value2;}
                 else
                 {value = value1;}
+                qDebug()<<"结果计算过程:信号位置偏出扫描区域!";
             }
             else
             {
                 value = (value1 + value2)/20000;   // 平均值
-            }
+            }*/
+            value = (value1)/10000;
+            strTempLogInfo = QString(" 检测结果:%1").arg(value);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
+            qDebug()<<strTestLogInfo;
+            strTestLogInfo.clear();
 
 
             //Result_index = value;
@@ -1053,6 +1156,43 @@ QString ResultCalc::ProcessDecimalPointPricision(QString strValue, quint8 nPreci
     }
     return strResult;
 }
+
+/*
+void ResultCalc::findPeak(const QVector<int> &v, QVector<int> &peakPositions)
+{
+    QVector<int> diff_v(v.size() - 1, 0);
+    // 计算V的一阶差分和符号函数trend
+    for (QVector<int>::size_type i = 0; i != diff_v.size(); i++)
+    {
+        if (v[i + 1] - v[i]>0)
+            diff_v[i] = 1;
+        else if (v[i + 1] - v[i] < 0)
+            diff_v[i] = -1;
+        else
+            diff_v[i] = 0;
+    }
+    // 对Trend作了一个遍历
+    for (int i = diff_v.size() - 1; i >= 0; i--)
+    {
+        if (diff_v[i] == 0 && i == diff_v.size() - 1)
+        {
+            diff_v[i] = 1;
+        }
+        else if (diff_v[i] == 0)
+        {
+            if (diff_v[i + 1] >= 0)
+                diff_v[i] = 1;
+            else
+                diff_v[i] = -1;
+        }
+    }
+
+    for (QVector<int>::size_type i = 0; i != diff_v.size() - 1; i++)
+    {
+        if (diff_v[i + 1] - diff_v[i] == -2)
+            peakPositions.push_back(i + 1);
+    }
+}*/
 
 
 
