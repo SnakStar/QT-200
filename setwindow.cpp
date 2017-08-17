@@ -939,7 +939,11 @@ void SetWindow::on_btnDebugOk_clicked()
     //qDebug()<<strAuthPassword;
     if(strInputPassword.compare("qt200") == 0){
         HideDebugLogin(true);
-        m_QueryWin->SetExportHide(false);
+        //m_QueryWin->SetExportHide(false);
+        //显示升级按钮
+        ui->btnSoftUpdate->setHidden(false);
+        ui->btnHardUpdate->setHidden(false);
+
         ui->btnDebugLogout->setHidden(false);
     }else if(strInputPassword.compare(strAuthPassword) == 0){
         HideDebugFunc(false);
@@ -968,6 +972,7 @@ void SetWindow::HideDebugFunc(bool bHide)
     ui->btnDebugLogout->setHidden(bHide);
     ui->btnSoftUpdate->setHidden(bHide);
     ui->btnHardUpdate->setHidden(bHide);
+    ui->btnRFCDelete->setHidden(bHide);
 
     //数据库修改删除按钮
     m_QueryWin->SetDbModifyFuncHide(bHide);
@@ -1092,4 +1097,43 @@ void SetWindow::on_btnRFCQuery_clicked()
         ui->twRFCardInfo->setItem(nRowCount,4,item6);
         nNumber++;
     }
+}
+
+
+/********************************************************
+ *@Name:        on_btnRFCDelete_clicked
+ *@Author:      HuaT
+ *@Description: 射频界面删除按钮
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-8-7
+********************************************************/
+void SetWindow::on_btnRFCDelete_clicked()
+{
+    QString Title = QObject::tr("Note");
+    QString Msg = QObject::tr("Please choose the data to delete");
+    int CurrentRow = ui->twRFCardInfo->currentRow();
+    if(CurrentRow == -1){
+        QMessageBox::information(this,Title,Msg,QMessageBox::Ok);
+        return;
+    }
+    QString strTitle,strContent;
+    strTitle = QObject::tr("Note");
+    strContent = QObject::tr("Confirmed will have to delete?");
+
+    if(QMessageBox::Yes == QMessageBox::information(this,strTitle,strContent,QMessageBox::Yes | QMessageBox::No)){
+        QString strID = ui->twRFCardInfo->item(CurrentRow,4)->text();
+        QString strCMD;
+        strCMD = QString("delete from idcard where barcode='%1'").arg(strID);
+        if(!m_db->Exec(strCMD)){
+            QString Msg = QObject::tr("Delete failed");
+            QMessageBox::information(this,Title,Msg,QMessageBox::Ok);
+        }else{
+            ui->twRFCardInfo->removeRow(CurrentRow);
+            QString Msg = QObject::tr("deleted successfully");
+            QMessageBox::information(this,Title,Msg,QMessageBox::Ok);
+        }
+    }
+
 }

@@ -194,17 +194,17 @@ completion of the test</translation>
         <translation>V1.0.0</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="622"/>
+        <location filename="mainwindow.cpp" line="624"/>
         <source>Timer1</source>
         <translation>Timer1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="654"/>
+        <location filename="mainwindow.cpp" line="656"/>
         <source>Timer2</source>
         <translation>Timer2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
+        <location filename="mainwindow.cpp" line="688"/>
         <source>Timer3</source>
         <translation>Timer3</translation>
     </message>
@@ -220,8 +220,8 @@ completion of the test</translation>
         <location filename="exportdata.cpp" line="58"/>
         <location filename="exportdata.cpp" line="73"/>
         <location filename="hardgrading.cpp" line="128"/>
-        <location filename="mainwindow.cpp" line="716"/>
-        <location filename="mainwindow.cpp" line="1186"/>
+        <location filename="mainwindow.cpp" line="718"/>
+        <location filename="mainwindow.cpp" line="1200"/>
         <location filename="qcvalue.cpp" line="55"/>
         <location filename="qcwindow.cpp" line="239"/>
         <location filename="qcwindow.cpp" line="454"/>
@@ -231,14 +231,16 @@ completion of the test</translation>
         <location filename="setwindow.cpp" line="650"/>
         <location filename="setwindow.cpp" line="689"/>
         <location filename="setwindow.cpp" line="697"/>
-        <location filename="setwindow.cpp" line="949"/>
+        <location filename="setwindow.cpp" line="953"/>
+        <location filename="setwindow.cpp" line="1114"/>
+        <location filename="setwindow.cpp" line="1122"/>
         <location filename="testwindow.cpp" line="1573"/>
         <location filename="testwindow.cpp" line="1771"/>
         <location filename="testwindow.cpp" line="1899"/>
         <location filename="testwindow.cpp" line="2019"/>
         <location filename="testwindow.cpp" line="2077"/>
         <location filename="testwindow.cpp" line="2188"/>
-        <location filename="testwindow.cpp" line="3574"/>
+        <location filename="testwindow.cpp" line="3612"/>
         <location filename="upgrading.cpp" line="58"/>
         <location filename="upgrading.cpp" line="79"/>
         <location filename="upgrading.cpp" line="82"/>
@@ -267,7 +269,7 @@ completion of the test</translation>
         <translation>Data export is successful</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="717"/>
+        <location filename="mainwindow.cpp" line="719"/>
         <source>printer is out of paper</source>
         <translation>printer is out of paper</translation>
     </message>
@@ -276,27 +278,27 @@ completion of the test</translation>
         <translation type="obsolete">Batch number already exists. Overwrite?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="888"/>
+        <location filename="mainwindow.cpp" line="902"/>
         <source>Data Update is successful</source>
         <translation>Data Update is successful</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="891"/>
+        <location filename="mainwindow.cpp" line="905"/>
         <source>Data Update is failed</source>
         <translation>Data Update is failed</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="908"/>
+        <location filename="mainwindow.cpp" line="922"/>
         <source>Data import is successful</source>
         <translation>Data import is successful</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="911"/>
+        <location filename="mainwindow.cpp" line="925"/>
         <source>Data import is failed</source>
         <translation>Data import is failed</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1187"/>
+        <location filename="mainwindow.cpp" line="1201"/>
         <source>Close the instrument?</source>
         <translation>Close the instrument?</translation>
     </message>
@@ -400,7 +402,7 @@ completion of the test</translation>
         <translation type="obsolete">Age Upper limit and lower limit value can&apos;t be empty!</translation>
     </message>
     <message>
-        <location filename="cchecktablewidget.cpp" line="148"/>
+        <location filename="cchecktablewidget.cpp" line="156"/>
         <location filename="querywindow.cpp" line="193"/>
         <location filename="renfvalue.cpp" line="44"/>
         <location filename="renfvalue.cpp" line="122"/>
@@ -416,7 +418,7 @@ completion of the test</translation>
         <translation>Male</translation>
     </message>
     <message>
-        <location filename="cchecktablewidget.cpp" line="150"/>
+        <location filename="cchecktablewidget.cpp" line="158"/>
         <location filename="querywindow.cpp" line="195"/>
         <location filename="renfvalue.cpp" line="44"/>
         <location filename="renfvalue.cpp" line="119"/>
@@ -527,7 +529,7 @@ completion of the test</translation>
         <location filename="setwindow.cpp" line="593"/>
         <location filename="setwindow.cpp" line="739"/>
         <location filename="setwindow.cpp" line="839"/>
-        <location filename="userinterface.cpp" line="463"/>
+        <location filename="userinterface.cpp" line="505"/>
         <source>operating info</source>
         <translation>operating info</translation>
     </message>
@@ -535,7 +537,7 @@ completion of the test</translation>
         <location filename="setwindow.cpp" line="594"/>
         <location filename="setwindow.cpp" line="740"/>
         <location filename="setwindow.cpp" line="840"/>
-        <location filename="userinterface.cpp" line="464"/>
+        <location filename="userinterface.cpp" line="506"/>
         <source>Configuration saved successfully</source>
         <translation>Configuration saved successfully</translation>
     </message>
@@ -547,12 +549,14 @@ completion of the test</translation>
     </message>
     <message>
         <location filename="setwindow.cpp" line="690"/>
+        <location filename="setwindow.cpp" line="1115"/>
         <source>Please choose the data to delete</source>
         <oldsource>Please choose to delete the data!</oldsource>
         <translation>Please choose the data to delete</translation>
     </message>
     <message>
         <location filename="setwindow.cpp" line="698"/>
+        <location filename="setwindow.cpp" line="1123"/>
         <source>Confirmed will have to delete?</source>
         <translation>Confirmed will have to delete?</translation>
     </message>
@@ -567,9 +571,19 @@ completion of the test</translation>
         <translation>Hard Update</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="950"/>
+        <location filename="setwindow.cpp" line="954"/>
         <source>longin failed</source>
         <translation>longin failed</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="1130"/>
+        <source>Delete failed</source>
+        <translation>Delete failed</translation>
+    </message>
+    <message>
+        <location filename="setwindow.cpp" line="1134"/>
+        <source>deleted successfully</source>
+        <translation>deleted successfully</translation>
     </message>
     <message>
         <location filename="testwindow.cpp" line="245"/>
@@ -628,13 +642,13 @@ completion of the test</translation>
     </message>
     <message>
         <location filename="testwindow.cpp" line="1906"/>
-        <location filename="testwindow.cpp" line="3581"/>
+        <location filename="testwindow.cpp" line="3619"/>
         <source>There is no corresponding ID information, please import the relevant ID card</source>
         <translation>There is no corresponding ID information, please import the relevant ID card</translation>
     </message>
     <message>
         <location filename="testwindow.cpp" line="1950"/>
-        <location filename="testwindow.cpp" line="3622"/>
+        <location filename="testwindow.cpp" line="3660"/>
         <source>Reagent Strip has expired</source>
         <translation>Reagent Strip has expired</translation>
     </message>
@@ -1188,6 +1202,7 @@ card is plugged or insert</translation>
     </message>
     <message>
         <location filename="setwindow.ui" line="261"/>
+        <location filename="setwindow.ui" line="674"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
@@ -1203,7 +1218,7 @@ card is plugged or insert</translation>
     </message>
     <message>
         <location filename="setwindow.ui" line="331"/>
-        <location filename="setwindow.ui" line="855"/>
+        <location filename="setwindow.ui" line="868"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -1290,22 +1305,22 @@ card is plugged or insert</translation>
         <translation>Channel3</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="754"/>
+        <location filename="setwindow.ui" line="767"/>
         <source>Soft Update</source>
         <translation>Soft Update</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="767"/>
+        <location filename="setwindow.ui" line="780"/>
         <source>Hard Update</source>
         <translation>Hard Update</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="816"/>
+        <location filename="setwindow.ui" line="829"/>
         <source>Logout</source>
         <translation>Logout</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="829"/>
+        <location filename="setwindow.ui" line="842"/>
         <source>Interface</source>
         <translation>Interface</translation>
     </message>
@@ -1315,13 +1330,12 @@ card is plugged or insert</translation>
         <translation>Query</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="728"/>
         <source>V0.30.0</source>
         <oldsource>V0.29.0</oldsource>
-        <translation>V0.30.0</translation>
+        <translation type="obsolete">V0.30.0</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="868"/>
+        <location filename="setwindow.ui" line="881"/>
         <source>Login Password</source>
         <translation>Login Password</translation>
     </message>
@@ -1337,17 +1351,17 @@ card is plugged or insert</translation>
         <translation>QC Channel</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="676"/>
+        <location filename="setwindow.ui" line="689"/>
         <source>System Info</source>
         <translation>System Info</translation>
     </message>
     <message utf8="true">
-        <location filename="setwindow.ui" line="702"/>
+        <location filename="setwindow.ui" line="715"/>
         <source>Software Version：</source>
         <translation>Software Version：</translation>
     </message>
     <message utf8="true">
-        <location filename="setwindow.ui" line="715"/>
+        <location filename="setwindow.ui" line="728"/>
         <source>Firmware version：</source>
         <translation>Firmware version：</translation>
     </message>
@@ -1357,7 +1371,7 @@ card is plugged or insert</translation>
         <translation type="obsolete">V1.0.0</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="741"/>
+        <location filename="setwindow.ui" line="754"/>
         <source>V0.5.1</source>
         <translation>V0.5.1</translation>
     </message>
@@ -1366,7 +1380,7 @@ card is plugged or insert</translation>
         <translation type="obsolete">Updage</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="790"/>
+        <location filename="setwindow.ui" line="803"/>
         <source>Debug Mode</source>
         <oldsource>Debug Model</oldsource>
         <translation>Debug Mode</translation>
@@ -1522,13 +1536,15 @@ card is plugged or insert</translation>
     <message utf8="true">
         <location filename="userinterface.ui" line="61"/>
         <location filename="userinterface.ui" line="149"/>
-        <location filename="userinterface.ui" line="445"/>
+        <location filename="userinterface.ui" line="430"/>
+        <location filename="userinterface.ui" line="497"/>
         <source>关闭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="userinterface.ui" line="74"/>
         <location filename="userinterface.ui" line="162"/>
+        <location filename="userinterface.ui" line="417"/>
         <source>开启</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1607,57 +1623,67 @@ card is plugged or insert</translation>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="407"/>
+        <location filename="userinterface.ui" line="405"/>
+        <source>日志记录</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="444"/>
+        <source>删除日志</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="userinterface.ui" line="459"/>
         <source>操作模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="419"/>
+        <location filename="userinterface.ui" line="471"/>
         <source>读卡模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="432"/>
+        <location filename="userinterface.ui" line="484"/>
         <source>写卡模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="458"/>
+        <location filename="userinterface.ui" line="510"/>
         <source>项目:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="471"/>
+        <location filename="userinterface.ui" line="523"/>
         <source>条码:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="527"/>
+        <location filename="userinterface.ui" line="579"/>
         <source>烧录总数:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="553"/>
+        <location filename="userinterface.ui" line="605"/>
         <source>清除记数</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="576"/>
+        <location filename="userinterface.ui" line="628"/>
         <source>卡号:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="589"/>
+        <location filename="userinterface.ui" line="641"/>
         <source>批号:</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="612"/>
+        <location filename="userinterface.ui" line="664"/>
         <source>PC连接模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="userinterface.ui" line="643"/>
+        <location filename="userinterface.ui" line="695"/>
         <source>操作日志</source>
         <translation type="unfinished"></translation>
     </message>

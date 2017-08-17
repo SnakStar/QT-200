@@ -661,6 +661,19 @@
       <string>Query</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="btnRFCDelete">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>20</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="SysInfoSetPage">
     <widget class="QLabel" name="lbSysInfoTitle">
@@ -725,7 +738,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>V0.33.3</string>
+      <string>V0.34.0</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbHardNum">
