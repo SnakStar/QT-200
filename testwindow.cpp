@@ -3600,7 +3600,8 @@ bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, Resu
 {
     //获得条码编号,先用新条码规则,新的条码格式为10100000000101
     data.m_strIDCardBarCode = ParseBarCode(can_data,true);
-    data.m_strIDCardBarCode = "10100110000111";
+    data.m_strIDCardBarCode = "10101000000101";
+    //data.m_strIDCardBarCode = "0100010001000001000000000101";
     //查询此批号的ID卡数据
     data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);
     if(data.m_strIDMessage.isEmpty()){//如果是空,则调用旧条码规则,旧的条码格式为010001000000000010001

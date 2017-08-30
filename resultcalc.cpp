@@ -24,7 +24,7 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
     unsigned int p[4]={0,0,0,0};
     long value,value1,value2;
     unsigned int Threshold1,Threshold2;
-    unsigned int TempMaxPos1,TempMaxPos2;
+    int TempMaxPos1,TempMaxPos2;
     long maxresult,minresult;
     long  area1,area2;
     //long Threshold = 0;
@@ -48,6 +48,8 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
     datainfo.m_RawTestInfo.m_nCheckIntegralBreadt = TSignallength;
     CSignallength = *(pIdmessgae+ID_NO_CT_CIntegralLength2);//质控峰积分长度
     datainfo.m_RawTestInfo.m_nQCIntegralBreadth = CSignallength;
+    //TSignallength = 120;
+    //CSignallength = 100;
     if(0 == CSignallength || CSignallength > MAX_CSignallength || *(pIdmessgae+ID_NO_CALNUM) > MAX_CALNUM)//旧的ID卡
     {
         CSignallength = 100;        //旧卡的质控峰积分长度都是100
@@ -119,6 +121,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         if(TempMaxPos1>150){
             TempMax1 = scanData1[TempMaxPos1 - TSignallength/2];
             for(int n=TempMaxPos1 - TSignallength/2; n>TempMaxPos1 - TSignallength/2 - CSignallength; n--){
+                if(n<0){
+                    break;
+                }
                 if(TempMax1<scanData1[n]){
                     MaxPosition[0] = n;
                     TempMax1 = scanData1[n];
@@ -128,6 +133,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         }else{
             TempMax1 = scanData1[TempMaxPos1 + CSignallength/2];
             for(int n=TempMaxPos1 + CSignallength/2; n<TempMaxPos1+CSignallength/2+TSignallength; n++){
+                if(n>320){
+                    break;
+                }
                 if(TempMax1<scanData1[n]){
                     MaxPosition[1] = n;
                     TempMax1 = scanData1[n];
@@ -143,6 +151,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         if(TempMaxPos2>150){
             TempMax2 = scanData2[TempMaxPos2 - CSignallength/2];
             for(int n=TempMaxPos2 - CSignallength/2; n>TempMaxPos2-CSignallength/2-TSignallength; n--){
+                if(n<0){
+                    break;
+                }
                 if(TempMax2<scanData2[n]){
                     MaxPosition[3] = n;
                     TempMax2 = scanData2[n];
@@ -153,6 +164,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         }else{
             TempMax2 = scanData2[TempMaxPos2 + TSignallength/2];
             for(int n=TempMaxPos2 + TSignallength/2; n<TempMaxPos2+TSignallength/2+CSignallength; n++){
+                if(n>320){
+                    break;
+                }
                 if(TempMax2<scanData2[n]){
                     MaxPosition[2] = n;
                     TempMax2 = scanData2[n];
@@ -180,6 +194,9 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
         {
             //MaxPosition[0] = (p[0]+p[1])/2;
             //MaxPosition[1] = (p[2]+p[3])/2;
+            strTempLogInfo = QString(" T积分宽度:%1,C积分宽度:%2").arg(TSignallength).arg(CSignallength);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
+
             strTempLogInfo = QString(" 波峰1:%1,波峰1旁:%2").arg(MaxPosition[0]).arg(MaxPosition[1]);
             strTestLogInfo = strTestLogInfo + strTempLogInfo;
             //记录波峰波谷位置，to PC Draw;
@@ -331,7 +348,11 @@ void ResultCalc::calculateResult(ResultDataInfo& datainfo,unsigned int *scanData
             //Result_index = minresult;
 
             if(value<=AdjustPoint[0])
-            {Tempresult = 0;}
+            {
+                Tempresult = 0;
+                strTempLogInfo = QString(" 检验公式:y=minresult=0");
+                strTestLogInfo = strTestLogInfo + strTempLogInfo;
+            }
             else if(AdjustPoint[0]<value && value<=AdjustPoint[1])
             {
                 Tempresult =(value/100.0)*(Adjust_a[0]/100.0)/100;
@@ -578,7 +599,7 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
     unsigned int p[4]={0,0,0,0};
     float value,value1,value2;
     unsigned int Threshold1,Threshold2;
-    unsigned int TempMaxPos1,TempMaxPos2;
+    int TempMaxPos1,TempMaxPos2;
     float maxresult,minresult;
     long  area1,area2;
     //long Threshold = 0;
@@ -681,6 +702,9 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         if(TempMaxPos1>150){
             TempMax1 = scanData1[TempMaxPos1 - TSignallength/2];
             for(int n=TempMaxPos1 - TSignallength/2; n>TempMaxPos1 - TSignallength/2 - CSignallength; n--){
+                if(n<0){
+                    break;
+                }
                 if(TempMax1<scanData1[n]){
                     MaxPosition[0] = n;
                     TempMax1 = scanData1[n];
@@ -690,6 +714,9 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         }else{
             TempMax1 = scanData1[TempMaxPos1 + CSignallength/2];
             for(int n=TempMaxPos1 + CSignallength/2; n<TempMaxPos1+CSignallength/2+TSignallength; n++){
+                if(n>320){
+                    break;
+                }
                 if(TempMax1<scanData1[n]){
                     MaxPosition[1] = n;
                     TempMax1 = scanData1[n];
@@ -705,6 +732,9 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         if(TempMaxPos2>150){
             TempMax2 = scanData2[TempMaxPos2 - CSignallength/2];
             for(int n=TempMaxPos2 - CSignallength/2; n>TempMaxPos2-CSignallength/2-TSignallength; n--){
+                if(n<0){
+                    break;
+                }
                 if(TempMax2<scanData2[n]){
                     MaxPosition[3] = n;
                     TempMax2 = scanData2[n];
@@ -715,6 +745,9 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         }else{
             TempMax2 = scanData2[TempMaxPos2 + TSignallength/2];
             for(int n=TempMaxPos2 + TSignallength/2; n<TempMaxPos2+TSignallength/2+CSignallength; n++){
+                if(n>320){
+                    break;
+                }
                 if(TempMax2<scanData2[n]){
                     MaxPosition[2] = n;
                     TempMax2 = scanData2[n];
@@ -845,6 +878,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         }
         else
         {
+            strTempLogInfo = QString(" T积分宽度:%1,C积分宽度:%2").arg(TSignallength).arg(CSignallength);
+            strTestLogInfo = strTestLogInfo + strTempLogInfo;
             //MaxPosition[0] = (p[0]+p[1])/2;
             //MaxPosition[1] = (p[2]+p[3])/2;
             strTempLogInfo = QString("new 波峰1:%1,波峰1旁:%2").arg(MaxPosition[0]).arg(MaxPosition[1]);
@@ -1115,7 +1150,10 @@ float ResultCalc::SelectFormulaCalc(int nFormulaType,float fValue, float fParam1
         if(0 == fParam1){
             fResult = 0;
         }else if( 0 == fParam2 && fParam1 != 0){
-            fResult = fParam1;
+            fResult = fParam1*fValue;
+            strInfo = QString(" new检验公式:y=%1 * %2 + 0 = %4").arg(fParam1)
+                    .arg(fValue).arg(fResult);
+            qDebug()<<strInfo;
         }else if( 0 == fParam3 && fParam2 != 0){
             fResult = fParam1*fValue + fParam2;
             strInfo = QString(" new检验公式:y=%1 * %2 + %3 = %4").arg(fParam1)

@@ -739,7 +739,7 @@ void MainWindow::RecvHL7SerialData()
     if(nRFSerialMode == 3){//转发数据模式开启,把收电脑端收到的数据发给射频卡
         QByteArray byteHL7Data = m_SerialHL7.readAll();
         m_bytePCSerialData.append(byteHL7Data);
-        qDebug()<<"m_SerialHL7:"<<byteHL7Data.size()<<byteHL7Data.toHex().toUpper();
+        //qDebug()<<"m_SerialHL7:"<<byteHL7Data.size()<<byteHL7Data.toHex().toUpper();
         QByteArray baFrameStart,baFrameEnd;
         baFrameStart = m_bytePCSerialData.left(4);
         baFrameEnd = m_bytePCSerialData.right(4);
