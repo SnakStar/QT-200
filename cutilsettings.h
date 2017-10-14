@@ -37,6 +37,10 @@
 #define APOFFSET2     "GenaralSet/APOFFSET2"
 #define APOFFSET3     "GenaralSet/APOFFSET3"
 
+#define CHANNELCOE1   "GenaralSet/CHANNELCOE1"
+#define CHANNELCOE2   "GenaralSet/CHANNELCOE2"
+#define CHANNELCOE3   "GenaralSet/CHANNELCOE3"
+
 #define HARDVERSION   "GenaralSet/HardVersion"
 
 #define LISMODE       "SystemSet/LisMode"

@@ -47,6 +47,8 @@ UserInterface::UserInterface(QWidget *parent,CQtProDB* db, CUtilSettings* settin
     InitRadioControl();
     //初始化偏移量参数
     InitAPOffSetShowValue();
+    //初始化通道系数参数
+    InitChannelCoeShowValue();
     //调试界面射频串口数据信号
     connect(m_RFSerialPort,SIGNAL(readyRead()), this, SLOT(RecvRFSerialPortData()) );
     //连接列表控件和栈控件
@@ -455,6 +457,23 @@ void UserInterface::InitAPOffSetShowValue()
 }
 
 /********************************************************
+ *@Name:        InitChannelCoeShowValue
+ *@Author:      HuaT
+ *@Description: 初始化通道系数控件存储值
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2017-08-30
+********************************************************/
+void UserInterface::InitChannelCoeShowValue()
+{
+    ui->leChannel1Coe->setText((m_SetParam->value(CHANNELCOE1)) );
+    ui->leChannel2Coe->setText((m_SetParam->value(CHANNELCOE2)) );
+    ui->leChannel3Coe->setText((m_SetParam->value(CHANNELCOE3)) );
+    //qDebug()<<m_SetParam->value(CHANNELCOE1).toFloat();
+}
+
+/********************************************************
  *@Name:        InitRFUIControl
  *@Author:      HuaT
  *@Description: 初始化射频烧录界面编辑控件
@@ -499,6 +518,10 @@ void UserInterface::on_btnUIOK_clicked()
     }else{
         m_settings->SetParam(RAWDATAMODE,"1");
     }
+    //通道系数
+    m_settings->SetParam(CHANNELCOE1,ui->leChannel1Coe->text());
+    m_settings->SetParam(CHANNELCOE2,ui->leChannel2Coe->text());
+    m_settings->SetParam(CHANNELCOE3,ui->leChannel3Coe->text());
     //写入数据至配置文件
     m_settings->WriteSettingsInfoToMap();
     //

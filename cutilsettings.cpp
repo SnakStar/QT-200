@@ -83,6 +83,10 @@ void CUtilSettings::DefaultSettings()
     settings.setValue(APOFFSET2,0);
     settings.setValue(APOFFSET3,0);
 
+    settings.setValue(CHANNELCOE1,0);
+    settings.setValue(CHANNELCOE2,0);
+    settings.setValue(CHANNELCOE3,0);
+
     settings.setValue(HARDVERSION,"");
 
     settings.setValue(LISMODE,0);
@@ -150,6 +154,10 @@ QMap<QString,QString>* CUtilSettings::ReadSettingsInfoToMap()
     m_SetParam[APOFFSET1]     = settings.value(APOFFSET1,0).toString();
     m_SetParam[APOFFSET2]     = settings.value(APOFFSET2,0).toString();
     m_SetParam[APOFFSET3]     = settings.value(APOFFSET3,0).toString();
+
+    m_SetParam[CHANNELCOE1]   = settings.value(CHANNELCOE1,0).toString();
+    m_SetParam[CHANNELCOE2]   = settings.value(CHANNELCOE2,0).toString();
+    m_SetParam[CHANNELCOE3]   = settings.value(CHANNELCOE3,0).toString();
 
     m_SetParam[HARDVERSION]   = settings.value(HARDVERSION,"V0.0.0").toString();
 

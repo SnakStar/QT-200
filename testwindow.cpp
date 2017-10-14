@@ -2289,7 +2289,7 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                 qDebug()<<strTestMsg;
                 //新旧卡标志区分
                 if(0 == DataObj.m_nCardFlag){ //旧卡数据
-                    pRecord = CalcResult(DataObj);
+                    pRecord = CalcResult(DataObj,nChannel);
                     //for(int i=0; i<32; i++){
                     //    qDebug()<<i<<pRecord[i];
                     //}
@@ -2313,7 +2313,7 @@ void TestWindow::ParseTestData(quint8 nSync, QByteArray can_data,
                     }
                     DataObj.m_RawTestInfo.m_fTestResult = strTempResult.toDouble();
                 }else { //新卡数据
-                    DataObj.m_strResult = CalcResult(DataObj,true);
+                    DataObj.m_strResult = CalcResult(DataObj,true,nChannel);
                     //
                     DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
                 }
@@ -2407,7 +2407,7 @@ QByteArray TestWindow::PackageTestDataToSerial(ResultDataInfo DataObj, quint8 nC
     byteDebugDataToSerial[10] = (0x00);
     byteDebugDataToSerial[11] = (0x06);
     //填充内容
-    byteContent.append(DataObj.m_byteCanData);
+    byteContent.append(DataObj.m_byteCoeData);
 
     //测试信息顺序为:
     //面积1，面积2，比值1，面积1，面积2，比值2，结果，计算方案，
@@ -2801,6 +2801,7 @@ void TestWindow::ClearResultDataInfo(ResultDataInfo &DataObj)
 {
     DataObj.m_RawTestInfo.Clear();
     DataObj.m_byteCanData.clear();
+    DataObj.m_byteCoeData.clear();
     DataObj.m_nDataLen = 0;
     DataObj.m_nCardFlag = 0;
     DataObj.m_nSyncID = 0;
@@ -2909,7 +2910,7 @@ void TestWindow::CalcReactionTime3(){
  *@Version:       1.0
  *@Date:          2016-7-14
 ********************************************************/
-unsigned char* TestWindow::CalcResult(ResultDataInfo &DataObj)
+unsigned char* TestWindow::CalcResult(ResultDataInfo &DataObj, quint8 nChannel)
 {
     QVector<int> vectorRawPoint;
     int nIndex;
@@ -2924,9 +2925,48 @@ unsigned char* TestWindow::CalcResult(ResultDataInfo &DataObj)
     }
     unsigned int ScanData1[320];
     unsigned int ScanData2[320];
+    unsigned int nTemp1 = 0;
+    unsigned int nTemp2 = 0;
+    float fCoe = 0;
+    switch (nChannel) {
+    case 1:
+        fCoe = m_SetParam->value(CHANNELCOE1).toFloat();
+        break;
+    case 2:
+        fCoe = m_SetParam->value(CHANNELCOE2).toFloat();
+        break;
+    case 3:
+        fCoe = m_SetParam->value(CHANNELCOE3).toFloat();
+        break;
+    default:
+        fCoe = 1;
+        break;
+    }
+    if(fCoe<=0){
+        fCoe = 1;
+    }
+    QString strChannelInfo;
+    strChannelInfo = QString("old-当前通道:%1,通道系数:%2").arg(nChannel).arg(fCoe);
+    qDebug()<<strChannelInfo;
+    DataObj.m_byteCoeData.clear();
+    DataObj.m_byteCoeData.resize(1280);
+    DataObj.m_byteCoeData.fill(0,1280);
     for(int i=0,n=320; i<320; i++,n++){
-        ScanData1[i] = vectorRawPoint.at(i);
-        ScanData2[i] = vectorRawPoint.at(n);
+        nTemp1 = vectorRawPoint.at(i) * fCoe;
+        if(nTemp1>4050){
+            nTemp1 = 4050;
+        }
+        ScanData1[i] = nTemp1;
+        DataObj.m_byteCoeData[i*2] = (quint8)(nTemp1%256);
+        DataObj.m_byteCoeData[i*2+1] = (quint8)(nTemp1/256);
+
+        nTemp2 = vectorRawPoint.at(n) * fCoe;
+        if(nTemp2 > 4050){
+            nTemp2 = 4050;
+        }
+        ScanData2[i] = nTemp2;
+        DataObj.m_byteCoeData[n*2] = (quint8)(nTemp2%256);
+        DataObj.m_byteCoeData[n*2+1] = (quint8)(nTemp2/256);
     }
     //数据滤波
     m_ResultCalc.low_passfilter(ScanData1);
@@ -2967,7 +3007,7 @@ unsigned char* TestWindow::CalcResult(ResultDataInfo &DataObj)
  *@Version:       1.0
  *@Date:          2016-7-14
 ********************************************************/
-QString TestWindow::CalcResult(ResultDataInfo &DataObj, bool bNewCard)
+QString TestWindow::CalcResult(ResultDataInfo &DataObj, bool bNewCard, quint8 nChannel)
 {
     bNewCard = false;
     QVector<int> vectorRawPoint;
@@ -2983,9 +3023,48 @@ QString TestWindow::CalcResult(ResultDataInfo &DataObj, bool bNewCard)
     }
     unsigned int ScanData1[320];
     unsigned int ScanData2[320];
+    unsigned int nTemp1 = 0;
+    unsigned int nTemp2 = 0;
+    float fCoe = 0;
+    switch (nChannel) {
+    case 1:
+        fCoe = m_SetParam->value(CHANNELCOE1).toFloat();
+        break;
+    case 2:
+        fCoe = m_SetParam->value(CHANNELCOE2).toFloat();
+        break;
+    case 3:
+        fCoe = m_SetParam->value(CHANNELCOE3).toFloat();
+        break;
+    default:
+        fCoe = 1;
+        break;
+    }
+    if(fCoe<=0){
+        fCoe = 1;
+    }
+    QString strChannelInfo;
+    strChannelInfo = QString("new-当前通道:%1,通道系数:%2").arg(nChannel).arg(fCoe);
+    qDebug()<<strChannelInfo;
+    DataObj.m_byteCoeData.clear();
+    DataObj.m_byteCoeData.resize(1280);
+    DataObj.m_byteCoeData.fill(0,1280);
     for(int i=0,n=320; i<320; i++,n++){
-        ScanData1[i] = vectorRawPoint.at(i);
-        ScanData2[i] = vectorRawPoint.at(n);
+        nTemp1 = vectorRawPoint.at(i) * fCoe;
+        if(nTemp1>4050){
+            nTemp1 = 4050;
+        }
+        ScanData1[i] = nTemp1;
+        DataObj.m_byteCoeData[i*2] = (quint8)(nTemp1%256);
+        DataObj.m_byteCoeData[i*2+1] = (quint8)(nTemp1/256);
+
+        nTemp2 = vectorRawPoint.at(n) * fCoe;
+        if(nTemp2 > 4050){
+            nTemp2 = 4050;
+        }
+        ScanData2[i] = nTemp2;
+        DataObj.m_byteCoeData[n*2] = (quint8)(nTemp2%256);
+        DataObj.m_byteCoeData[n*2+1] = (quint8)(nTemp2/256);
     }
     //数据滤波
     m_ResultCalc.low_passfilter(ScanData1);
@@ -3511,7 +3590,7 @@ void TestWindow::MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8
         //memset(pRecord,0,40);
         //新旧卡标志区分
         if(0 == DataObj.m_nCardFlag){ //旧卡数据
-            pRecord = CalcResult(DataObj);
+            pRecord = CalcResult(DataObj,0);
             //for(int i=0; i<32; i++){
             //    qDebug()<<i<<pRecord[i];
             //}
@@ -3535,7 +3614,7 @@ void TestWindow::MockTestParseTestData(quint8 nSync, QByteArray can_data, quint8
             }
             DataObj.m_RawTestInfo.m_fTestResult = strTempResult.toDouble();
         }else { //新卡数据
-            DataObj.m_strResult = CalcResult(DataObj,true);
+            DataObj.m_strResult = CalcResult(DataObj,true,0);
             //
             DataObj.m_RawTestInfo.m_fTestResult = DataObj.m_strResult.toDouble();
         }

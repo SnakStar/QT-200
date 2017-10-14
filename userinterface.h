@@ -156,6 +156,8 @@ private:
     void InitRadioControl();
     //初始化放大偏移量控件
     void InitAPOffSetShowValue();
+    //初始化通道系数控件
+    void InitChannelCoeShowValue();
     //初始化射频界面控件
     void InitRFUIControl();
     //根据配置文件初始化控件

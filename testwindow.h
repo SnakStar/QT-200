@@ -143,6 +143,8 @@ struct ResultDataInfo{
     quint32 m_nDataLen;
     //测试数据
     QByteArray m_byteCanData;
+    //乘以系数后的测试数据
+    QByteArray m_byteCoeData;
     //测试条码号
     QString m_strIDCardBarCode;
     //测试ID卡信息
@@ -356,9 +358,9 @@ private:
     //解析测试数据
     void ParseTestData(quint8 nSync, QByteArray can_data, quint8 nChannel, ResultDataInfo& DataObj);
     //计算结果
-    unsigned char *CalcResult(ResultDataInfo& DataObj);
+    unsigned char *CalcResult(ResultDataInfo& DataObj,quint8 nChannel);
     //计算新卡结果
-    QString CalcResult(ResultDataInfo& DataObj,bool bNewCard);
+    QString CalcResult(ResultDataInfo& DataObj,bool bNewCard, quint8 nChannel);
     //结果出来后，处理结果
     void ProcessResult(quint8 nChannel);
     //解析条码号
