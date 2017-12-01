@@ -750,7 +750,10 @@ void TestWindow::on_btnPrint1_clicked()
     strItem = ui->leItem1->text();
     strResult = ui->leResult1->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+                   .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -768,11 +771,11 @@ void TestWindow::on_btnPrint1_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -1066,7 +1069,10 @@ void TestWindow::AutoPrint(int nChannel)
     }
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
     //检测时间
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+                   .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //查询获取参考值
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1082,10 +1088,10 @@ void TestWindow::AutoPrint(int nChannel)
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
-                                     strAge,strSex,strItem,strResult,strCheckTime,strRenf,strFlag);
+                                     strAge,strSex,strItem,strResult,strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
-                                     strAge,strSex,strItem,strResult,strCheckTime,strRenf,strFlag);
+                                     strAge,strSex,strItem,strResult,strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -1373,7 +1379,10 @@ void TestWindow::on_btnPrint2_clicked()
     strItem = ui->leItem2->text();
     strResult = ui->leResult2->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+                   .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1390,11 +1399,11 @@ void TestWindow::on_btnPrint2_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -1462,7 +1471,10 @@ void TestWindow::on_btnPrint3_clicked()
     strItem = ui->leItem3->text();
     strResult = ui->leResult3->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+                   .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1479,11 +1491,11 @@ void TestWindow::on_btnPrint3_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -3679,7 +3691,7 @@ bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, Resu
 {
     //获得条码编号,先用新条码规则,新的条码格式为10100000000101
     data.m_strIDCardBarCode = ParseBarCode(can_data,true);
-    data.m_strIDCardBarCode = "10101000000101";
+    data.m_strIDCardBarCode = "10100100000001";
     //data.m_strIDCardBarCode = "0100010001000001000000000101";
     //查询此批号的ID卡数据
     data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);

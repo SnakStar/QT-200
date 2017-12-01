@@ -701,7 +701,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
 
         if(TempMaxPos1>150){
             TempMax1 = scanData1[TempMaxPos1 - TSignallength/2];
-            for(int n=TempMaxPos1 - TSignallength/2; n>TempMaxPos1 - TSignallength/2 - CSignallength; n--){
+            for(int n=TempMaxPos1 - TSignallength/2; n>0; n--){
+            //for(int n=TempMaxPos1 - TSignallength/2; n>TempMaxPos1 - TSignallength/2 - CSignallength; n--){
                 if(n<0){
                     break;
                 }
@@ -713,7 +714,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             MaxPosition[1] = TempMaxPos1;
         }else{
             TempMax1 = scanData1[TempMaxPos1 + CSignallength/2];
-            for(int n=TempMaxPos1 + CSignallength/2; n<TempMaxPos1+CSignallength/2+TSignallength; n++){
+            for(int n=TempMaxPos1 + CSignallength/2; n<320; n++){
+            //for(int n=TempMaxPos1 + CSignallength/2; n<TempMaxPos1+CSignallength/2+TSignallength; n++){
                 if(n>320){
                     break;
                 }
@@ -731,7 +733,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
         }
         if(TempMaxPos2>150){
             TempMax2 = scanData2[TempMaxPos2 - CSignallength/2];
-            for(int n=TempMaxPos2 - CSignallength/2; n>TempMaxPos2-CSignallength/2-TSignallength; n--){
+            for(int n=TempMaxPos2 - CSignallength/2; n>0; n--){
+            //for(int n=TempMaxPos2 - CSignallength/2; n>TempMaxPos2-CSignallength/2-TSignallength; n--){
                 if(n<0){
                     break;
                 }
@@ -744,7 +747,8 @@ QString ResultCalc::calculateResult2(ResultDataInfo& datainfo,unsigned int *scan
             MaxPosition[2] = TempMaxPos2;
         }else{
             TempMax2 = scanData2[TempMaxPos2 + TSignallength/2];
-            for(int n=TempMaxPos2 + TSignallength/2; n<TempMaxPos2+TSignallength/2+CSignallength; n++){
+            for(int n=TempMaxPos2 + TSignallength/2; n<320; n++){
+            //for(int n=TempMaxPos2 + TSignallength/2; n<TempMaxPos2+TSignallength/2+CSignallength; n++){
                 if(n>320){
                     break;
                 }

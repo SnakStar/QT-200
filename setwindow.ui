@@ -55,7 +55,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="PrintSetPage">
     <widget class="QGroupBox" name="groupBox_Pinrt">
@@ -738,7 +738,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>V0.35.0</string>
+      <string>V0.35.1</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbHardNum">
