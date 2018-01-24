@@ -676,7 +676,7 @@ void TestWindow::changeEvent(QEvent *e)
 }
 
 /********************************************************
- *@Name:        GetValidNumber
+ *@Name:        GetMaxValidNumber
  *@Author:      HuaT
  *@Description: 通过查询数据得到当前当天最大的编号
  *@Param:       无
@@ -684,7 +684,7 @@ void TestWindow::changeEvent(QEvent *e)
  *@Version:     1.0
  *@Date:        2016-7-6
 ********************************************************/
-quint64 TestWindow::GetValidNumber()
+quint64 TestWindow::GetMaxValidNumber()
 {
     //QTime time1,time2;
     //time1 = QTime::currentTime();
@@ -750,7 +750,10 @@ void TestWindow::on_btnPrint1_clicked()
     strItem = ui->leItem1->text();
     strResult = ui->leResult1->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+            .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -768,11 +771,11 @@ void TestWindow::on_btnPrint1_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -923,6 +926,36 @@ void TestWindow::NewTest(int nChannel)
 
 }
 
+int TestWindow::GetValidNumber(int nCurMaxNumber, QLineEdit *le1, QLineEdit *le2)
+{
+    int nValidNumber = -1;
+    int nle1 = le1->text().toInt();
+    int nle2 = le2->text().toInt();
+    if(le1->isEnabled() && le2->isEnabled()){
+        if( ( (nle1 == nCurMaxNumber+1) && (nle2 == nCurMaxNumber+2) ) ||
+                ( (nle2 == nCurMaxNumber+1) && (nle1 == nCurMaxNumber+2) ) ){
+            nValidNumber = nCurMaxNumber + 3;
+        }else if( ( (nle1 == nCurMaxNumber+1) && (nle2 != nCurMaxNumber+2) ) ||
+                  ( (nle2 == nCurMaxNumber+1) && (nle1 != nCurMaxNumber+2) )){
+            nValidNumber = nCurMaxNumber + 2;
+        }else if( ( (nle1 != nCurMaxNumber+1) && (nle2 != nCurMaxNumber+2) ) ||
+                  ( (nle2 != nCurMaxNumber+1 ) && (nle1 != nCurMaxNumber+2) ) ){
+            nValidNumber = nCurMaxNumber + 1;
+        }else{
+            nValidNumber = nCurMaxNumber + 3;
+        }
+    }else if(le1->isEnabled() || le2->isEnabled()){
+        if(nle1 == nCurMaxNumber + 1 || nle2 == nCurMaxNumber + 1){
+            nValidNumber = nCurMaxNumber + 2;
+        }else {
+            nValidNumber = nCurMaxNumber + 1;
+        }
+    }else{
+        nValidNumber = nCurMaxNumber + 1;
+    }
+    return nValidNumber;
+}
+
 /********************************************************
  *@Name:        AutoEncode
  *@Author:      HuaT
@@ -935,7 +968,7 @@ void TestWindow::NewTest(int nChannel)
 void TestWindow::AutoEncode(int nChannel)
 {
     //自动输入编号
-    quint64 nCurMaxNumber = GetValidNumber();
+    quint64 nCurMaxNumber = GetMaxValidNumber();
     if(nCurMaxNumber == -1){
         qDebug()<<"自动输入编号出错,可能原因为:查询出错!";
     }else{
@@ -948,13 +981,8 @@ void TestWindow::AutoEncode(int nChannel)
                 //新建之前需清除上一次测试信息,如果已经打开则不清
                 CleareChannelInfo(nChannel);
             }
-            if(ui->leNumber2->isEnabled() && ui->leNumber3->isEnabled()){
-                m_nValidNumber = nCurMaxNumber + 3;
-            }else if(ui->leNumber2->isEnabled() || ui->leNumber3->isEnabled()){
-                m_nValidNumber = nCurMaxNumber + 2;
-            }else{
-                m_nValidNumber = nCurMaxNumber + 1;
-            }
+
+            m_nValidNumber = GetValidNumber(nCurMaxNumber,ui->leNumber2,ui->leNumber3);
             ui->leNumber1->setText(QString("%1").arg( m_nValidNumber ));
             //m_Candata1.m_nNumberID = m_nValidNumber;
             break;
@@ -965,13 +993,8 @@ void TestWindow::AutoEncode(int nChannel)
                 //新建之前需清除上一次测试信息,如果已经打开则不清
                 CleareChannelInfo(nChannel);
             }
-            if(ui->leNumber1->isEnabled() && ui->leNumber3->isEnabled()){
-                m_nValidNumber = nCurMaxNumber + 3;
-            }else if(ui->leNumber1->isEnabled() || ui->leNumber3->isEnabled()){
-                m_nValidNumber = nCurMaxNumber + 2;
-            }else{
-                m_nValidNumber = nCurMaxNumber + 1;
-            }
+            //
+            m_nValidNumber = GetValidNumber(nCurMaxNumber,ui->leNumber1,ui->leNumber3);
             ui->leNumber2->setText(QString("%1").arg( m_nValidNumber ));
             //m_Candata2.m_nNumberID = m_nValidNumber;
             break;
@@ -982,13 +1005,14 @@ void TestWindow::AutoEncode(int nChannel)
                 //新建之前需清除上一次测试信息,如果已经打开则不清
                 CleareChannelInfo(nChannel);
             }
-            if(ui->leNumber1->isEnabled() && ui->leNumber2->isEnabled()){
+            /*if(ui->leNumber1->isEnabled() && ui->leNumber2->isEnabled()){
                 m_nValidNumber = nCurMaxNumber + 3;
             }else if(ui->leNumber1->isEnabled() || ui->leNumber2->isEnabled()){
                 m_nValidNumber = nCurMaxNumber + 2;
             }else{
                 m_nValidNumber = nCurMaxNumber + 1;
-            }
+            }*/
+            m_nValidNumber = GetValidNumber(nCurMaxNumber,ui->leNumber1,ui->leNumber2);
             ui->leNumber3->setText(QString("%1").arg( m_nValidNumber ));
             //m_Candata3.m_nNumberID = m_nValidNumber;
             break;
@@ -1066,7 +1090,10 @@ void TestWindow::AutoPrint(int nChannel)
     }
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
     //检测时间
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+            .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //查询获取参考值
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1082,10 +1109,10 @@ void TestWindow::AutoPrint(int nChannel)
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
-                                     strAge,strSex,strItem,strResult,strCheckTime,strRenf,strFlag);
+                                     strAge,strSex,strItem,strResult,strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
-                                     strAge,strSex,strItem,strResult,strCheckTime,strRenf,strFlag);
+                                     strAge,strSex,strItem,strResult,strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -1373,7 +1400,10 @@ void TestWindow::on_btnPrint2_clicked()
     strItem = ui->leItem2->text();
     strResult = ui->leResult2->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+            .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1390,11 +1420,11 @@ void TestWindow::on_btnPrint2_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 
@@ -1462,7 +1492,10 @@ void TestWindow::on_btnPrint3_clicked()
     strItem = ui->leItem3->text();
     strResult = ui->leResult3->text();
     int nLanguage = m_SetParam->value(LANGUAGESET,"1").toInt(0);
-    QString strCheckTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString strCurDate = QDate::currentDate().toString("yyyy-MM-dd");
+    QString strSqlCheckTime=QString("select testdate from patient where number=%1 and date(testdate)='%2'")
+            .arg(strNumber).arg(strCurDate);
+    QStringList strlistCheckTime = m_db->ExecQuery(strSqlCheckTime);
     //计算参考值和参考标志
     quint8 nSex;
     if(strSex.compare(QObject::tr("Male")) == 0){
@@ -1479,11 +1512,11 @@ void TestWindow::on_btnPrint3_clicked()
     if(nLanguage == 0){
         m_settings->PrintChineseData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }else{
         m_settings->PrintEnglishData(m_SerialPrint,strName,strNumber,
                                      strAge,strSex,strItem,strResult,
-                                     strCheckTime,strRenf,strFlag);
+                                     strlistCheckTime.at(0),strRenf,strFlag);
     }
 }
 

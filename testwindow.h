@@ -411,8 +411,8 @@ private:
     int InsertTestInfoToDb(int nChannel);
     //过虑语言事件
     void changeEvent(QEvent *e);
-    //获取有效可用编号
-    quint64 GetValidNumber();
+    //获取最大有效可用编号
+    quint64 GetMaxValidNumber();
     //初始化测试模式状态，获取检测时需要的状态
     void InitRunState();
     //更新打印按钮文本
@@ -429,6 +429,8 @@ private:
     void InstantTest(int nChannel);
     //新建测试
     void NewTest(int nChannel);
+    //获取有效的新建编号
+    int GetValidNumber(int nCurMaxNumber,QLineEdit* le1,QLineEdit* le2);
     //自动输入编码
     void AutoEncode(int nChannel);
     //扫描输入编码

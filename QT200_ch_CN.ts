@@ -232,13 +232,13 @@ completion of the test</source>
         <location filename="setwindow.cpp" line="953"/>
         <location filename="setwindow.cpp" line="1114"/>
         <location filename="setwindow.cpp" line="1122"/>
-        <location filename="testwindow.cpp" line="1573"/>
-        <location filename="testwindow.cpp" line="1771"/>
-        <location filename="testwindow.cpp" line="1899"/>
-        <location filename="testwindow.cpp" line="2019"/>
-        <location filename="testwindow.cpp" line="2077"/>
-        <location filename="testwindow.cpp" line="2188"/>
-        <location filename="testwindow.cpp" line="3612"/>
+        <location filename="testwindow.cpp" line="1606"/>
+        <location filename="testwindow.cpp" line="1804"/>
+        <location filename="testwindow.cpp" line="1932"/>
+        <location filename="testwindow.cpp" line="2052"/>
+        <location filename="testwindow.cpp" line="2110"/>
+        <location filename="testwindow.cpp" line="2221"/>
+        <location filename="testwindow.cpp" line="3646"/>
         <location filename="upgrading.cpp" line="58"/>
         <location filename="upgrading.cpp" line="79"/>
         <location filename="upgrading.cpp" line="82"/>
@@ -404,10 +404,10 @@ completion of the test</source>
         <location filename="setwindow.cpp" line="369"/>
         <location filename="setwindow.cpp" line="415"/>
         <location filename="setwindow.cpp" line="422"/>
-        <location filename="testwindow.cpp" line="756"/>
-        <location filename="testwindow.cpp" line="1072"/>
-        <location filename="testwindow.cpp" line="1379"/>
-        <location filename="testwindow.cpp" line="1468"/>
+        <location filename="testwindow.cpp" line="759"/>
+        <location filename="testwindow.cpp" line="1099"/>
+        <location filename="testwindow.cpp" line="1409"/>
+        <location filename="testwindow.cpp" line="1501"/>
         <source>Male</source>
         <translation>男</translation>
     </message>
@@ -420,10 +420,10 @@ completion of the test</source>
         <location filename="setwindow.cpp" line="371"/>
         <location filename="setwindow.cpp" line="417"/>
         <location filename="setwindow.cpp" line="424"/>
-        <location filename="testwindow.cpp" line="758"/>
-        <location filename="testwindow.cpp" line="1074"/>
-        <location filename="testwindow.cpp" line="1381"/>
-        <location filename="testwindow.cpp" line="1470"/>
+        <location filename="testwindow.cpp" line="761"/>
+        <location filename="testwindow.cpp" line="1101"/>
+        <location filename="testwindow.cpp" line="1411"/>
+        <location filename="testwindow.cpp" line="1503"/>
         <source>Female</source>
         <translation>女</translation>
     </message>
@@ -435,8 +435,8 @@ completion of the test</source>
     </message>
     <message>
         <location filename="settimer.cpp" line="78"/>
-        <location filename="testwindow.cpp" line="792"/>
-        <location filename="testwindow.cpp" line="866"/>
+        <location filename="testwindow.cpp" line="795"/>
+        <location filename="testwindow.cpp" line="869"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -608,40 +608,40 @@ completion of the test</source>
         <translation>自动测试</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="795"/>
+        <location filename="testwindow.cpp" line="798"/>
         <source>Auto test is underway, cancel test will lead 
  to the failure of reagent strip, whether to continue?</source>
         <translation>自动测试正在进行中,取消将会导致本次试剂卡测试失效,是否继续?</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="826"/>
+        <location filename="testwindow.cpp" line="829"/>
         <source>The serial number entered already exists, please enter again</source>
         <translation>输入的编号已经存在，请重新输入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="830"/>
+        <location filename="testwindow.cpp" line="833"/>
         <source>User information insert failed, stop test</source>
         <translation>用户信息插入失败，停止测试</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1574"/>
+        <location filename="testwindow.cpp" line="1607"/>
         <source>updateing </source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1772"/>
+        <location filename="testwindow.cpp" line="1805"/>
         <source>Upgrade is complete</source>
         <translation>更新完成</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1906"/>
-        <location filename="testwindow.cpp" line="3619"/>
+        <location filename="testwindow.cpp" line="1939"/>
+        <location filename="testwindow.cpp" line="3653"/>
         <source>There is no corresponding ID information, please import the relevant ID card</source>
         <translation>无对应ID信息,请导入对应ID卡信息</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="1950"/>
-        <location filename="testwindow.cpp" line="3660"/>
+        <location filename="testwindow.cpp" line="1983"/>
+        <location filename="testwindow.cpp" line="3694"/>
         <source>Reagent Strip has expired</source>
         <translation>试剂卡已过期</translation>
     </message>
@@ -650,42 +650,42 @@ completion of the test</source>
         <translation type="obsolete">试剂卡已过期</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2080"/>
+        <location filename="testwindow.cpp" line="2113"/>
         <source>Motor initialization failed,Please contact 
 customer service</source>
         <translation>电机初始化故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2083"/>
+        <location filename="testwindow.cpp" line="2116"/>
         <source>Photoelectric switch A failed,Please contact 
 customer service</source>
         <translation>光电开关A故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2086"/>
+        <location filename="testwindow.cpp" line="2119"/>
         <source>Photoelectric switch B failed,Please contact 
 customer service</source>
         <translation>光电开关B故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2089"/>
+        <location filename="testwindow.cpp" line="2122"/>
         <source>Laser component failure,Please contact customer service</source>
         <translation>激光组件故障,请联系客服</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2092"/>
+        <location filename="testwindow.cpp" line="2125"/>
         <source>No barcode,Please check whether the reagent 
 card is plugged or insert</source>
         <translation>无条码,请检查试剂卡是否插好或插入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2095"/>
+        <location filename="testwindow.cpp" line="2128"/>
         <source>Wrong barcode,Please check whether the reagent 
 card is plugged or insert</source>
         <translation>条码错误,请检查试剂卡是否插好或插入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="2189"/>
+        <location filename="testwindow.cpp" line="2222"/>
         <source>The result data save failed,please check the equipment</source>
         <translation>结果数据保存失败,请检查设备</translation>
     </message>
@@ -695,12 +695,12 @@ card is plugged or insert</source>
         <translation type="obsolete">自动测试正在进行中，取消将会导致本次试剂卡测试失效，是否继续?</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="871"/>
+        <location filename="testwindow.cpp" line="874"/>
         <source>Enter the serial number of already exists,Please enter again</source>
         <translation>输入的编号已经存在,请重新输入</translation>
     </message>
     <message>
-        <location filename="testwindow.cpp" line="875"/>
+        <location filename="testwindow.cpp" line="878"/>
         <source>User information insertion failure, stop test</source>
         <translation>用户信息插入失败,停止测试</translation>
     </message>
@@ -712,19 +712,19 @@ card is plugged or insert</source>
     <message>
         <location filename="qcwindow.cpp" line="255"/>
         <location filename="qcwindow.cpp" line="270"/>
-        <location filename="testwindow.cpp" line="2035"/>
+        <location filename="testwindow.cpp" line="2068"/>
         <source>Channel1 is busy</source>
         <translation>通道1忙</translation>
     </message>
     <message>
         <location filename="qcwindow.cpp" line="260"/>
-        <location filename="testwindow.cpp" line="2038"/>
+        <location filename="testwindow.cpp" line="2071"/>
         <source>Channel2 is busy</source>
         <translation>通道2忙</translation>
     </message>
     <message>
         <location filename="qcwindow.cpp" line="265"/>
-        <location filename="testwindow.cpp" line="2041"/>
+        <location filename="testwindow.cpp" line="2074"/>
         <source>Channel3 is busy</source>
         <translation>通道3忙</translation>
     </message>
@@ -1292,6 +1292,11 @@ card is plugged or insert</source>
         <translation>通道3</translation>
     </message>
     <message>
+        <location filename="setwindow.ui" line="741"/>
+        <source>V0.34.3</source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="setwindow.ui" line="767"/>
         <source>Soft Update</source>
         <translation>软件更新</translation>
@@ -1359,8 +1364,9 @@ card is plugged or insert</source>
     </message>
     <message>
         <location filename="setwindow.ui" line="754"/>
-        <source>V0.5.1</source>
-        <translation>V0.5.1</translation>
+        <source>V1.0.2</source>
+        <oldsource>V0.5.1</oldsource>
+        <translation></translation>
     </message>
     <message>
         <source>Updage</source>
