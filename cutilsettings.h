@@ -45,6 +45,7 @@
 #define SERVERPORT    "SystemSet/ServerPort"
 #define LANGUAGESET   "SystemSet/LanguageSet"
 #define CHANNELSET    "SystemSet/ChannelSet"
+#define DEVICEID      "SystemSet/DeviceID"
 
 
 class CUtilSettings : public QObject

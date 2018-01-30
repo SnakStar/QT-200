@@ -88,6 +88,8 @@ private slots:
 
     void on_btnRFCDelete_clicked();
 
+    void on_btnDeviceIDSave_clicked();
+
 public:
     //设置数据库对象
     void SetDbObj(CQtProDB* db);

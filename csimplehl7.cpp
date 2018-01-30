@@ -2,6 +2,7 @@
 
 CSimpleHL7::CSimpleHL7()
 {
+    m_Settings.ReadSettingsInfoToMap();
 }
 
 /********************************************************
@@ -35,7 +36,7 @@ void CSimpleHL7::WriteHL7Msg(QextSerialPort *SerialHL7,
     QString strCurrentTime;
     currentTime = QDateTime::currentDateTime();
     strCurrentTime = currentTime.toString("yyyyMMddhhmmss");
-    strMSH = QString("MSH|^~\&|IMPORVE|QT-200|%1|||%2||P|2.3.1|||ASCII||").arg(strCurrentTime).arg(strEventType);
+    strMSH = QString("MSH|^~\&|IMPORVE|QT-200|%1|%2||%3||P|2.3.1|||ASCII||").arg(strCurrentTime).arg(m_Settings.ReadSettings(DEVICEID,"").toString()).arg(strEventType);
     byteResult.append(strMSH);
     //MSH结果
     byteResult.append(0x0D);

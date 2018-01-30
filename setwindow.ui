@@ -738,7 +738,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>V0.34.3</string>
+      <string>V0.34.4</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbHardNum">
@@ -780,6 +780,42 @@
       <string>Hard Update</string>
      </property>
     </widget>
+    <widget class="QLabel" name="lbDeviceID">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>90</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Device        ID：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnDeviceIDSave">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>130</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="leDeviceID">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>90</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
     <zorder>groupBox_SysInfo</zorder>
     <zorder>lbSysInfoTitle</zorder>
     <zorder>lbSoftTag</zorder>
@@ -788,6 +824,9 @@
     <zorder>lbHardNum</zorder>
     <zorder>btnSoftUpdate</zorder>
     <zorder>btnHardUpdate</zorder>
+    <zorder>lbDeviceID</zorder>
+    <zorder>btnDeviceIDSave</zorder>
+    <zorder>leDeviceID</zorder>
    </widget>
    <widget class="QWidget" name="DebugSetPage">
     <widget class="QLabel" name="lbDebugTitle">

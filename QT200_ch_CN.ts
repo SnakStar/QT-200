@@ -226,12 +226,13 @@ completion of the test</source>
         <location filename="querywindow.cpp" line="162"/>
         <location filename="querywindow.cpp" line="258"/>
         <location filename="querywindow.cpp" line="279"/>
-        <location filename="setwindow.cpp" line="650"/>
-        <location filename="setwindow.cpp" line="689"/>
-        <location filename="setwindow.cpp" line="697"/>
-        <location filename="setwindow.cpp" line="953"/>
-        <location filename="setwindow.cpp" line="1114"/>
-        <location filename="setwindow.cpp" line="1122"/>
+        <location filename="setwindow.cpp" line="654"/>
+        <location filename="setwindow.cpp" line="693"/>
+        <location filename="setwindow.cpp" line="701"/>
+        <location filename="setwindow.cpp" line="957"/>
+        <location filename="setwindow.cpp" line="1118"/>
+        <location filename="setwindow.cpp" line="1126"/>
+        <location filename="setwindow.cpp" line="1158"/>
         <location filename="testwindow.cpp" line="1606"/>
         <location filename="testwindow.cpp" line="1804"/>
         <location filename="testwindow.cpp" line="1932"/>
@@ -520,62 +521,63 @@ completion of the test</source>
         <translation>值</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="593"/>
-        <location filename="setwindow.cpp" line="739"/>
-        <location filename="setwindow.cpp" line="839"/>
+        <location filename="setwindow.cpp" line="597"/>
+        <location filename="setwindow.cpp" line="743"/>
+        <location filename="setwindow.cpp" line="843"/>
         <location filename="userinterface.cpp" line="505"/>
         <source>operating info</source>
         <translation>操作信息</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="594"/>
-        <location filename="setwindow.cpp" line="740"/>
-        <location filename="setwindow.cpp" line="840"/>
+        <location filename="setwindow.cpp" line="598"/>
+        <location filename="setwindow.cpp" line="744"/>
+        <location filename="setwindow.cpp" line="844"/>
+        <location filename="setwindow.cpp" line="1159"/>
         <location filename="userinterface.cpp" line="506"/>
         <source>Configuration saved successfully</source>
         <translation>配置保存成功</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="651"/>
+        <location filename="setwindow.cpp" line="655"/>
         <source>Please choose the data to modify</source>
         <oldsource>Please choose to modify the data!</oldsource>
         <translation>请选择要修改的数据</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="690"/>
-        <location filename="setwindow.cpp" line="1115"/>
+        <location filename="setwindow.cpp" line="694"/>
+        <location filename="setwindow.cpp" line="1119"/>
         <source>Please choose the data to delete</source>
         <oldsource>Please choose to delete the data!</oldsource>
         <translation>请选择要删除的数据</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="698"/>
-        <location filename="setwindow.cpp" line="1123"/>
+        <location filename="setwindow.cpp" line="702"/>
+        <location filename="setwindow.cpp" line="1127"/>
         <source>Confirmed will have to delete?</source>
         <translation>确定要删除吗?</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="874"/>
+        <location filename="setwindow.cpp" line="878"/>
         <source>Soft Update</source>
         <translation>软件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="890"/>
+        <location filename="setwindow.cpp" line="894"/>
         <source>Hard Update</source>
         <translation>固件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="954"/>
+        <location filename="setwindow.cpp" line="958"/>
         <source>longin failed</source>
         <translation>登陆失败</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="1130"/>
+        <location filename="setwindow.cpp" line="1134"/>
         <source>Delete failed</source>
         <translation>删除失败</translation>
     </message>
     <message>
-        <location filename="setwindow.cpp" line="1134"/>
+        <location filename="setwindow.cpp" line="1138"/>
         <source>deleted successfully</source>
         <translation>删除成功</translation>
     </message>
@@ -1148,6 +1150,7 @@ card is plugged or insert</source>
     <message>
         <location filename="setwindow.ui" line="142"/>
         <location filename="setwindow.ui" line="615"/>
+        <location filename="setwindow.ui" line="806"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -1205,7 +1208,7 @@ card is plugged or insert</source>
     </message>
     <message>
         <location filename="setwindow.ui" line="331"/>
-        <location filename="setwindow.ui" line="868"/>
+        <location filename="setwindow.ui" line="907"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -1293,8 +1296,9 @@ card is plugged or insert</source>
     </message>
     <message>
         <location filename="setwindow.ui" line="741"/>
-        <source>V0.34.3</source>
-        <translation></translation>
+        <source>V0.34.4</source>
+        <oldsource>V0.34.3</oldsource>
+        <translation>V0.34.4</translation>
     </message>
     <message>
         <location filename="setwindow.ui" line="767"/>
@@ -1306,13 +1310,18 @@ card is plugged or insert</source>
         <source>Hard Update</source>
         <translation>固件更新</translation>
     </message>
+    <message utf8="true">
+        <location filename="setwindow.ui" line="793"/>
+        <source>Device        ID：</source>
+        <translation>设备编号：</translation>
+    </message>
     <message>
-        <location filename="setwindow.ui" line="829"/>
+        <location filename="setwindow.ui" line="868"/>
         <source>Logout</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="842"/>
+        <location filename="setwindow.ui" line="881"/>
         <source>Interface</source>
         <translation>接口</translation>
     </message>
@@ -1327,7 +1336,7 @@ card is plugged or insert</source>
         <translation type="obsolete">V0.30.0</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="881"/>
+        <location filename="setwindow.ui" line="920"/>
         <source>Login Password</source>
         <translation>登陆密码</translation>
     </message>
@@ -1373,7 +1382,7 @@ card is plugged or insert</source>
         <translation type="obsolete">软件更新</translation>
     </message>
     <message>
-        <location filename="setwindow.ui" line="803"/>
+        <location filename="setwindow.ui" line="842"/>
         <source>Debug Mode</source>
         <oldsource>Debug Model</oldsource>
         <translation>调试模式</translation>

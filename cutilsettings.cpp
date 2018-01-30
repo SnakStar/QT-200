@@ -91,6 +91,7 @@ void CUtilSettings::DefaultSettings()
     settings.setValue(SERVERPORT,0);
     settings.setValue(LANGUAGESET,0);
     settings.setValue(CHANNELSET,0);
+    settings.setValue(DEVICEID,"");
 }
 
 /********************************************************
@@ -159,6 +160,7 @@ QMap<QString,QString>* CUtilSettings::ReadSettingsInfoToMap()
     m_SetParam[SERVERPORT]    = settings.value(SERVERPORT,0).toString();
     m_SetParam[LANGUAGESET]   = settings.value(LANGUAGESET,0).toString();
     m_SetParam[CHANNELSET]    = settings.value(CHANNELSET,0).toString();
+    m_SetParam[DEVICEID]      = settings.value(DEVICEID,"").toString();
     return &m_SetParam;
 }
 
@@ -376,7 +378,12 @@ void CUtilSettings::PrintEnglishData(QextSerialPort* SerialPort,QString strName,
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("%1: %2").arg(strItem).arg(strRenfValue);
+    QStringList listResult = ParseTestUnit(strResult);
+    QString strUnit = listResult.at(1);
+    if(strRenfValue.isEmpty()){
+        strUnit.clear();
+    }
+    str = QString("%1: %2%3").arg(strItem).arg(strRenfValue).arg(strUnit);
     SerialPort->write(Utf8ToGbk(str));
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
@@ -607,7 +614,12 @@ void CUtilSettings::PrintChineseData(QextSerialPort* SerialPort,QString strName,
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
     bytecmd.clear();
-    str = QString("%1: %2").arg(strItem).arg(strRenfValue);
+    QStringList listResult = ParseTestUnit(strResult);
+    QString strUnit = listResult.at(1);
+    if(strRenfValue.isEmpty()){
+        strUnit.clear();
+    }
+    str = QString("%1: %2%3").arg(strItem).arg(strRenfValue).arg(strUnit);
     SerialPort->write(Utf8ToGbk(str));
     bytecmd[0] = 0x0A;
     SerialPort->write(bytecmd);
@@ -852,12 +864,18 @@ QString CUtilSettings::GetResultFlag(QString strRenf, QString strResult)
     float fResult = re.toFloat();
     float fRenfLow,fRenfHight;
     QStringList listRenf = ParseValue(strRenf);
+    if(!strResult.isEmpty()){
+        nAscii = (quint8)(strResult.at(0).toAscii());
+    }
     //只有上限，没有下限，小于号系列
     if(listRenf.at(0).isEmpty()){
         fRenfLow = 0;
         fRenfHight = listRenf.at(1).toFloat();
-        if(fResult >=fRenfHight){
+        if(fResult >= fRenfHight){
             strFlag="↑";
+        }
+        if( (fResult == fRenfHight) && (nAscii == 60) ){
+            strFlag="";
         }
     //只有下限，没有上限，大于号系列
     }else if(listRenf.at(1).isEmpty()){
@@ -865,6 +883,9 @@ QString CUtilSettings::GetResultFlag(QString strRenf, QString strResult)
         fRenfHight = 0;
         if(fResult <=fRenfLow){
             strFlag = "↓";
+        }
+        if( (fResult == fRenfLow) && (nAscii == 62) ){
+            strFlag="";
         }
     //区间值系列
     }else{

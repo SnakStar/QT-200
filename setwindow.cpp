@@ -521,6 +521,10 @@ void SetWindow::UpdateControl()
     QString ServerPort = m_SetParam->value(SERVERPORT,0);
     ui->leServerPort->setText(ServerPort);
 
+    //更新设备ID
+    QString DeviceID = m_SetParam->value(DEVICEID,"");
+    ui->leDeviceID->setText(DeviceID);
+
     /*//更新语言设置-由于更新语言会导致界面其它控件更新，所以在此独立出来
     int LanguageSet = m_SetParam->value("SystemSet/LanguageSet",0).toInt();
     if(LanguageSet == 0){
@@ -1136,4 +1140,22 @@ void SetWindow::on_btnRFCDelete_clicked()
         }
     }
 
+}
+
+/********************************************************
+ *@Name:        on_btnDeviceIDSave_clicked
+ *@Author:      HuaT
+ *@Description: 系统信息界面删除按钮
+ *@Param:       无
+ *@Return:      无
+ *@Version:     1.0
+ *@Date:        2018-1-24
+********************************************************/
+void SetWindow::on_btnDeviceIDSave_clicked()
+{
+    m_settings->SetParam(DEVICEID,ui->leDeviceID->text());
+    m_settings->WriteSettingsInfoToMap();
+    QString Title = QObject::tr("Note");
+    QString Msg = QObject::tr("Configuration saved successfully");
+    QMessageBox::information(this,Title,Msg,QMessageBox::Ok);
 }
