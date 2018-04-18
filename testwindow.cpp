@@ -763,7 +763,7 @@ void TestWindow::on_btnPrint1_clicked()
     }else{
         nSex = 0;
     }
-    QString strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(strItem).arg(nSex);
+    QString strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(strItem).arg(nSex);
     QStringList listRenfValue = m_db->ExecQuery(strSql);
     QString strRenf = m_settings->GetRenfValue(strAge,listRenfValue);
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
@@ -1103,7 +1103,7 @@ void TestWindow::AutoPrint(int nChannel)
     }else{
         nSex = 0;
     }
-    QString strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(strItem).arg(nSex);
+    QString strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(strItem).arg(nSex);
     QStringList listRenfValue = m_db->ExecQuery(strSql);
     QString strRenf = m_settings->GetRenfValue(strAge,listRenfValue);
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
@@ -1141,7 +1141,7 @@ void TestWindow::AutoPrint(int nChannel)
     }else{
         nSex = 0;
     }
-    strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(strItem).arg(nSex);
+    strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(strItem).arg(nSex);
     listInfo = m_db->ExecQuery(strSql);
     if(listInfo.size() == 0){
         return strRenf;
@@ -1413,7 +1413,7 @@ void TestWindow::on_btnPrint2_clicked()
     }else{
         nSex = 0;
     }
-    QString strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(strItem).arg(nSex);
+    QString strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(strItem).arg(nSex);
     QStringList listRenfValue = m_db->ExecQuery(strSql);
     QString strRenf = m_settings->GetRenfValue(strAge,listRenfValue);
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
@@ -1505,7 +1505,7 @@ void TestWindow::on_btnPrint3_clicked()
     }else{
         nSex = 0;
     }
-    QString strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(strItem).arg(nSex);
+    QString strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(strItem).arg(nSex);
     QStringList listRenfValue = m_db->ExecQuery(strSql);
     QString strRenf = m_settings->GetRenfValue(strAge,listRenfValue);
     QString strFlag = m_settings->GetResultFlag(strRenf,strResult);
@@ -3633,7 +3633,7 @@ bool TestWindow::MockTestProcessBarCode(quint8 nChannel, bool& bTestStatus, Resu
 {
     //获得条码编号,先用新条码规则,新的条码格式为10100000000101
     data.m_strIDCardBarCode = ParseBarCode(can_data,true);
-    data.m_strIDCardBarCode = "10101000000101";
+    data.m_strIDCardBarCode = "10100100000001";
     //data.m_strIDCardBarCode = "0100010001000001000000000101";
     //查询此批号的ID卡数据
     data.m_strIDMessage = GetIDMessageInfo(data.m_strIDCardBarCode);

@@ -197,7 +197,7 @@ void QueryWindow::on_btnPrint_clicked()
                     strSex = QObject::tr("");
                 }
                 //计算参考值和参考标志
-                strSql = QString("select * from renfvalue where item='%1' and sex=%2").arg(vecPatientInfo.at(i).m_strItems).arg(nSex);
+                strSql = QString("select * from renfvalue where item='%1' and (sex=0 or sex=%2)").arg(vecPatientInfo.at(i).m_strItems).arg(nSex);
                 listRenfValue = m_db->ExecQuery(strSql);
                 //年龄为字符，性别格式为字符型的0、1、2，0(Male/Female),1(Male),2(Female)
                 strRenf = m_settings->GetRenfValue(

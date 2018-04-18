@@ -708,9 +708,9 @@ void SetWindow::on_btnDelete_clicked()
         QStringList listAge;
         listAge = m_settings->ParseValue(stringList.at(2));
         quint8 nSex;
-        if(stringList.at(3).compare("Male") == 0){
+        if(stringList.at(3).compare(QObject::tr("Male")) == 0){
             nSex = 1;
-        }else if(stringList.at(3).compare("Female") == 0){
+        }else if(stringList.at(3).compare(QObject::tr("Female")) == 0){
             nSex = 2;
         }else{
             nSex = 0;

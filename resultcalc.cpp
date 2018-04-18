@@ -1207,6 +1207,9 @@ QString ResultCalc::ProcessDecimalPointPricision(QString strValue, quint8 nPreci
         case 4:
             strResult = QString("%1.0000").arg(strValue);
             break;
+        default:
+            strResult = QString("%1.00000").arg(strValue);
+            break;
         }
     }else{
         switch(nPrecision){
@@ -1224,6 +1227,9 @@ QString ResultCalc::ProcessDecimalPointPricision(QString strValue, quint8 nPreci
             break;
         case 4:
             strResult = QString("%1").arg(strValue.left(nDecimalPointIndex+5));
+            break;
+        default:
+            strResult = QString("%1").arg(strValue.left(nDecimalPointIndex+6));
             break;
         }
 

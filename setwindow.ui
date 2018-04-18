@@ -738,7 +738,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>V0.34.4</string>
+      <string>V1.34.5</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbHardNum">
